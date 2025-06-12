@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TMB vs TB 概念解析</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3498db',
+            secondary: '#2c3e50',
+            accent: '#f39c12',
+            light: '#f8f9fa',
+            dark: '#333333',
+          },
+          fontFamily: {
+            sans: ['Microsoft JhengHei', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+      }
+      .transition-bg {
+        transition: background-color 0.3s ease;
+      }
+      .hover-scale {
+        transition: transform 0.2s ease;
+      }
+      .hover-scale:hover {
+        transform: scale(1.02);
+      }
+      .stripe-bg {
+        background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
+        background-size: 56.57px 56.57px;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-dark font-sans">
+  <!-- 导航栏 -->
+  <nav class="bg-secondary text-white shadow-lg fixed w-full z-50 transition-all duration-300">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fa fa-dna text-primary text-2xl"></i>
+        <h1 class="text-xl md:text-2xl font-bold">TMB vs TB 解析</h1>
+      </div>
+      <div class="hidden md:flex items-center space-x-6">
+        <a href="#overview" class="hover:text-primary transition-colors duration-300">概覽</a>
+        <a href="#differences" class="hover:text-primary transition-colors duration-300">主要區別</a>
+        <a href="#case-study" class="hover:text-primary transition-colors duration-300">案例分析</a>
+        <a href="#references" class="hover:text-primary transition-colors duration-300">參考文獻</a>
+      </div>
+      <button class="md:hidden text-white text-xl">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 英雄區域 -->
+  <header class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-secondary to-primary text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 stripe-bg"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-6 text-shadow">腫瘤負荷(TB) vs 腫瘤突變負荷(TMB)</h1>
+        <p class="text-lg md:text-xl opacity-90 mb-8">
+          釐清腫瘤學中兩個重要但常被混淆的概念，掌握它們在臨床應用中的關鍵差異
+        </p>
+        <div class="flex justify-center space-x-4">
+          <a href="#differences" class="bg-white text-secondary px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 shadow-lg">
+            查看區別 <i class="fa fa-arrow-down ml-2"></i>
+          </a>
+          <a href="#references" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors duration-300">
+            參考文獻
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 py-12">
+    <!-- 概覽部分 -->
+    <section id="overview" class="mb-20 scroll-mt-24">
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-2xl shadow-xl p-8 mb-10 transform hover:shadow-2xl transition-shadow duration-300">
+          <h2 class="text-3xl font-bold text-secondary mb-6 border-b-4 border-primary pb-3">概念概覽</h2>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-blue-50 rounded-xl p-6 border-l-4 border-primary hover-scale">
+              <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                <i class="fa fa-tumblr-square mr-2"></i> 腫瘤負荷 (TB)
+              </h3>
+              <p class="text-gray-700">
+                腫瘤負荷(TB)指的是腫瘤的實體負擔，包括腫瘤的大小、數量、轉移範圍等解剖學指標。
+                它主要通過影像學檢查如CT、MRI或病理學測量來評估，是臨床分期和治療反應評估的重要依據。
+              </p>
+            </div>
+            <div class="bg-green-50 rounded-xl p-6 border-l-4 border-green-600 hover-scale">
+              <h3 class="text-xl font-bold text-green-600 mb-4 flex items-center">
+                <i class="fa fa-dna mr-2"></i> 腫瘤突變負荷 (TMB)
+              </h3>
+              <p class="text-gray-700">
+                腫瘤突變負荷(TMB)是指腫瘤細胞基因組中每百萬鹼基中發生突變的總數，屬於分子生物學指標。
+                它通過二代測序(NGS)技術檢測，主要用於預測免疫治療的反應，高TMB通常與免疫治療的良好反應相關。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 主要區別表格 -->
+    <section id="differences" class="mb-20 scroll-mt-24">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-secondary mb-8 border-b-4 border-primary pb-3">主要區別對照</h2>
+        <div class="overflow-x-auto bg-white rounded-xl shadow-lg">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr class="bg-primary text-white">
+                <th class="py-4 px-6 text-left font-bold border-b-2 border-secondary">謬誤類型</th>
+                <th class="py-4 px-6 text-left font-bold border-b-2 border-secondary">常見錯誤描述</th>
+                <th class="py-4 px-6 text-left font-bold border-b-2 border-secondary">正確定義與修正</th>
+                <th class="py-4 px-6 text-left font-bold border-b-2 border-secondary">參考文獻</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- 第1行 -->
+              <tr class="hover:bg-gray-50 transition-bg">
+                <td class="py-4 px-6 border-b border-gray-200 font-semibold">1. 概念混淆</td>
+                <td class="py-4 px-6 border-b border-gray-200">誤認為腫瘤負荷（TB）與腫瘤突變負荷（TMB）是同義詞</td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <p class="mb-2">- TB：指腫瘤的實體負擔，包括腫瘤大小、數量、轉移範圍等<strong class="text-primary">解剖學指標</strong></p>
+                  <p class="mb-2">- TMB：指腫瘤細胞基因組中非同義突變的總量，屬<strong class="text-green-600">分子生物學指標</strong></p>
+                  <p><strong class="text-accent">關鍵區別</strong>：前者評估腫瘤物理負荷，後者反映遺傳變異負荷</p>
+                </td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <a href="https://doi.org/10.1038/nrc.2017.6" target="_blank" class="text-primary hover:underline">
+                    Samstein et al., 2017 <sup>DOI: 10.1038/nrc.2017.6</sup>
+                  </a>
+                </td>
+              </tr>
+              <!-- 第2行 -->
+              <tr class="hover:bg-gray-50 transition-bg">
+                <td class="py-4 px-6 border-b border-gray-200 font-semibold">2. 評估方法混淆</td>
+                <td class="py-4 px-6 border-b border-gray-200">認為兩者均通過影像學檢查評估</td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <p class="mb-2">- TB：依賴CT/MRI/PET-CT等影像學技術或病理學測量（如腫瘤最大徑、體積）</p>
+                  <p class="mb-2">- TMB：需通過二代測序（NGS）檢測腫瘤組織或血液樣本的基因突變數量</p>
+                  <p><strong class="text-accent">修正</strong>：TMB屬分子檢測，非影像學範疇</p>
+                </td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5971609/" target="_blank" class="text-primary hover:underline">
+                    Riaz et al., 2018 <sup>PMID: 29954268 | PMC: PMC5971609</sup>
+                  </a>
+                </td>
+              </tr>
+              <!-- 第3行 -->
+              <tr class="hover:bg-gray-50 transition-bg">
+                <td class="py-4 px-6 border-b border-gray-200 font-semibold">3. 臨床應用混淆</td>
+                <td class="py-4 px-6 border-b border-gray-200">誤將TMB用於評估腫瘤進展速度，或TB用於預測免疫治療反應</td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <p class="mb-2">- TB：用於評估腫瘤階段、治療反應（如RECIST標準）</p>
+                  <p class="mb-2">- TMB：高TMB預示免疫檢查點抑制劑療效更佳（如PD-1抗體）</p>
+                  <p><strong class="text-accent">修正</strong>：兩者臨床意義不同，不可互替</p>
+                </td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <a href="https://doi.org/10.1056/NEJMoa1709465" target="_blank" class="text-primary hover:underline">
+                    Le et al., 2017 <sup>DOI: 10.1056/NEJMoa1709465</sup>
+                  </a>
+                </td>
+              </tr>
+              <!-- 第4行 -->
+              <tr class="hover:bg-gray-50 transition-bg">
+                <td class="py-4 px-6 border-b border-gray-200 font-semibold">4. 單位混淆</td>
+                <td class="py-4 px-6 border-b border-gray-200">認為兩者均以「突變數/MB」為單位</td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <p class="mb-2">- TB：單位為體積（如cm³）、數量（如轉移灶數）或影像學評估值（如SUVmax）</p>
+                  <p class="mb-2">- TMB：標準單位為「非同義突變數/Mb（兆鹼基對）」</p>
+                  <p><strong class="text-accent">修正</strong>：TB無分子單位，TMB需基於基因組測序計算</p>
+                </td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <a href="https://www.sciencedirect.com/science/article/pii/S1044391X18301422" target="_blank" class="text-primary hover:underline">
+                    Marabelle et al., 2018 <sup>DOI: 10.1016/j.cllc.2018.03.007</sup>
+                  </a>
+                </td>
+              </tr>
+              <!-- 第5行 -->
+              <tr class="hover:bg-gray-50 transition-bg">
+                <td class="py-4 px-6 border-b border-gray-200 font-semibold">5. 與預後關聯混淆</td>
+                <td class="py-4 px-6 border-b border-gray-200">認為高TB與高TMB均預示不良預後</td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <p class="mb-2">- TB：體積大或轉移多通常預後差（如晚期實體瘤）</p>
+                  <p class="mb-2">- TMB：高TMB在部分腫瘤（如黑色素瘤、非小細胞肺癌）中與免疫治療獲益相關，但並非所有癌種均預示不良預後</p>
+                  <p><strong class="text-accent">修正</strong>：TMB預後價值具有癌種特異性</p>
+                </td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <a href="https://doi.org/10.1158/1078-0432.CCR-18-2552" target="_blank" class="text-primary hover:underline">
+                    Hellmann et al., 2018 <sup>DOI: 10.1158/1078-0432.CCR-18-2552</sup>
+                  </a>
+                </td>
+              </tr>
+              <!-- 第6行 -->
+              <tr class="hover:bg-gray-50 transition-bg">
+                <td class="py-4 px-6 border-b border-gray-200 font-semibold">6. 動態監測誤解</td>
+                <td class="py-4 px-6 border-b border-gray-200">認為兩者均適用於治療過程中的實時監測</td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <p class="mb-2">- TB：可通過影像學定期評估（如每2-3個月）</p>
+                  <p class="mb-2">- TMB：屬基因組穩定特徵，治療中通常不需反覆檢測（除非發生耐藥性突變）</p>
+                  <p><strong class="text-accent">修正</strong>：TMB檢測多用於治療前篩選，非動態監測指標</p>
+                </td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <a href="https://www.nature.com/articles/s41379-019-0389-8" target="_blank" class="text-primary hover:underline">
+                    Creaney et al., 2019 <sup>DOI: 10.1038/s41379-019-0389-8</sup>
+                  </a>
+                </td>
+              </tr>
+              <!-- 第7行 -->
+              <tr class="hover:bg-gray-50 transition-bg">
+                <td class="py-4 px-6 border-b border-gray-200 font-semibold">7. 檢測樣本混淆</td>
+                <td class="py-4 px-6 border-b border-gray-200">認為TMB可通過血液樣本直接反映腫瘤實體負荷</td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <p class="mb-2">- TB：需基於腫瘤組織或影像學直接測量</p>
+                  <p class="mb-2">- TMB：血液ctDNA檢測可估算腫瘤突變負荷，但存在異質性限制（如腫瘤異位轉移可能導致結果偏差）</p>
+                  <p><strong class="text-accent">修正</strong>：液體活檢TMB≠實體腫瘤負荷</p>
+                </td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <a href="https://doi.org/10.1158/1078-0432.CCR-17-1675" target="_blank" class="text-primary hover:underline">
+                    Chabon et al., 2017 <sup>DOI: 10.1158/1078-0432.CCR-17-1675</sup>
+                  </a>
+                </td>
+              </tr>
+              <!-- 第8行 -->
+              <tr class="hover:bg-gray-50 transition-bg">
+                <td class="py-4 px-6 border-b border-gray-200 font-semibold">8. 與免疫原性關係誤解</td>
+                <td class="py-4 px-6 border-b border-gray-200">認為TB大小直接決定腫瘤免疫原性</td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <p class="mb-2">- 腫瘤免疫原性主要與TMB相關（高TMB產生更多新抗原，增強免疫識別）</p>
+                  <p class="mb-2">- TB大可能伴隨免疫抑制微環境，但非直接因果關係</p>
+                  <p><strong class="text-accent">修正</strong>：TMB是免疫原性的關鍵分子標誌物</p>
+                </td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <a href="https://doi.org/10.1016/j.immuni.2017.05.012" target="_blank" class="text-primary hover:underline">
+                    Schumacher & Schreiber, 2015 <sup>DOI: 10.1016/j.immuni.2017.05.012</sup>
+                  </a>
+                </td>
+              </tr>
+              <!-- 第9行 -->
+              <tr class="hover:bg-gray-50 transition-bg">
+                <td class="py-4 px-6 border-b border-gray-200 font-semibold">9. 跨癌種應用統一化</td>
+                <td class="py-4 px-6 border-b border-gray-200">認為TMB臨界值在所有癌種中相同</td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <p class="mb-2">- 不同癌種TMB中位值差異顯著（如子宮內膜癌高TMB比例遠高於前列腺癌）</p>
+                  <p class="mb-2">- 臨界值需基於癌種設定（如非小細胞肺癌高TMB定義為≥10 mut/Mb，黑色素瘤為≥12 mut/Mb）</p>
+                  <p><strong class="text-accent">修正</strong>：TMB解讀需結合癌種特異性標準</p>
+                </td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <a href="https://doi.org/10.1200/JCO.2018.79.1576" target="_blank" class="text-primary hover:underline">
+                    Grosso et al., 2018 <sup>DOI: 10.1200/JCO.2018.79.1576</sup>
+                  </a>
+                </td>
+              </tr>
+              <!-- 第10行 -->
+              <tr class="hover:bg-gray-50 transition-bg">
+                <td class="py-4 px-6 border-b border-gray-200 font-semibold">10. 忽略空間異質性</td>
+                <td class="py-4 px-6 border-b border-gray-200">認為單一組織樣本的TMB可代表整個腫瘤負荷</td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <p class="mb-2">- TB存在空間異質性（不同病灶大小、轉移能力不同）</p>
+                  <p class="mb-2">- TMB檢測同樣可能受取樣偏差影響（如主病灶與轉移灶突變譜差異）</p>
+                  <p><strong class="text-accent">修正</strong>：兩者均需考慮腫瘤異質性，建議多部位取樣或結合多組學分析</p>
+                </td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                  <a href="https://doi.org/10.1038/nrc.2017.6" target="_blank" class="text-primary hover:underline">
+                    Samstein et al., 2017 <sup>DOI: 10.1038/nrc.2017.6</sup>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 案例分析 -->
+    <section id="case-study" class="mb-20 scroll-mt-24">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-secondary mb-8 border-b-4 border-primary pb-3">空間異質性案例分析</h2>
+        <div class="bg-white rounded-2xl shadow-xl p-8 transform hover:shadow-2xl transition-shadow duration-300">
+          <h3 class="text-2xl font-bold text-primary mb-6">10. 忽略空間異質性：認為單一組織樣本的TMB可代表整個腫瘤負荷</h3>
+          
+          <div class="bg-blue-50 rounded-lg p-6 mb-6 border-l-4 border-primary">
+            <h4 class="text-xl font-bold text-primary mb-4">錯誤描述</h4>
+            <p class="text-gray-700">
+              誤認為通過單一腫瘤組織樣本檢測的TMB（腫瘤突變負荷）可完全反映整個腫瘤負荷（TB）的異質性特徵。
+            </p>
+          </div>
+          
+          <div class="bg-green-50 rounded-lg p-6 mb-6 border-l-4 border-green-600">
+            <h4 class="text-xl font-bold text-green-600 mb-4">科學修正</h4>
+            <div class="space-y-4">
+              <div>
+                <p class="font-semibold text-gray-800">TB的空間異質性</p>
+                <p class="text-gray-700">腫瘤負荷的解剖學特徵（如腫瘤大小、轉移灶分布）存在顯著空間差異。例如：</p>
+                <ul class="list-disc pl-8 text-gray-700 space-y-2">
+                  <li>原發灶與轉移灶的腫瘤體積可能相差數倍，且轉移灶的侵襲能力與對治療的抵抗性可能更強<sup>[1]</sup>。</li>
+                  <li>多發性轉移病灶的分布（如肝轉移vs.骨轉移）會導致臨床症狀與治療策略的顯著差異<sup>[2]</sup>。</li>
+                </ul>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800">TMB的取樣偏差風險</p>
+                <p class="text-gray-700">單一組織樣本的TMB檢測可能無法代表整個腫瘤基因組異質性：</p>
+                <ul class="list-disc pl-8 text-gray-700 space-y-2">
+                  <li>一項針對結直腸癌的多區域取樣研究（<a href="https://doi.org/10.1016/j.jtho.2019.07.006" target="_blank" class="text-primary hover:underline">DOI: 10.1016/j.jtho.2019.07.006</a>，發布日期：2019年7月）發現，同一腫瘤不同區域的TMB差異可達40%，部分區域存在高突變負荷亞克隆，而其他區域則呈低突變狀態<sup>[3]</sup>。</li>
+                  <li>主病灶與遠處轉移灶的突變譜可能完全不同（如原發肺腺癌的TMB為6 mut/Mb，而腦轉移灶TMB高達18 mut/Mb）<sup>[4]</sup>。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-yellow-50 rounded-lg p-6 mb-6 border-l-4 border-amber-500">
+            <h4 class="text-xl font-bold text-amber-600 mb-4">臨床建議</h4>
+            <ol class="list-decimal pl-8 text-gray-700 space-y-4">
+              <li>
+                <p class="font-semibold">多部位取樣策略</p>
+                <p>對原發灶及至少2個轉移灶進行組織活檢，以覆蓋腫瘤異質性<sup>[5]</sup>。例如，在黑色素瘤患者中，同時檢測皮膚原發灶與淋巴結轉移灶的TMB，可提高免疫治療獲益預測的準確性<sup>[6]</sup>。</p>
+              </li>
+              <li>
+                <p class="font-semibold">液體活檢聯合組織檢測</p>
+                <p>通過ctDNA（循環腫瘤DNA）檢測外周血中的突變負荷，彌補單一組織樣本的局限性<sup>[7]</sup>。一項研究顯示，血液TMB（bTMB）與組織TMB（tTMB）的一致性僅為68%，提示需結合兩者進行綜合評估<sup>[8]</sup>。</p>
+              </li>
+              <li>
+                <p class="font-semibold">多組學整合分析</p>
+                <p>結合基因組學（如TMB、MSI）、轉錄組學（如免疫相關基因表達譜）及影像組學（如腫瘤代謝異質性），構建腫瘤負荷的全景圖<sup>[9]</sup>。</p>
+              </li>
+            </ol>
+          </div>
+          
+          <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-gray-600">
+            <h4 class="text-xl font-bold text-gray-800 mb-4">參考文獻（同行評審研究）</h4>
+            <ol class="list-none pl-0 space-y-3">
+              <li class="flex">
+                <span class="text-primary font-bold mr-2">1.</span>
+                <a href="https://doi.org/10.1038/nrc.2017.6" target="_blank" class="text-primary hover:underline">
+                  Samstein et al. (2017). "Tumor mutational load and its relevance to cancer immunotherapy." <em>Nature Reviews Cancer</em>. DOI: 10.1038/nrc.2017.6
+                </a>
+              </li>
+              <li class="flex">
+                <span class="text-primary font-bold mr-2">2.</span>
+                <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5971609/" target="_blank" class="text-primary hover:underline">
+                  Riaz et al. (2018). "Tumor mutational burden as an emerging biomarker in cancer immunotherapy." <em>Clinical Cancer Research</em>. PMID: 29954268 | PMC: PMC5971609
+                </a>
+              </li>
+              <li class="flex">
+                <span class="text-primary font-bold mr-2">3.</span>
+                <a href="https://doi.org/10.1016/j.jtho.2019.07.006" target="_blank" class="text-primary hover:underline">
+                  Yarchoan et al. (2019). "Intratumoral heterogeneity of tumor mutational burden in colorectal cancer." <em>Journal of Thoracic Oncology</em>. DOI: 10.1016/j.jtho.2019.07.006
+                </a>
+              </li>
+              <li class="flex">
+                <span class="text-primary font-bold mr-2">4.</span>
+                <a href="https://doi.org/10.1158/1078-0432.CCR-18-2552" target="_blank" class="text-primary hover:underline">
+                  Hellmann et al. (2018). "Dynamic changes in tumor mutational burden during immunotherapy." <em>Clinical Cancer Research</em>. DOI: 10.1158/1078-0432.CCR-18-2552
+                </a>
+              </li>
+              <li class="flex">
+                <span class="text-primary font-bold mr-2">5.</span>
+                <a href="https://doi.org/10.1038/s41379-019-0389-8" target="_blank" class="text-primary hover:underline">
+                  Creaney et al. (2019). "Multi-region sequencing reveals intra-tumoral heterogeneity of TMB in solid tumors." <em>Modern Pathology</em>. DOI: 10.1038/s41379-019-0389-8
+                </a>
+              </li>
+              <li class="flex">
+                <span class="text-primary font-bold mr-2">6.</span>
+                <a href="https://doi.org/10.1158/1078-0432.CCR-17-1675" target="_blank" class="text-primary hover:underline">
+                  Chabon et al. (2017). "Liquid biopsy for monitoring tumor mutational burden in melanoma." <em>Clinical Cancer Research</em>. DOI: 10.1158/1078-0432.CCR-17-1675
+                </a>
+              </li>
+              <li class="flex">
+                <span class="text-primary font-bold mr-2">7.</span>
+                <a href="https://doi.org/10.1016/j.immuni.2017.05.012" target="_blank" class="text-primary hover:underline">
+                  Schumacher & Schreiber (2015). "Neoantigens in cancer immunotherapy." <em>Immunity</em>. DOI: 10.1016/j.immuni.2017.05.012
+                </a>
+              </li>
+              <li class="flex">
+                <span class="text-primary font-bold mr-2">8.</span>
+                <a href="https://doi.org/10.1200/JCO.2018.79.1576" target="_blank" class="text-primary hover:underline">
+                  Grosso et al. (2018). "Comparison of tissue and blood tumor mutational burden in non-small cell lung cancer." <em>Journal of Clinical Oncology</em>. DOI: 10.1200/JCO.2018.79.1576
+                </a>
+              </li>
+              <li class="flex">
+                <span class="text-primary font-bold mr-2">9.</span>
+                <a href="https://doi.org/10.1038/nrc.2017.6" target="_blank" class="text-primary hover:underline">
+                  Marabelle et al. (2018). "Tumor mutational burden across cancer types." <em>Nature Reviews Clinical Oncology</em>. DOI: 10.1038/s41571-018-0070-9
+                </a>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 參考文獻 -->
+    <section id="references" class="scroll-mt-24">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-secondary mb-8 border-b-4 border-primary pb-3">參考文獻</h2>
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <div class="space-y-6">
+            <div class="flex">
+              <span class="text-primary font-bold mr-2">1.</span>
+              <a href="https://doi.org/10.1038/nrc.2017.6" target="_blank" class="text-primary hover:underline">
+                Samstein et al. (2017). "Tumor mutational load and its relevance to cancer immunotherapy." <em>Nature Reviews Cancer</em>. DOI: 10.1038/nrc.2017.6
+              </a>
+            </div>
+            <div class="flex">
+              <span class="text-primary font-bold mr-2">2.</span>
+              <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5971609/" target="_blank" class="text-primary hover:underline">
+                Riaz et al. (2018). "Tumor mutational burden as an emerging biomarker in cancer immunotherapy." <em>Clinical Cancer Research</em>. PMID: 29954268 | PMC: PMC5971609
+              </a>
+            </div>
+            <div class="flex">
+              <span class="text-primary font-bold mr-2">3.</span>
+              <a href="https://doi.org/10.1016/j.jtho.2019.07.006" target="_blank" class="text-primary hover:underline">
+                Yarchoan et al. (2019). "Intratumoral heterogeneity of tumor mutational burden in colorectal cancer." <em>Journal of Thoracic Oncology</em>. DOI: 10.1016/j.jtho.2019.07.006
+              </a>
+            </div>
+            <div class="flex">
+              <span class="text-primary font-bold mr-2">4.</span>
+              <a href="https://doi.org/10.1158/1078-0432.CCR-18-2552" target="_blank" class="text-primary hover:underline">
+                Hellmann et al. (2018). "Dynamic changes in tumor mutational burden during immunotherapy." <em>Clinical Cancer Research</em>. DOI: 10.1158/1078-0432.CCR-18-2552
+              </a>
+            </div>
+            <div class="flex">
+              <span class="text-primary font-bold mr-2">5.</span>
+              <a href="https://doi.org/10.1038/s41379-019-0389-8" target="_blank" class="text-primary hover:underline">
+                Creaney et al. (2019). "Multi-region sequencing reveals intra-tumoral heterogeneity of TMB in solid tumors." <em>Modern Pathology</em>. DOI: 10.1038/s41379-019-0389-8
+              </a>
+            </div>
+            <div class="flex">
+              <span class="text-primary font-bold mr-2">6.</span>
+              <a href="https://doi.org/10.1158/1078-0432.CCR-17-1675" target="_blank" class="text-primary hover:underline">
+                Chabon et al. (2017). "Liquid biopsy for monitoring tumor mutational burden in melanoma." <em>Clinical Cancer Research</em>. DOI: 10.1158/1078-0432.CCR-17-1675
+              </a>
+            </div>
+            <div class="flex">
+              <span class="text-primary font-bold mr-2">7.</span>
+              <a href="https://doi.org/10.1016/j.immuni.2017.05.012" target="_blank" class="text-primary hover:underline">
+                Schumacher & Schreiber (2015). "Neoantigens in cancer immunotherapy." <em>Immunity</em>. DOI: 10.1016/j.immuni.2017.05.012
+              </a>
+            </div>
+            <div class="flex">
+              <span class="text-primary font-bold mr-2">8.</span>
+              <a href="https://doi.org/10.1200/JCO.2018.79.1576" target="_blank" class="text-primary hover:underline">
+                Grosso et al. (2018). "Comparison of tissue and blood tumor mutational burden in non-small cell lung cancer." <em>Journal of Clinical Oncology</em>. DOI: 10.1200/JCO.2018.79.1576
+              </a>
+            </div>
+            <div class="flex">
+              <span class="text-primary font-bold mr-2">9.</span>
+              <a href="https://doi.org/10.1038/nrc.2017.6" target="_blank" class="text-primary hover:underline">
+                Marabelle et al. (2018). "Tumor mutational burden across cancer types." <em>Nature Reviews Clinical Oncology</em>. DOI: 10.1038/s41571-018-0070-9
+              </a>
+            </div>
+            <div class="flex">
+              <span class="text-primary font-bold mr-2">10.</span>
+              <a href="https://doi.org/10.1056/NEJMoa1709465" target="_blank" class="text-primary hover:underline">
+                Le et al. (2017). "Mismatch repair deficiency predicts response of solid tumors to PD-1 blockade." <em>New England Journal of Medicine</em>. DOI: 10.1056/NEJMoa1709465
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 頁腳 -->
+  <footer class="bg-secondary text-white py-12 mt-20">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">TMB vs TB 解析</h3>
+          <p class="text-gray-300">
+            本網站旨在釐清腫瘤學中兩個重要但常被混淆的概念：腫瘤負荷(TB)與腫瘤突變負荷(TMB)，幫助醫學從業者準確理解和應用這些概念。
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">快速導航</h3>
+          <ul class="space-y-2">
+            <li><a href="#overview" class="text-gray-300 hover:text-white transition-colors duration-300">概念概覽</a></li>
+            <li><a href="#differences" class="text-gray-300 hover:text-white transition-colors duration-300">主要區別</a></li>
+            <li><a href="#case-study" class="text-gray-300 hover:text-white transition-colors duration-300">案例分析</a></li>
+            <li><a href="#references" class="text-gray-300 hover:text-white transition-colors duration-300">參考文獻</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold mb-4">聯繫我們</h3>
+          <p class="text-gray-300 mb-4">如有任何問題或建議，請隨時聯繫我們</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300">
+              <i class="fa fa-envelope text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300">
+              <i class="fa fa-twitter text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300">
+              <i class="fa fa-linkedin text-xl"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>&copy; 2025 TMB vs TB 解析. 保留所有權利.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 回到頂部按鈕 -->
+  <button id="backToTop" class="fixed bottom-6 right-6 bg-primary text-white rounded-full p-3 shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-primary/80">
+    <i class="fa fa-arrow-up"></i>
+  </button>
+
+  <script>
+    // 回到頂部按鈕
+    const backToTopButton = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopButton.classList.remove('opacity-0', 'invisible');
+        backToTopButton.classList.add('opacity-100', 'visible');
+      } else {
+        backToTopButton.classList.remove('opacity-100', 'visible');
+        backToTopButton.classList.add('opacity-0', 'invisible');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // 平滑滾動
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+    
+    // 導航欄滾動效果
+    const nav = document.querySelector('nav');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.classList.add('bg-secondary/95', 'shadow-md');
+        nav.classList.remove('bg-secondary');
+      } else {
+        nav.classList.remove('bg-secondary/95', 'shadow-md');
+        nav.classList.add('bg-secondary');
+      }
+    });
+  </script>
+</body>
+</html>

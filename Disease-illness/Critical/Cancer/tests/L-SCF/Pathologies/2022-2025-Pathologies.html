@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <title>精準腫瘤學分析報告</title>
+    <style>
+      body {
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      .report-section {
+        margin-bottom: 30px;
+        border: 2px solid #4a5568;
+        padding: 15px;
+        border-radius: 5px;
+      }
+      .section-title {
+        color: #2c5282;
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #4a5568;
+        padding-bottom: 5px;
+      }
+      .subsection-title {
+        color: #d9534f;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 15px 0 10px 0;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        font-size: 14px;
+      }
+      th,
+      td {
+        border: 2px solid #4a5568;
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background-color: #ffdebf;
+        font-weight: bold;
+      }
+      .high-risk {
+        color: #d9534f;
+        font-weight: bold;
+      }
+      .opportunity {
+        color: #5bc0de;
+        font-weight: bold;
+      }
+      ul,
+      ol {
+        margin: 10px 0;
+        padding-left: 20px;
+      }
+      li {
+        margin-bottom: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="report-section">
+      <div class="section-title">關鍵觀察與臨床意義</div>
+
+      <div class="subsection-title">腫瘤演變：</div>
+      <ul>
+        <li>
+          <strong>2022年：</strong>
+          高度惡性腺癌（胃腸道來源）伴MMR缺陷但無RAS/RAF突變
+        </li>
+        <li>
+          <strong>2022年（後期）：</strong>
+          轉變為黏液亞型（>50%黏液）伴印戒細胞—與化療耐藥相關
+        </li>
+        <li>
+          <strong>2025年：</strong>
+          進一步惡化（壞死枯斑、結節外擴展）和CLDN18陰性（排除claudin靶向治療）
+        </li>
+      </ul>
+
+      <div class="subsection-title">預後標記：</div>
+      <ul>
+        <li>
+          <strong>MMR缺陷（2022年）：</strong>
+          提示可能對免疫治療（如pembrolizumab）有反應，但Ki67>95%表明快速生長激增擴散
+        </li>
+        <li>
+          <strong>黏液特徵（2022-2025年）：</strong>
+          因藥物在黏液豐富腫瘤中穿透有限導致生存率更差
+        </li>
+        <li>
+          <strong>CLDN18陰性（2025年）：</strong>
+          排除zolbetuximab（抗CLDN18）作為治療選項
+        </li>
+      </ul>
+
+      <div class="subsection-title">治療挑戰：</div>
+      <ul>
+        <li>除MMR缺陷外無可操作突變（KRAS/NRAS/BRAF野生型）</li>
+        <li>EGFR中度表達（H-score 200）可能不足以支持抗EGFR治療效果</li>
+      </ul>
+    </div>
+
+    <div class="report-section">
+      <div class="section-title">精準腫瘤學分析與治療建議</div>
+
+      <div class="subsection-title">1. 腫瘤生物學與基因組驅動因素</div>
+      <table>
+        <tr>
+          <th>特徵</th>
+          <th>發現</th>
+          <th>臨床意義</th>
+        </tr>
+        <tr>
+          <td><strong>分子亞型</strong></td>
+          <td>
+            <ul>
+              <li><strong>MSI-High</strong> (MLH1/PMS2缺失, TMB=56)</li>
+              <li><strong>KRAS/NRAS/BRAF野生型</strong></li>
+              <li><strong>TP53 R273C</strong> (致癌性)</li>
+              <li><strong>APC/ARID1A/RNF43</strong> 截短突變</li>
+            </ul>
+          </td>
+          <td>
+            <span class="high-risk"
+              >MSI-H提示免疫治療敏感性，但先前PD-1/CTLA-4失敗引發耐藥擔憂</span
+            ><br />
+            <span class="opportunity"
+              >WNT/β-catenin通路激活(APC/RNF43)可能驅動免疫逃逸</span
+            >
+          </td>
+        </tr>
+        <tr>
+          <td><strong>PET-CT進展</strong></td>
+          <td>
+            <ul>
+              <li><strong>主動脈腔淋巴結TLG +575%</strong> (最具侵襲性)</li>
+              <li>鎖骨上淋巴結增大至2.8cm (2025年)</li>
+              <li>CEA反彈 (17.8 → 75.0) Pembrolizumab後</li>
+            </ul>
+          </td>
+          <td>
+            <span class="high-risk">免疫治療期間超進展疾病(儘管MSI-H)</span
+            ><br />
+            <span class="opportunity"
+              >考慮非免疫治療靶點(如MEK1 K57T, TP53 R273C)</span
+            >
+          </td>
+        </tr>
+      </table>
+
+      <div class="subsection-title">2. 治療歷史與耐藥機制</div>
+      <p><strong>關鍵嘗試治療方案：</strong></p>
+      <ul>
+        <li>
+          <strong>Cetuximab + Bevacizumab</strong> (CEA ↓129.5 → 63.6):
+          部分反應但短暫
+        </li>
+        <li>
+          <strong>FOLFOXIRI + Docetaxel</strong> (CEA ↑252.4):
+          化療耐藥(黏液性組織學)
+        </li>
+        <li>
+          <strong>Nivolumab/Ipilimumab → Pembrolizumab</strong> (CEA ↓36.1 →
+          7.6): 初始反應但最終進展
+        </li>
+      </ul>
+
+      <p><strong>已識別耐藥驅動因素：</strong></p>
+      <ol>
+        <li>
+          <strong>WNT/β-catenin激活</strong> (APC/RNF43突變) → 免疫排斥(PD-L1=0,
+          TPS=0)
+        </li>
+        <li><strong>TP53 R273C</strong> → 化療耐藥和基因組不穩定</li>
+        <li><strong>MEK1 K57T</strong> (MAP2K1) → 潛在RAS/MAPK通路旁路</li>
+      </ol>
+
+      <div class="subsection-title">3. 可操作靶點與後續步驟</div>
+      <table>
+        <tr>
+          <th>靶點</th>
+          <th>藥物選擇</th>
+          <th>理論依據</th>
+          <th>限制</th>
+        </tr>
+        <tr>
+          <td><strong>MSI-H/TMB=56</strong></td>
+          <td>
+            <ul>
+              <li>再嘗試: <strong>Pembrolizumab + Lenvatinib</strong></li>
+              <li>實驗性: <strong>TIL療法</strong></li>
+            </ul>
+          </td>
+          <td>VEGF抑制(Lenvatinib)可能逆轉免疫排斥</td>
+          <td>先前PD-1失敗；WNT通路可能限制效果</td>
+        </tr>
+        <tr>
+          <td><strong>MEK1 K57T</strong></td>
+          <td>
+            <ul>
+              <li><strong>Trametinib</strong> (MEK抑制劑)</li>
+              <li><strong>Selumetinib + EGFR抑制劑</strong></li>
+            </ul>
+          </td>
+          <td>MAP2K1突變可能對MEK抑制敏感</td>
+          <td>胃腸癌數據有限；毒性風險</td>
+        </tr>
+        <tr>
+          <td><strong>TP53 R273C</strong></td>
+          <td>
+            <ul>
+              <li><strong>APR-246 (Eprenetapopt)</strong></li>
+            </ul>
+          </td>
+          <td>重建突變p53功能並與化療協同</td>
+          <td>僅二期試驗；香港取得困難</td>
+        </tr>
+        <tr>
+          <td><strong>黏液性表型</strong></td>
+          <td>
+            <ul>
+              <li><strong>FOLFIRI + Bevacizumab</strong></li>
+            </ul>
+          </td>
+          <td>Bevacizumab可能減少黏液產生</td>
+          <td>預期持續時間短</td>
+        </tr>
+      </table>
+
+      <div class="subsection-title">4. 預後與監測</div>
+      <p><strong>短期（3-6個月）：</strong></p>
+      <ul>
+        <li>高內臟轉移風險（肝/肺）由於TP53/APC驅動的基因組不穩定</li>
+        <li>CEA趨勢關鍵；若>100考慮症狀性淋巴結的緩和性放療</li>
+      </ul>
+
+      <p><strong>長期：</strong></p>
+      <ul>
+        <li>
+          探索<strong>MEK抑制劑+免疫治療</strong>或<strong>p53靶向治療</strong>的臨床試驗
+        </li>
+        <li>若ECOG許可，重複液體活檢（追蹤新興KRAS/NRAS克隆）</li>
+      </ul>
+
+      <div class="subsection-title">結論</div>
+      <p>
+        儘管MSI-H，免疫治療期間的超進展和黏液性轉變需要轉向靶向策略（MEK抑制、p53功能重建）或臨床試驗。WNT通路抑制（如PORCN抑制劑）可考慮超適應症使用。
+      </p>
+         <p><strong>參考文獻：</strong></p>
+    <ul>
+<li>
+【野生型】一詞最初表示在一基因位點上有與突變型相對應的未變異基因，現在由於認識到物種內絕大多數基因座位上存在較多等位基因，因此一個統一的野生型是不存在的。一般而言，野生型用於表示某一座位上基因頻率最高的allele等位基因。
+    <li>
+【Wnt】是int和Wg的合成詞，代表「無翅相關整合位點」。 Wnt是一種分泌因子，在胚胎發育過程中調節細胞的生長、運動和分化。      </li>
+    <li>
+【β-catenin】是一種在細胞黏附和訊號傳導中起關鍵作用的蛋白質，尤其是透過Wnt訊號路徑。它是細胞間連結的關鍵組成部分，幫助細胞黏附在一起，同時也作為轉錄因子，影響細胞核內的基因表現。 β-catenin功能的失調可能導致多種疾病，包括癌症。      </li>
+<li>【ECOG】Eastern Cooperative Oncology Group State Scale東岸腫瘤協作組體能狀態量表：用於癌症治療的量表 0-5，用於評估患者執行日常活動的能力 0 表示完全健康，5 表示死亡。
+ECOG 協調中心位於麻薩諸塞州波士頓，而其小組主席辦公室則位於賓州費城。美國東岸運作首個公共資助進行多種癌症研究臨床試驗的合作團體。<a href="https://en.wikipedia.org/wiki/Performance_status" target="_blank">https://en.wikipedia.org/wiki/Performance_status</a></li>
+    </div>
+  </body>
+</html>
+<hr />
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Precision Oncology Analysis Report</title>s
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      .report-section {
+        margin-bottom: 30px;
+        border: 2px solid #4a5568;
+        padding: 15px;
+        border-radius: 5px;
+      }
+      .section-title {
+        color: #2c5282;
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #4a5568;
+        padding-bottom: 5px;
+      }
+      .subsection-title {
+        color: #d9534f;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 15px 0 10px 0;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        font-size: 14px;
+      }
+      th,
+      td {
+        border: 2px solid #4a5568;
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background-color: #ffdebf;
+        font-weight: bold;
+      }
+      .high-risk {
+        color: #d9534f;
+        font-weight: bold;
+      }
+      .opportunity {
+        color: #5bc0de;
+        font-weight: bold;
+      }
+      ul,
+      ol {
+        margin: 10px 0;
+        padding-left: 20px;
+      }
+      li {
+        margin-bottom: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="report-section">
+      <div class="section-title">Key Observations & Clinical Implications</div>
+
+      <div class="subsection-title">Tumor Evolution:</div>
+      <ul>
+        <li>
+          <strong>2022:</strong> High-grade adenocarcinoma (GI origin) with MMR
+          deficiency but no RAS/RAF mutations.
+        </li>
+        <li>
+          <strong>2022 (Later):</strong> Shift to mucinous subtype (>50% mucin)
+          with signet ring cells—associated with chemo-resistance.
+        </li>
+        <li>
+          <strong>2025:</strong> Further aggression (necrosis, extranodal
+          extension) and CLDN18 negativity (ruling out claudin-targeted
+          therapies).
+        </li>
+      </ul>
+
+      <div class="subsection-title">Prognostic Markers:</div>
+      <ul>
+        <li>
+          <strong>MMR Deficiency (2022):</strong> Suggests potential response to
+          immunotherapy (e.g., pembrolizumab), but high Ki67 (>95%) indicates
+          rapid growth.
+        </li>
+        <li>
+          <strong>Mucinous Features (2022–2025):</strong> Worse survival due to
+          limited drug penetration in mucin-rich tumors.
+        </li>
+        <li>
+          <strong>CLDN18 Negativity (2025):</strong> Excludes zolbetuximab
+          (anti-CLDN18) as a treatment option.
+        </li>
+      </ul>
+
+      <div class="subsection-title">Therapeutic Challenges:</div>
+      <ul>
+        <li>
+          No actionable mutations (KRAS/NRAS/BRAF wild-type) except MMR
+          deficiency.
+        </li>
+        <li>
+          EGFR moderate expression (H-score 200) may not suffice for anti-EGFR
+          therapy efficacy.
+        </li>
+      </ul>
+    </div>
+
+    <div class="report-section">
+      <div class="section-title">
+        Precision Oncology Analysis & Therapeutic Recommendations
+      </div>
+
+      <div class="subsection-title">1. Tumor Biology & Genomic Drivers</div>
+      <table>
+        <tr>
+          <th>Feature</th>
+          <th>Findings</th>
+          <th>Clinical Implications</th>
+        </tr>
+        <tr>
+          <td><strong>Molecular Subtype</strong></td>
+          <td>
+            <ul>
+              <li><strong>MSI-High</strong> (MLH1/PMS2 loss, TMB=56)</li>
+              <li><strong>KRAS/NRAS/BRAF wild-type</strong></li>
+              <li><strong>TP53 R273C</strong> (oncogenic)</li>
+              <li><strong>APC/ARID1A/RNF43</strong> truncations</li>
+            </ul>
+          </td>
+          <td>
+            <span class="high-risk"
+              >MSI-H suggests immunotherapy sensitivity, but prior PD-1/CTLA-4
+              failure raises resistance concerns.</span
+            ><br />
+            <span class="opportunity"
+              >WNT/β-catenin pathway activation (APC/RNF43) may drive immune
+              evasion.</span
+            >
+          </td>
+        </tr>
+        <tr>
+          <td><strong>PET-CT Progression</strong></td>
+          <td>
+            <ul>
+              <li>
+                <strong>Aortocaval node TLG +575%</strong> (most aggressive)
+              </li>
+              <li>SCF node size ↑2.8cm (2025)</li>
+              <li>CEA rebound (17.8 → 75.0) post-Pembrolizumab</li>
+            </ul>
+          </td>
+          <td>
+            <span class="high-risk"
+              >Hyperprogressive disease on immunotherapy (despite MSI-H).</span
+            ><br />
+            <span class="opportunity"
+              >Consider non-immunotherapy targets (e.g., MEK1 K57T, TP53
+              R273C).</span
+            >
+          </td>
+        </tr>
+      </table>
+
+      <div class="subsection-title">
+        2. Treatment History & Resistance Mechanisms
+      </div>
+      <p><strong>Key Therapies Attempted:</strong></p>
+      <ul>
+        <li>
+          <strong>Cetuximab + Bevacizumab</strong> (CEA ↓129.5 → 63.6): Partial
+          response but short-lived.
+        </li>
+        <li>
+          <strong>FOLFOXIRI + Docetaxel</strong> (CEA ↑252.4): Chemoresistance
+          (mucinous histology).
+        </li>
+        <li>
+          <strong>Nivolumab/Ipilimumab → Pembrolizumab</strong> (CEA ↓36.1 →
+          7.6): Initial response but eventual progression.
+        </li>
+      </ul>
+
+      <p><strong>Identified Resistance Drivers:</strong></p>
+      <ol>
+        <li>
+          <strong>WNT/β-catenin Activation</strong> (APC/RNF43 mutations) →
+          Immune exclusion (PD-L1=0, TPS=0).
+        </li>
+        <li>
+          <strong>TP53 R273C</strong> → Chemoresistance and genomic instability.
+        </li>
+        <li>
+          <strong>MEK1 K57T</strong> (MAP2K1) → Potential RAS/MAPK pathway
+          bypass.
+        </li>
+      </ol>
+
+      <div class="subsection-title">3. Actionable Targets & Next Steps</div>
+      <table>
+        <tr>
+          <th>Target</th>
+          <th>Drug Options</th>
+          <th>Rationale</th>
+          <th>Limitations</th>
+        </tr>
+        <tr>
+          <td><strong>MSI-H/TMB=56</strong></td>
+          <td>
+            <ul>
+              <li>Retrial: <strong>Pembrolizumab + Lenvatinib</strong></li>
+              <li>Experimental: <strong>TIL therapy</strong></li>
+            </ul>
+          </td>
+          <td>VEGF inhibition (Lenvatinib) may reverse immune exclusion.</td>
+          <td>Prior anti-PD-1 failure; WNT pathway may limit efficacy.</td>
+        </tr>
+        <tr>
+          <td><strong>MEK1 K57T</strong></td>
+          <td>
+            <ul>
+              <li><strong>Trametinib</strong> (MEK inhibitor)</li>
+              <li><strong>Selumetinib + EGFRi</strong></li>
+            </ul>
+          </td>
+          <td>MAP2K1 mutation may confer sensitivity to MEK inhibition.</td>
+          <td>Limited data in GI cancers; risk of toxicity.</td>
+        </tr>
+        <tr>
+          <td><strong>TP53 R273C</strong></td>
+          <td>
+            <ul>
+              <li><strong>APR-246 (Eprenetapopt)</strong></li>
+            </ul>
+          </td>
+          <td>Reactivates mutant p53 and synergizes with chemo.</td>
+          <td>Phase II trials only; limited access in HK.</td>
+        </tr>
+        <tr>
+          <td><strong>Mucinous Phenotype</strong></td>
+          <td>
+            <ul>
+              <li><strong>FOLFIRI + Bevacizumab</strong></li>
+            </ul>
+          </td>
+          <td>Bevacizumab may reduce mucin production.</td>
+          <td>Low expected durability.</td>
+        </tr>
+      </table>
+
+      <div class="subsection-title">4. Prognosis & Monitoring</div>
+      <p><strong>Short-Term (3–6 months):</strong></p>
+      <ul>
+        <li>
+          High risk of visceral metastasis (liver/lung) due to TP53/APC-driven
+          genomic instability.
+        </li>
+        <li>
+          CEA trend critical; if ↑>100, consider palliative RT for symptomatic
+          nodes.
+        </li>
+      </ul>
+
+      <p><strong>Long-Term:</strong></p>
+      <ul>
+        <li>
+          Explore clinical trials for
+          <strong>MEK inhibitors + immunotherapy</strong> or
+          <strong>p53-targeted therapies</strong>.
+        </li>
+        <li>
+          Repeat liquid biopsy if ECOG permits (track emerging KRAS/NRAS
+          clones).
+        </li>
+      </ul>
+
+      <div class="subsection-title">Conclusion</div>
+      <p>
+        Despite MSI-H, hyperprogression on immunotherapy and mucinous
+        transformation necessitate a shift to targeted strategies (MEK
+        inhibition, p53 reactivation) or clinical trials. WNT pathway inhibition
+        (e.g., PORCN inhibitors) could be explored off-label.
+      </p>
+      <p><strong>References:</strong></p>
+    <ul>
+        
+        <li>
+【Wild Type】 was conceptualized as a product of the standard "normal" allele at a locus, in contrast to that produced by a non-standard, "mutant" allele. "Mutant" alleles can vary to a great extent, and even become the wild type if a genetic shift occurs within the population. Continued advancements in genetic mapping technologies have created a better understanding of how mutations occur and interact with other genes to alter phenotype. It is now regarded that most or all gene loci exist in a variety of allelic forms, which vary in frequency throughout the geographic range of a species, and that a uniform wild type does not exist. In general, however, the most prevalent allele – i.e., the one with the highest gene frequency – is the one deemed wild type.
+ 
+      <li>
+       【Wnt】   is a portmanteau of int and Wg and stands for "Wingless-related integration site". Wnts are secreted factors that regulate cell growth, motility, and diﬀerentiation during embryonic development.
+      </li>
+      <li>
+        【Beta-catenin】 is a protein that plays a crucial role in cell adhesion and signaling, particularly through the Wnt signaling pathway. It's a key component of cell-cell junctions, helps cells stick together, and also acts as a transcription factor, influencing gene expression in the nucleus. Disruptions in beta-catenin's function can contribute to various diseases, including cancer. 
+      </li>
+    </ul>
+    </div>
+    
+  </body>
+</html>
+<hr/>

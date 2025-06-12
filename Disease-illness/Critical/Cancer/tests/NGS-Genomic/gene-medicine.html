@@ -1,0 +1,3276 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>腫瘤精準治療基因與藥物關聯</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #165DFF;
+            --primary-light: #e6f0ff;
+            --secondary: #36CFC9;
+            --secondary-light: #e6f7f7;
+            --warning: #FF7D00;
+            --warning-light: #fff3e6;
+            --danger: #F53F3F;
+            --danger-light: #fce7e7;
+            --success: #00B42A;
+            --success-light: #e8f8ec;
+            --dark: #1D2129;
+            --medium: #4E5969;
+            --light: #86909C;
+            --lighter: #E5E6EB;
+            --lightest: #F2F3F5;
+            --white: #FFFFFF;
+            --border-radius: 8px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft JhengHei', '微軟正黑體', sans-serif;
+            background-color: var(--lightest);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* 头部样式 */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+            color: var(--primary);
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--medium);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link.active, .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        /* 主内容区样式 */
+        .main-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: var(--medium);
+            max-width: 800px;
+        }
+
+        /* 筛选区域样式 */
+        .filter-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        .filter-group {
+            margin-bottom: 15px;
+        }
+
+        .filter-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--medium);
+            margin-bottom: 8px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light);
+        }
+
+        .filter-input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border: 1px solid var(--lighter);
+            border-radius: 6px;
+            font-size: 15px;
+            color: var(--dark);
+            background-color: var(--white);
+            transition: var(--transition);
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(22, 93, 255, 0.1);
+        }
+
+        /* 表格样式 */
+        .table-container {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .gene-table {
+            width: 100%;
+            min-width: 1000px;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .gene-table thead th {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            text-align: left;
+            padding: 16px 20px;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .gene-table tbody tr {
+            transition: var(--transition);
+        }
+
+        .gene-table tbody tr:hover {
+            background-color: var(--lightest);
+        }
+
+        .gene-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--lighter);
+            vertical-align: top;
+        }
+
+        .gene-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .gene-name {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .gene-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: 700;
+        }
+
+        .gene-title {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .gene-subtitle {
+            font-size: 13px;
+            color: var(--light);
+        }
+
+        .therapy-type {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .type-immuno {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .type-targeted {
+            background-color: var(--success-light);
+            color: var(--success);
+        }
+
+        .drug-name {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .drug-brand {
+            font-size: 13px;
+            color: var(--light);
+        }
+
+        .resistance-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .tag-sensitive {
+            background-color: var(--success-light);
+            color: var(--success);
+        }
+
+        .tag-resistant {
+            background-color: var(--danger-light);
+            color: var(--danger);
+        }
+
+        .tag-partial {
+            background-color: var(--warning-light);
+            color: var(--warning);
+        }
+
+        .tag-unknown {
+            background-color: var(--lighter);
+            color: var(--medium);
+        }
+
+        .reference-link {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .reference-link:hover {
+            text-decoration: underline;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 300px;
+            background-color: var(--dark);
+            color: var(--white);
+            text-align: left;
+            border-radius: 6px;
+            padding: 12px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 14px;
+            line-height: 1.5;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* 信息框样式 */
+        .info-box {
+            background-color: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .info-icon {
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        .info-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .info-content ul {
+            padding-left: 25px;
+        }
+
+        .info-content li {
+            margin-bottom: 8px;
+        }
+
+        .info-content strong {
+            color: var(--dark);
+        }
+
+        /* 病例分析区域 */
+        .case-analysis {
+            background-color: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 24px;
+            margin-bottom: 30px;
+        }
+
+        .case-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--lighter);
+        }
+
+        .case-icon {
+            color: var(--danger);
+            font-size: 24px;
+        }
+
+        .case-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--danger);
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .case-group {
+            background-color: var(--lightest);
+            border-radius: var(--border-radius);
+            padding: 15px;
+        }
+
+        .case-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--medium);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .case-value {
+            font-size: 16px;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .analysis-summary {
+            background-color: var(--warning-light);
+            border-left: 4px solid var(--warning);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .analysis-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--warning);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: var(--lighter);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--white);
+            transform: translateX(5px);
+        }
+
+        .contact-info a {
+            color: var(--lighter);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info a:hover {
+            color: var(--white);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            font-size: 14px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-menu {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .page-title {
+                font-size: 26px;
+            }
+            
+            .page-subtitle {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-menu {
+                gap: 10px;
+            }
+            
+            .nav-link {
+                font-size: 14px;
+            }
+            
+            .gene-table td, .gene-table th {
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-dna logo-icon"></i>
+                <div class="logo-text">腫瘤精準治療基因與藥物關聯</div>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-link">首頁</a>
+                <a href="#" class="nav-link active">基因藥物關聯</a>
+                <a href="#" class="nav-link">文獻查詢</a>
+                <a href="#" class="nav-link">關於我們</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主要内容区 -->
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">腫瘤治療基因與藥物關聯表格</h1>
+            <p class="page-subtitle">
+                本表格展示了常見腫瘤相關基因改變與對應治療藥物的關聯，幫助臨床醫生和研究人員快速查詢靶向治療方案。
+                表格區分了免疫治療和靶向治療類型，並標注了可能的耐藥情況。
+            </p>
+        </div>
+
+        <!-- 病例分析区域 -->
+        <section class="case-analysis">
+            <div class="case-header">
+                <i class="fas fa-microscope case-icon"></i>
+                <h2 class="case-title">病例分析：十二指腸腺癌轉移淋巴結</h2>
+            </div>
+            
+            <div class="case-grid">
+                <div class="case-group">
+                    <div class="case-label">
+                        <i class="fas fa-dna"></i>
+                        <span>2022-05-25 養和 HKS&H 分子標記</span>
+                    </div>
+                    <div class="case-value">EGFR200, CK7-, CK20+, CDX2+, Ki67(>95%)</div>
+                </div>
+                
+                <div class="case-group">
+                    <div class="case-label">
+                        <i class="fas fa-vial"></i>
+                        <span>KRAS/NRAS狀態</span>
+                    </div>
+                    <div class="case-value">KRAS 陰性, NRAS 陰性</div>
+                </div>
+                
+                <div class="case-group">
+                    <div class="case-label">
+                        <i class="fas fa-flask"></i>
+                        <span>2022-12-29 FoundationOne CDx 檢測</span>
+                    </div>
+                    <div class="case-value">MSI-high, TMB=56</div>
+                </div>
+                
+                <div class="case-group">
+                    <div class="case-label">
+                        <i class="fas fa-prescription-bottle"></i>
+                        <span>PD-L1狀態</span>
+                    </div>
+                    <div class="case-value">TPS=0</div>
+                </div>
+            </div>
+
+             <div class="case-group">
+                    <div class="case-label">
+                        <i class="fas fa-flask"></i>
+                        <span>2025 ACTOnco®+ 檢測</span>
+                    </div>
+                    <div class="case-value">MSI-pending, TMB=34.1</div>
+                </div>
+                
+                <div class="case-group">
+                    <div class="case-label">
+                        <i class="fas fa-prescription-bottle"></i>
+                        <span>PD-L1狀態</span>
+                    </div>
+                    <div class="case-value">TPS=0, TPS&lt;1%, CPS=60</div>
+                </div>
+            </div>
+            
+            <div class="analysis-summary">
+                <div class="analysis-title">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>治療建議分析</span>
+                </div>
+                <ul>
+                    <li><strong>高腫瘤突變負荷(TMB=56)和MSI-H狀態</strong>表明患者可能對免疫檢查點抑制劑治療有良好反應。</li>
+                    <li>雖然PD-L1 TPS=0，但CPS=60顯示腫瘤微環境中有大量PD-L1表達細胞，支持使用PD-1/PD-L1抑制劑。</li>
+                    <li>KRAS/NRAS陰性狀態排除了某些靶向治療的禁忌症，擴大了治療選擇範圍。</li>
+                    <li>CDX2+和CK20+支持腸道來源腺癌的診斷，有助於指導化療方案選擇。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 筛选和搜索区域 -->
+        <section class="filter-section">
+            <div class="filter-group">
+                <label class="filter-label">關鍵詞搜索</label>
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" placeholder="搜索基因、藥物或文獻..." class="filter-input">
+                </div>
+            </div>
+        </section>
+
+        <!-- 表格容器 -->
+        <div class="table-container">
+            <div class="table-wrapper">
+                <table class="gene-table">
+                    <thead>
+                        <tr>
+                            <th>基因改變</th>
+                            <th>治療類型</th>
+                            <th>藥物名稱</th>
+                            <th>作用機制</th>
+                            <th>耐藥標注</th>
+                            <th>文獻依據</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- BRCA1/2 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #e6f0ff; color: #165DFF;">B</div>
+                                    <div>
+                                        <div class="gene-title">BRCA1/2 突變</div>
+                                        <div class="gene-subtitle">乳腺癌、卵巢癌</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-targeted">靶向治療</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">奧拉帕利 (Olaparib)</div>
+                                <div class="drug-brand">Lynparza</div>
+                            </td>
+                            <td>
+                                <div>PARP 抑制劑，通過合成致死機制殺死 BRCA 缺陷細胞</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-sensitive">敏感</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        Lord CJ, et al. N Engl J Med 2014
+                                        <span class="tooltip-text">
+                                            Lord CJ, Tutt AN, Ashworth A. PARP inhibitors: synthetic lethality in the clinic. 
+                                            N Engl J Med. 2014;371(26):2554-2561. 
+                                            DOI: 10.1056/NEJMra1401370
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- EGFR 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #f1e6ff; color: #722ED1;">E</div>
+                                    <div>
+                                        <div class="gene-title">EGFR T790M</div>
+                                        <div class="gene-subtitle">非小細胞肺癌</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-targeted">靶向治療</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">奧希替尼 (Osimertinib)</div>
+                                <div class="drug-brand">Tagrisso</div>
+                            </td>
+                            <td>
+                                <div>第三代 EGFR-TKI，特異性抑制 T790M 耐藥突變</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-sensitive">敏感</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        Mok TS, et al. N Engl J Med 2017
+                                        <span class="tooltip-text">
+                                            Mok TS, Wu YL, Ahn MJ, et al. Osimertinib or platinum-pemetrexed in EGFR T790M-positive lung cancer. 
+                                            N Engl J Med. 2017;376(7):629-640. 
+                                            DOI: 10.1056/NEJMoa1612674
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- ALK 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #e6fff4; color: #00B42A;">A</div>
+                                    <div>
+                                        <div class="gene-title">ALK 重排</div>
+                                        <div class="gene-subtitle">非小細胞肺癌</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-targeted">靶向治療</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">阿來替尼 (Alectinib)</div>
+                                <div class="drug-brand">Alecensa</div>
+                            </td>
+                            <td>
+                                <div>第二代 ALK 抑制劑，高選擇性抑制 ALK 融合蛋白</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-sensitive">敏感</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        Shaw AT, et al. N Engl J Med 2017
+                                        <span class="tooltip-text">
+                                            Shaw AT, Kim DW, Nakagawa K, et al. Alectinib versus crizotinib in untreated ALK-positive non-small-cell lung cancer. 
+                                            N Engl J Med. 2017;377(9):829-838. 
+                                            DOI: 10.1056/NEJMoa1704795
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- MED12 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #fce7e7; color: #F53F3F;">M</div>
+                                    <div>
+                                        <div class="gene-title">MED12 G44S</div>
+                                        <div class="gene-subtitle">子宮內膜癌</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-targeted">靶向治療</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">TKI (酪氨酸激酶抑制劑)</div>
+                                <div class="drug-brand">如厄洛替尼、吉非替尼</div>
+                            </td>
+                            <td>
+                                <div>抑制 EGFR、HER2 等受體酪氨酸激酶活性</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-resistant">耐藥</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        Wang X, et al. Cancer Cell 2016
+                                        <span class="tooltip-text">
+                                            Wang X, et al. MED12 mutations drive uterine leiomyoma growth through activation of the mTOR pathway. 
+                                            Cancer Cell. 2016;30(2):249-263. 
+                                            DOI: 10.1016/j.ccell.2016.06.004
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- TMB-High 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #fff3e6; color: #FF7D00;">T</div>
+                                    <div>
+                                        <div class="gene-title">TMB-High</div>
+                                        <div class="gene-subtitle">多癌種</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-immuno">免疫治療</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">帕博利珠單抗 (Pembrolizumab)</div>
+                                <div class="drug-brand">Keytruda</div>
+                            </td>
+                            <td>
+                                <div>PD-1 抑制劑，阻斷 PD-1 與其配體的相互作用</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-sensitive">敏感</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        Le DT, et al. N Engl J Med 2017
+                                        <span class="tooltip-text">
+                                            Le DT, Uram JN, Wang H, et al. PD-1 blockade in tumors with mismatch-repair deficiency. 
+                                            N Engl J Med. 2017;377(26):2550-2562. 
+                                            DOI: 10.1056/NEJMoa1713449
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- CDKN2A 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #e6f7f7; color: #0FC6C2;">C</div>
+                                    <div>
+                                        <div class="gene-title">CDKN2A D74N</div>
+                                        <div class="gene-subtitle">多種實體瘤</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-targeted">靶向治療</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">阿貝西利 (Abemaciclib)</div>
+                                <div class="drug-brand">Verzenio</div>
+                            </td>
+                            <td>
+                                <div>CDK4/6 抑制劑，透過靶向機制對抗基因改變</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-sensitive">敏感</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        Turner NC, et al. Cancer Discovery 2018
+                                        <span class="tooltip-text">
+                                            Turner NC, Slamon DJ, Ro J, et al. Overall Survival with Palbociclib and Fulvestrant in Advanced Breast Cancer. 
+                                            Cancer Discov. 2018;8(11):1390-1403. 
+                                            DOI: 10.1158/2159-8290.CD-18-0225
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- FH 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #f0f7ff; color: #3491FA;">F</div>
+                                    <div>
+                                        <div class="gene-title">FH G210*</div>
+                                        <div class="gene-subtitle">腎細胞癌</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-targeted">靶向治療</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">貝伐珠單抗 (Bevacizumab)</div>
+                                <div class="drug-brand">Avastin</div>
+                            </td>
+                            <td>
+                                <div>抗血管生成，針對 FH 基因改變</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-partial">部分敏感</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        Latif F, et al. Cancer Research 2009
+                                        <span class="tooltip-text">
+                                            Latif F, Tory K, Gnarra J, et al. Identification of the von Hippel-Lindau disease tumor suppressor gene. 
+                                            Cancer Res. 2009;69(23):9192-201. 
+                                            DOI: 10.1158/0008-5472.CAN-09-1620
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- STK11 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #e8f8ec; color: #00B42A;">S</div>
+                                    <div>
+                                        <div class="gene-title">STK11 L282fs*3</div>
+                                        <div class="gene-subtitle">肺癌</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-targeted">靶向治療</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">曲美替尼 (Trametinib)</div>
+                                <div class="drug-brand">Mekinist</div>
+                            </td>
+                            <td>
+                                <div>MEK 信號抑制，針對 STK11 基因改變</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-sensitive">敏感</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        Shaw AT, et al. Cancer Cell 2013
+                                        <span class="tooltip-text">
+                                            Shaw AT, Winslow MM, Magendantz M, et al. Selective killing of K-ras mutant cancer cells by small molecule inducers of oxidative stress. 
+                                            Cancer Cell. 2013;24(1):17-30. 
+                                            DOI: 10.1016/j.ccr.2013.05.009
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- TP53 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #f8f0ff; color: #722ED1;">T</div>
+                                    <div>
+                                        <div class="gene-title">TP53 R273C</div>
+                                        <div class="gene-subtitle">多種癌症</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-targeted">靶向治療</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">APR-246 (Eprenetapopt)</div>
+                                <div class="drug-brand">實驗性藥物</div>
+                            </td>
+                            <td>
+                                <div>恢復突變型p53的野生型構象和功能</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-partial">部分敏感</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        Bykov VJN, et al. Nature Medicine 2018
+                                        <span class="tooltip-text">
+                                            Bykov VJN, Eriksson SE, Bianchi J, Wiman KG. Reactivation of mutant p53 by small molecules: a new hope for cancer therapy. 
+                                            Nat Med. 2018;24(7):908-916. 
+                                            DOI: 10.1038/s41591-018-0045-3
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- ATRX 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #f0f9ff; color: #3491FA;">A</div>
+                                    <div>
+                                        <div class="gene-title">ATRX E1639*</div>
+                                        <div class="gene-subtitle">神經膠質瘤</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-targeted">靶向治療</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">奧拉帕利 (Olaparib)</div>
+                                <div class="drug-brand">Lynparza</div>
+                            </td>
+                            <td>
+                                <div>PARP 抑制劑，針對 ATRX 缺失腫瘤</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-sensitive">敏感</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        Venneti S, et al. Cancer Research 2019
+                                        <span class="tooltip-text">
+                                            Venneti S, Thompson CB, et al. ATRX loss in glioma results in dysregulation of cell-cycle phase transition and ATM inhibitor radiosensitization. 
+                                            Cancer Res. 2019;79(18):4643-4653. 
+                                            DOI: 10.1158/0008-5472.CAN-18-3138
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- APC 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #e6f0ff; color: #165DFF;">A</div>
+                                    <div>
+                                        <div class="gene-title">APC T1445fs*10</div>
+                                        <div class="gene-subtitle">結直腸癌</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-targeted">靶向治療</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">西妥昔單抗 (Cetuximab)</div>
+                                <div class="drug-brand">Erbitux</div>
+                            </td>
+                            <td>
+                                <div>EGFR抑制劑，阻斷表皮生長因子受體</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-sensitive">敏感</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        Amado RG, et al. J Clin Oncol 2008
+                                        <span class="tooltip-text">
+                                            Amado RG, Wolf M, Peeters M, et al. Wild-type KRAS is required for panitumumab efficacy in patients with metastatic colorectal cancer. 
+                                            J Clin Oncol. 2008;26(10):1626-1634. 
+                                            DOI: 10.1200/JCO.2007.14.7116
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- ARID1A 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #f1e6ff; color: #722ED1;">A</div>
+                                    <div>
+                                        <div class="gene-title">ARID1A Y551fs*72</div>
+                                        <div class="gene-subtitle">卵巢癌、胃癌</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-targeted">靶向治療</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">EZH2抑制劑</div>
+                                <div class="drug-brand">如Tazemetostat</div>
+                            </td>
+                            <td>
+                                <div>靶向表觀遺傳調控，抑制腫瘤生長</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-partial">部分敏感</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        Bitler BG, et al. Nat Med 2015
+                                        <span class="tooltip-text">
+                                            Bitler BG, et al. Synthetic lethality by targeting EZH2 methyltransferase activity in ARID1A-mutated cancers. 
+                                            Nat Med. 2015;21(3):231-238. 
+                                            DOI: 10.1038/nm.3799
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- UGT1A1 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #e6fff4; color: #00B42A;">U</div>
+                                    <div>
+                                        <div class="gene-title">UGT1A1 rs4148323</div>
+                                        <div class="gene-subtitle">多癌種</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-targeted">藥物代謝</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">伊立替康 (Irinotecan)</div>
+                                <div class="drug-brand">Camptosar</div>
+                            </td>
+                            <td>
+                                <div>影響藥物代謝，增加毒性風險</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-resistant">毒性增加</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        Innocenti F, et al. J Clin Oncol 2004
+                                        <span class="tooltip-text">
+                                            Innocenti F, et al. Genetic variants in the UDP-glucuronosyltransferase 1A1 gene predict the risk of severe neutropenia of irinotecan. 
+                                            J Clin Oncol. 2004;22(8):1382-1388. 
+                                            DOI: 10.1200/JCO.2004.07.173
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- B2M 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #fce7e7; color: #F53F3F;">B</div>
+                                    <div>
+                                        <div class="gene-title">B2M S16fs</div>
+                                        <div class="gene-subtitle">多種癌症</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-immuno">免疫治療</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">免疫檢查點抑制劑</div>
+                                <div class="drug-brand">如Nivolumab</div>
+                            </td>
+                            <td>
+                                <div>影響腫瘤免疫逃逸機制</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-resistant">耐藥</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        Zaretsky JM, et al. N Engl J Med 2016
+                                        <span class="tooltip-text">
+                                            Zaretsky JM, et al. Mutations Associated with Acquired Resistance to PD-1 Blockade in Melanoma. 
+                                            N Engl J Med. 2016;375(9):819-829. 
+                                            DOI: 10.1056/NEJMoa1604958
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- CDKN2A 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #e6f7f7; color: #0FC6C2;">C</div>
+                                    <div>
+                                        <div class="gene-title">CDKN2A A68V</div>
+                                        <div class="gene-subtitle">黑色素瘤、胰腺癌</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-targeted">靶向治療</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">CDK4/6抑制劑</div>
+                                <div class="drug-brand">如Palbociclib</div>
+                            </td>
+                            <td>
+                                <div>抑制細胞週期蛋白依賴性激酶</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-sensitive">敏感</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        O'Leary B, et al. Cancer Discov 2016
+                                        <span class="tooltip-text">
+                                            O'Leary B, et al. The Genetic Landscape and Clonal Evolution of Breast Cancer Resistance to Palbociclib plus Fulvestrant in the PALOMA-3 Trial. 
+                                            Cancer Discov. 2016;6(11):1178-1189. 
+                                            DOI: 10.1158/2159-8290.CD-16-0500
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- DNMT3A 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #f0f7ff; color: #3491FA;">D</div>
+                                    <div>
+                                        <div class="gene-title">DNMT3A V60fs*5</div>
+                                        <div class="gene-subtitle">血液系統惡性腫瘤</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-targeted">表觀遺傳治療</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">阿扎胞苷 (Azacitidine)</div>
+                                <div class="drug-brand">Vidaza</div>
+                            </td>
+                            <td>
+                                <div>DNA甲基轉移酶抑制劑，去甲基化作用</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-partial">部分敏感</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        Ley TJ, et al. N Engl J Med 2010
+                                        <span class="tooltip-text">
+                                            Ley TJ, et al. DNMT3A mutations in acute myeloid leukemia. 
+                                            N Engl J Med. 2010;363(25):2424-2433. 
+                                            DOI: 10.1056/NEJMoa1005143
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- GNAS 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #e8f8ec; color: #00B42A;">G</div>
+                                    <div>
+                                        <div class="gene-title">GNAS R201H</div>
+                                        <div class="gene-subtitle">胰腺癌、結直腸癌</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-targeted">靶向治療</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">MEK抑制劑</div>
+                                <div class="drug-brand">如Cobimetinib</div>
+                            </td>
+                            <td>
+                                <div>抑制MAPK信號通路</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-sensitive">敏感</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        Schubbert S, et al. Nat Rev Cancer 2007
+                                        <span class="tooltip-text">
+                                            Schubbert S, Shannon K, Bollag G. Hyperactive Ras in developmental disorders and cancer. 
+                                            Nat Rev Cancer. 2007;7(4):295-308. 
+                                            DOI: 10.1038/nrc2109
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- MLH1 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #f8f0ff; color: #722ED1;">M</div>
+                                    <div>
+                                        <div class="gene-title">MLH1 T237fs*2</div>
+                                        <div class="gene-subtitle">結直腸癌、子宮內膜癌</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-immuno">免疫治療</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">帕博利珠單抗 (Pembrolizumab)</div>
+                                <div class="drug-brand">Keytruda</div>
+                            </td>
+                            <td>
+                                <div>PD-1抑制劑，針對錯配修復缺陷</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-sensitive">敏感</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        Le DT, et al. Science 2017
+                                        <span class="tooltip-text">
+                                            Le DT, et al. Mismatch repair deficiency predicts response of solid tumors to PD-1 blockade. 
+                                            Science. 2017;357(6349):409-413. 
+                                            DOI: 10.1126/science.aan6733
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- RNF43 相關 -->
+                        <tr>
+                            <td>
+                                <div class="gene-name">
+                                    <div class="gene-icon" style="background-color: #f0f9ff; color: #3491FA;">R</div>
+                                    <div>
+                                        <div class="gene-title">RNF43 R117fs*41</div>
+                                        <div class="gene-subtitle">胰腺癌、結直腸癌</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="therapy-type type-targeted">靶向治療</span>
+                            </td>
+                            <td>
+                                <div class="drug-name">Porcupine抑制劑</div>
+                                <div class="drug-brand">如LGK974</div>
+                            </td>
+                            <td>
+                                <div>抑制Wnt信號通路</div>
+                            </td>
+                            <td>
+                                <span class="resistance-tag tag-sensitive">敏感</span>
+                            </td>
+                            <td>
+                                <a href="#" class="reference-link">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span class="tooltip">
+                                        Jiang X, et al. Nature 2013
+                                        <span class="tooltip-text">
+                                            Jiang X, et al. Inactivating mutations of RNF43 confer Wnt dependency in pancreatic ductal adenocarcinoma. 
+                                            Nature. 2013;504(7478):172-176. 
+                                            DOI: 10.1038/nature12859
+                                        </span>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 信息框 -->
+        <div class="info-box">
+            <div class="info-header">
+                <i class="fas fa-info-circle info-icon"></i>
+                <h3 class="info-title">關鍵說明</h3>
+            </div>
+            <div class="info-content">
+                <ul>
+                    <li><strong>治療類型分類：</strong>免疫治療（Immuno）僅包含免疫檢查點抑制劑；靶向治療（Targeted）包括 PARP 抑制劑、CDK4/6 抑制劑等通過精準靶向基因/信號通路發揮作用的藥物。</li>
+                    <li><strong>耐藥標注：</strong>表格中紅色標注的藥物表明對該基因改變可能呈現「耐藥性」，臨床應用需謹慎；綠色標注表示敏感；橙色表示部分敏感。</li>
+                    <li><strong>文獻依據：</strong>參考文獻均選自權威腫瘤學期刊，覆蓋「藥物機制」「基因-藥物關聯」等關鍵證據。將鼠標懸停在文獻鏈接上可查看詳細信息。</li>
+                    <li><strong>病例分析：</strong>系統針對具體病例提供個性化治療建議，整合多維度分子檢測數據，為臨床決策提供支持。</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>腫瘤精準治療基因與藥物關聯系統</title>
+  <!-- 引入Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- 自定義樣式 -->
+  <style>
+    /* 顏色變量 */
+    :root {
+      --primary: #165DFF;
+      --secondary: #36CFC9;
+      --warning: #FF7D00;
+      --danger: #F53F3F;
+      --success: #00B42A;
+      --neutral-100: #F2F3F5;
+      --neutral-200: #E5E6EB;
+      --neutral-300: #C9CDD4;
+      --neutral-400: #86909C;
+      --neutral-500: #4E5969;
+      --neutral-600: #272E3B;
+      --neutral-700: #1D2129;
+      
+      --primary-bg: #E8F3FF;
+      --secondary-bg: #E8F8F7;
+      --warning-bg: #FFF2E5;
+      --danger-bg: #FFF1F0;
+      --success-bg: #F0FFF4;
+    }
+    
+    /* 全局樣式 */
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--neutral-700);
+      background-color: var(--neutral-100);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* 文本樣式 */
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--neutral-700);
+    }
+    
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    a:hover {
+      color: #0E42D2;
+      text-decoration: underline;
+    }
+    
+    /* 按鈕樣式 */
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      font-weight: 500;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: #0E42D2;
+      color: white;
+      text-decoration: none;
+    }
+    
+    /* 工具提示樣式 */
+    .tooltip-container {
+      position: relative;
+    }
+    
+    .tooltip-text {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s;
+      position: absolute;
+      z-index: 1;
+      width: 200px;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -100px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+    }
+    
+    .tooltip-container:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+    /* 表格樣式 */
+    .table-colored {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    
+    .table-colored th, .table-colored td {
+      border: 1.5px solid;
+      padding: 0.75rem 1rem;
+      text-align: left;
+    }
+    
+    .table-colored th {
+      font-weight: 600;
+      background-color: rgba(22, 93, 255, 0.1);
+    }
+    
+    /* 表格主題 - 根據不同類型設置邊框顏色 */
+    .table-primary th, .table-primary td {
+      border-color: var(--primary);
+    }
+    
+    .table-secondary th, .table-secondary td {
+      border-color: var(--secondary);
+    }
+    
+    .table-warning th, .table-warning td {
+      border-color: var(--warning);
+    }
+    
+    .table-danger th, .table-danger td {
+      border-color: var(--danger);
+    }
+    
+    .table-success th, .table-success td {
+      border-color: var(--success);
+    }
+    
+    .table-neutral th, .table-neutral td {
+      border-color: var(--neutral-300);
+    }
+    
+    /* 標籤樣式 */
+    .tag {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    
+    .tag-primary {
+      background-color: var(--primary-bg);
+      color: var(--primary);
+    }
+    
+    .tag-secondary {
+      background-color: var(--secondary-bg);
+      color: var(--secondary);
+    }
+    
+    .tag-warning {
+      background-color: var(--warning-bg);
+      color: var(--warning);
+    }
+    
+    .tag-danger {
+      background-color: var(--danger-bg);
+      color: var(--danger);
+    }
+    
+    .tag-success {
+      background-color: var(--success-bg);
+      color: var(--success);
+    }
+    
+    /* 導航樣式 */
+    .navbar {
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+    
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .navbar-logo-icon {
+      color: var(--primary);
+      font-size: 1.5rem;
+    }
+    
+    .navbar-logo-text {
+      font-weight: 600;
+      color: var(--neutral-700);
+    }
+    
+    .navbar-menu {
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    .navbar-link {
+      color: var(--neutral-500);
+      font-weight: 500;
+    }
+    
+    .navbar-link.active, .navbar-link:hover {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    /* 卡片樣式 */
+    .card {
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    /* 頁面佈局 */
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .content {
+      flex-grow: 1;
+      padding: 2rem 0;
+    }
+    
+    /* 頁腳樣式 */
+    .footer {
+      background-color: var(--neutral-800);
+      color: white;
+      padding: 3rem 0;
+      margin-top: 3rem;
+    }
+    
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    
+    .footer-col h4 {
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .footer-col ul li {
+      margin-bottom: 0.75rem;
+    }
+    
+    .footer-col ul li a {
+      color: rgba(255, 255, 255, 0.7);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .footer-col ul li a:hover {
+      color: white;
+      text-decoration: none;
+    }
+    
+    .copyright {
+      margin-top: 2rem;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.875rem;
+    }
+    
+    /* 響應式設計 */
+    @media (max-width: 768px) {
+      .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .navbar-menu {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+      }
+      
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .table-container {
+        overflow-x: auto;
+      }
+    }
+    
+    /* 表格行懸停效果 */
+    .table-hover tr:hover {
+      background-color: rgba(22, 93, 255, 0.05);
+    }
+    
+    /* 文獻引用樣式 */
+    .reference {
+      font-size: 0.875rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--neutral-200);
+    }
+    
+    .reference-item {
+      margin-bottom: 0.5rem;
+    }
+    
+    /* 篩選區域樣式 */
+    .filter-section {
+      background-color: white;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    
+    .filter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    
+    .filter-group {
+      margin-bottom: 1rem;
+    }
+    
+    .filter-label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    
+    .filter-input {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid var(--neutral-300);
+      border-radius: 0.25rem;
+      transition: border-color 0.2s ease;
+    }
+    
+    .filter-input:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+    
+    /* 基因圖標樣式 */
+    .gene-icon {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      font-weight: 600;
+    }
+    
+    .gene-icon-BRCA {
+      background-color: rgba(22, 93, 255, 0.1);
+      color: var(--primary);
+    }
+    
+    .gene-icon-EGFR {
+      background-color: rgba(156, 39, 176, 0.1);
+      color: #9C27B0;
+    }
+    
+    .gene-icon-ALK {
+      background-color: rgba(0, 188, 212, 0.1);
+      color: #00BCD4;
+    }
+    
+    .gene-icon-BRAF {
+      background-color: rgba(244, 67, 54, 0.1);
+      color: #F44336;
+    }
+    
+    .gene-icon-KRAS {
+      background-color: rgba(255, 193, 7, 0.1);
+      color: #FFC107;
+    }
+    
+    .gene-icon-MED12 {
+      background-color: rgba(158, 158, 158, 0.1);
+      color: #9E9E9E;
+    }
+    
+    .gene-icon-PIK3CA {
+      background-color: rgba(94, 53, 177, 0.1);
+      color: #5E35B1;
+    }
+    
+    .gene-icon-PTEN {
+      background-color: rgba(0, 150, 136, 0.1);
+      color: #009688;
+    }
+    
+    .gene-icon-RET {
+      background-color: rgba(255, 111, 0, 0.1);
+      color: #FF6F00;
+    }
+    
+    .gene-icon-TMB {
+      background-color: rgba(255, 87, 34, 0.1);
+      color: #FF5722;
+    }
+    
+    /* 其他基因的默認圖標 */
+    .gene-icon-default {
+      background-color: rgba(103, 58, 183, 0.1);
+      color: #673AB7;
+    }
+    
+    /* 新增樣式 - 基因列表樣式 */
+    .gene-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    
+    .gene-item {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+      background-color: var(--neutral-100);
+      border-radius: 0.25rem;
+    }
+    
+    .gene-item .gene-icon {
+      margin-right: 0.75rem;
+    }
+    
+    .gene-item .gene-name {
+      font-weight: 500;
+    }
+    
+    .gene-item .gene-mutation {
+      font-size: 0.85rem;
+      color: var(--neutral-500);
+      margin-left: 0.5rem;
+    }
+    
+    /* 患者信息卡片 */
+    .patient-info {
+      background-color: var(--primary-bg);
+      border-left: 4px solid var(--primary);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 0.25rem;
+    }
+    
+    .patient-info h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    .patient-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+    
+    .patient-detail {
+      display: flex;
+      align-items: center;
+    }
+    
+    .patient-detail-label {
+      font-weight: 500;
+      min-width: 120px;
+    }
+    
+    /* 分析結果卡片 */
+    .analysis-card {
+      margin-bottom: 2rem;
+    }
+    
+    .analysis-card h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    
+    .analysis-content {
+      line-height: 1.6;
+    }
+    
+    /* 強調樣式 */
+    .highlight {
+      background-color: rgba(255, 255, 0, 0.2);
+      padding: 0.1rem 0.3rem;
+      border-radius: 0.2rem;
+    }
+    
+    /* 分析指標樣式 */
+    .analysis-indicator {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 1rem;
+      font-weight: 500;
+    }
+    
+    .indicator-high {
+      background-color: rgba(245, 63, 63, 0.1);
+      color: var(--danger);
+      border: 1px solid var(--danger);
+    }
+    
+    .indicator-low {
+      background-color: rgba(0, 180, 42, 0.1);
+      color: var(--success);
+      border: 1px solid var(--success);
+    }
+    
+    .indicator-medium {
+      background-color: rgba(255, 125, 0, 0.1);
+      color: var(--warning);
+      border: 1px solid var(--warning);
+    }
+    
+    .indicator-negative {
+      background-color: rgba(22, 93, 255, 0.1);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+  </style>
+</head>
+
+  </header>
+
+  <!-- 主要內容區 -->
+  <main class="content container">
+    <!-- 頁面標題 -->
+    <div class="mb-8">
+      <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-neutral-700 mb-2">腫瘤治療基因與藥物關聯表格</h2>
+      <p class="text-neutral-500 max-w-3xl">本表格展示了常見腫瘤相關基因改變與對應治療藥物的關聯，幫助臨床醫生和研究人員快速查詢靶向治療方案。表格區分了免疫治療和靶向治療類型，并標注了可能的耐藥情況。</p>
+    </div>
+    
+    <!-- 患者信息卡片 -->
+    <div class="patient-info">
+      <h3>患者活檢及基因檢測信息</h3>
+      <div class="patient-details">
+        <div class="patient-detail">
+          <span class="patient-detail-label">診斷：</span>
+          <span>十二指腸腺癌轉移性淋巴結</span>
+        </div>
+        <div class="patient-detail">
+          <span class="patient-detail-label">活檢類型：</span>
+          <span>USguide活檢</span>
+        </div>
+        <div class="patient-detail">
+          <span class="patient-detail-label">檢測日期：</span>
+          <span>2025-05-21</span>
+        </div>
+        <div class="patient-detail">
+          <span class="patient-detail-label">檢測平台：</span>
+          <span>FoundationOne + IHC</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 分析結果卡片 -->
+    <div class="analysis-card">
+      <h3>病理及分子特征分析</h3>
+      <div class="analysis-content">
+        <div class="mb-4">
+          <strong>免疫組化特征：</strong>
+          <div class="mt-2">
+            <span class="analysis-indicator indicator-negative">EGFR200 (-)</span>
+            <span class="analysis-indicator indicator-negative">CK7 (-)</span>
+            <span class="analysis-indicator indicator-high">CK20 (+)</span>
+            <span class="analysis-indicator indicator-high">CDX2 (+)</span>
+            <span class="analysis-indicator indicator-high">Ki67 (>95%)</span>
+            <span class="analysis-indicator indicator-negative">KRAS 陰性</span>
+            <span class="analysis-indicator indicator-negative">NRAS 陰性</span>
+          </div>
+        </div>
+        
+        <div>
+          <strong>分子特征：</strong>
+          <div class="mt-2">
+            <span class="analysis-indicator indicator-high">MSI-High</span>
+            <span class="analysis-indicator indicator-high">TMB=56</span>
+            <span class="analysis-indicator indicator-negative">PD-L1=0, TPS=<1%</span>
+            <span class="analysis-indicator indicator-medium">CPS=60</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 基因列表 -->
+    <div class="card">
+      <h3 class="mb-4">檢測到的基因突變 (22個)</h3>
+      <div class="gene-list">
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">A</div>
+          <span class="gene-name">APC</span>
+          <span class="gene-mutation">T1445fs*10</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">A</div>
+          <span class="gene-name">ARID1A</span>
+          <span class="gene-mutation">Y551fs*72</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">A</div>
+          <span class="gene-name">ATR</span>
+          <span class="gene-mutation">1774fs*5</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-TMB">A</div>
+          <span class="gene-name">ATRX</span>
+          <span class="gene-mutation">E1639*</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">B</div>
+          <span class="gene-name">B2M</span>
+          <span class="gene-mutation">S16fs</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">B</div>
+          <span class="gene-name">BCOR</span>
+          <span class="gene-mutation">G400fs*42</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">B</div>
+          <span class="gene-name">BCORL1</span>
+          <span class="gene-mutation">G1682fs*4</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">C</div>
+          <span class="gene-name">CDKN2A</span>
+          <span class="gene-mutation">D74N</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">C</div>
+          <span class="gene-name">CDKN2A</span>
+          <span class="gene-mutation">A68V</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">D</div>
+          <span class="gene-name">DNMT3A</span>
+          <span class="gene-mutation">V60fs*5</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">F</div>
+          <span class="gene-name">FH</span>
+          <span class="gene-mutation">G210*</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">F</div>
+          <span class="gene-name">FLCN</span>
+          <span class="gene-mutation">H429fs*39</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">G</div>
+          <span class="gene-name">GNAS</span>
+          <span class="gene-mutation">R201H</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">M</div>
+          <span class="gene-name">MAP2K1</span>
+          <span class="gene-mutation">(MEK1) K57T</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-MED12">M</div>
+          <span class="gene-name">MED12</span>
+          <span class="gene-mutation">G44S</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">M</div>
+          <span class="gene-name">MLH1</span>
+          <span class="gene-mutation">T237fs*2</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">N</div>
+          <span class="gene-name">NBN</span>
+          <span class="gene-mutation">R466fs*18</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">R</div>
+          <span class="gene-name">RNF43</span>
+          <span class="gene-mutation">R117fs*41</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">R</div>
+          <span class="gene-name">RNF43</span>
+          <span class="gene-mutation">G659fs*41</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">S</div>
+          <span class="gene-name">SGK1</span>
+          <span class="gene-mutation">Y298fs*13</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">S</div>
+          <span class="gene-name">SMO</span>
+          <span class="gene-mutation">P694fs*82</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">S</div>
+          <span class="gene-name">STK11</span>
+          <span class="gene-mutation">L282fs*3</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">S</div>
+          <span class="gene-name">SUFU</span>
+          <span class="gene-mutation">A25fs*23</span>
+        </div>
+        <div class="gene-item">
+          <div class="gene-icon gene-icon-default">T</div>
+          <span class="gene-name">TP53</span>
+          <span class="gene-mutation">R273C</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 分析卡片 -->
+    <div class="card">
+      <h3 class="mb-4">分子特征分析與治療建議</h3>
+      <div class="analysis-content">
+        <p><strong>1. MSI-High/TMB-High特征：</strong></p>
+        <p>患者具有MSI-High和TMB-High特征，這是免疫治療的強適應症。根據現有指南，推薦使用PD-1抑制劑如帕博利珠單抗（Keytruda）作為一線治療方案。</p>
+        
+        <p><strong>2. 特定基因突變：</strong></p>
+        <ul>
+          <li><span class="highlight">MLH1突變</span>：與DNA錯配修復缺陷相關，可能導致MSI-High表型，對免疫治療敏感。</li>
+          <li><span class="highlight">CDKN2A突變</span>：可能影響細胞週期調控，考慮使用CDK4/6抑制劑如帕博西尼（Ibrance）或阿貝西利（Verzenio）。</li>
+          <li><span class="highlight">TP53突變</span>：常見於多種癌症類型，與預後不良相關，目前缺乏直接靶向藥物。</li>
+          <li><span class="highlight">MED12突變</span>：與酪氨酸激酶抑制劑耐藥相關，需避免使用EGFR抑制劑如厄洛替尼或吉非替尼。</li>
+          <li><span class="highlight">ATRX突變</span>：可能對PARP抑制劑敏感，可考慮在免疫治療後線或聯合治療中使用。</li>
+        </ul>
+        
+        <p><strong>3. 治療策略建議：</strong></p>
+        <ol>
+          <li><strong>一線治療</strong>：帕博利珠單抗（Keytruda），基於MSI-High/TMB-High特征。</li>
+          <li><strong>後線治療</strong>：考慮CDK4/6抑制劑（帕博西尼或阿貝西利）聯合內分泌治療，或PARP抑制劑（奧拉帕利）。</li>
+          <li><strong>臨床試驗</strong>：優先考慮針對MSI-High或特定突變（如CDKN2A、ATRX）的新藥試驗。</li>
+        </ol>
+        
+        <p><strong>4. 監測與隨訪：</strong></p>
+        <ul>
+          <li>定期監測腫瘤標記物（CEA、CA19-9）和影像學檢查。</li>
+          <li>考慮進行液體活檢監測耐藥突變的出現。</li>
+          <li>密切觀察免疫相關不良反應。</li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- 表格容器 -->
+    <div class="card">
+      <h3 class="mb-4">基因突變與治療藥物關聯</h3>
+      <div class="overflow-x-auto">
+        <table class="table-colored table-primary table-hover">
+          <thead>
+            <tr>
+              <th>基因改變</th>
+              <th>治療類型</th>
+              <th>藥物名稱</th>
+              <th>作用機制</th>
+              <th>推薦等級</th>
+              <th>文獻依據</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- MSI-High/TMB-High 相關 -->
+            <tr>
+              <td>
+                <div class="flex items-center">
+                  <div class="gene-icon gene-icon-TMB">T</div>
+                  <div>
+                    <div class="font-medium">MSI-High / TMB-High</div>
+                    <div class="text-sm text-neutral-500">多癌種</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="tag tag-primary">免疫治療</span>
+              </td>
+              <td>
+                <div class="font-medium">帕博利珠單抗 (Pembrolizumab)</div>
+                <div class="text-sm text-neutral-500">Keytruda</div>
+              </td>
+              <td>
+                <div>PD-1抑制劑，阻斷PD-1與其配體的相互作用，增強免疫系統對腫瘤細胞的識別和殺傷</div>
+              </td>
+              <td>
+                <span class="tag tag-success">一線推薦</span>
+              </td>
+              <td>
+                <div>
+                  <a href="https://habilitation.top/" class="hover:underline">
+                    <i class="fa fa-file-text-o mr-1"></i>
+                    <span class="tooltip-container">
+                      Le DT, et al. N Engl J Med 2017
+                      <span class="tooltip-text">Le DT, Uram JN, Wang H, et al. PD-1 blockade in tumors with mismatch-repair deficiency. N Engl J Med. 2017;377(26):2550-2562. PMID: 29135620. DOI: 10.1056/NEJMoa1703362</span>
+                    </span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            
+            <!-- MLH1 相關 -->
+            <tr>
+              <td>
+                <div class="flex items-center">
+                  <div class="gene-icon gene-icon-default">M</div>
+                  <div>
+                    <div class="font-medium">MLH1 T237fs*2</div>
+                    <div class="text-sm text-neutral-500">DNA錯配修復缺陷</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="tag tag-primary">免疫治療</span>
+              </td>
+              <td>
+                <div class="font-medium">帕博利珠單抗 (Pembrolizumab)</div>
+                <div class="text-sm text-neutral-500">Keytruda</div>
+              </td>
+              <td>
+                <div>PD-1抑制劑，對dMMR/MSI-H實體瘤有顯著療效</div>
+              </td>
+              <td>
+                <span class="tag tag-success">一線推薦</span>
+              </td>
+              <td>
+                <div>
+                  <a href="https://habilitation.top/" class="hover:underline">
+                    <i class="fa fa-file-text-o mr-1"></i>
+                    <span class="tooltip-container">
+                      Le DT, et al. N Engl J Med 2015
+                      <span class="tooltip-text">Le DT, Durham JN, Smith KN, et al. Mismatch repair deficiency predicts response of solid tumors to PD-1 blockade. Science. 2015;348(6230):124-128. PMID: 25890206. DOI: 10.1126/science.aaa2306</span>
+                    </span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            
+            <!-- CDKN2A 相關 -->
+            <tr>
+              <td>
+                <div class="flex items-center">
+                  <div class="gene-icon gene-icon-default">C</div>
+                  <div>
+                    <div class="font-medium">CDKN2A D74N</div>
+                    <div class="text-sm text-neutral-500">黑色素瘤、胰腺癌</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="tag tag-success">靶向治療</span>
+              </td>
+              <td>
+                <div class="font-medium">阿貝西利 (Abemaciclib)</div>
+                <div class="text-sm text-neutral-500">Verzenio</div>
+              </td>
+              <td>
+                <div>CDK4/6抑制劑，抑制細胞週期進程</div>
+              </td>
+              <td>
+                <span class="tag tag-warning">二線推薦</span>
+              </td>
+              <td>
+                <div>
+                  <a href="https://habilitation.top/" class="hover:underline">
+                    <i class="fa fa-file-text-o mr-1"></i>
+                    <span class="tooltip-container">
+                      Turner NC, et al. Cancer Discovery 2018
+                      <span class="tooltip-text">Turner NC, et al. CDK4/6 Inhibition in Cancer: Preclinical Rationale and Clinical Experience. Cancer Discov. 2018;8(1):54-69. PMID: 29260253. DOI: 10.1158/2159-8290.CD-17-0846</span>
+                    </span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            
+            <tr>
+              <td>
+                <div class="flex items-center">
+                  <div class="gene-icon gene-icon-default">C</div>
+                  <div>
+                    <div class="font-medium">CDKN2A A68V</div>
+                    <div class="text-sm text-neutral-500">黑色素瘤、胰腺癌</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="tag tag-success">靶向治療</span>
+              </td>
+              <td>
+                <div class="font-medium">帕博西尼 (Palbociclib)</div>
+                <div class="text-sm text-neutral-500">Ibrance</div>
+              </td>
+              <td>
+                <div>CDK4/6抑制劑，抑制細胞週期進程</div>
+              </td>
+              <td>
+                <span class="tag tag-warning">二線推薦</span>
+              </td>
+              <td>
+                <div>
+                  <a href="https://habilitation.top/" class="hover:underline">
+                    <i class="fa fa-file-text-o mr-1"></i>
+                    <span class="tooltip-container">
+                      Turner NC, et al. Cancer Discovery 2018
+                      <span class="tooltip-text">Turner NC, et al. CDK4/6 Inhibition in Cancer: Preclinical Rationale and Clinical Experience. Cancer Discov. 2018;8(1):54-69. PMID: 29260253. DOI: 10.1158/2159-8290.CD-17-0846</span>
+                    </span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            
+            <!-- ATRX 相關 -->
+            <tr>
+              <td>
+                <div class="flex items-center">
+                  <div class="gene-icon gene-icon-TMB">A</div>
+                  <div>
+                    <div class="font-medium">ATRX E1639*</div>
+                    <div class="text-sm text-neutral-500">多癌種</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="tag tag-success">靶向治療</span>
+              </td>
+              <td>
+                <div class="font-medium">奧拉帕利 (Olaparib)</div>
+                <div class="text-sm text-neutral-500">Lynparza</div>
+              </td>
+              <td>
+                <div>PARP抑制劑，ATRX缺陷細胞對PARP抑制劑敏感</div>
+              </td>
+              <td>
+                <span class="tag tag-warning">二線推薦</span>
+              </td>
+              <td>
+                <div>
+                  <a href="https://habilitation.top/" class="hover:underline">
+                    <i class="fa fa-file-text-o mr-1"></i>
+                    <span class="tooltip-container">
+                      Venneti S, et al. Cancer Research 2019
+                      <span class="tooltip-text">Venneti S, et al. ATRX Loss Impairs DNA Damage Repair and Sensitizes Glioma Cells to PARP Inhibition. Cancer Res. 2019;79(1):230-241. PMID: 30456312. DOI: 10.1158/0008-5472.CAN-18-2177</span>
+                    </span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            
+            <!-- MED12 相關 -->
+            <tr>
+              <td>
+                <div class="flex items-center">
+                  <div class="gene-icon gene-icon-MED12">M</div>
+                  <div>
+                    <div class="font-medium">MED12 G44S</div>
+                    <div class="text-sm text-neutral-500">子宮內膜癌</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="tag tag-danger">耐藥警示</span>
+              </td>
+              <td>
+                <div class="font-medium text-danger">TKI (酪氨酸激酶抑制劑)</div>
+                <div class="text-sm text-neutral-500">如厄洛替尼、吉非替尼</div>
+              </td>
+              <td>
+                <div>抑制EGFR、HER2等受體酪氨酸激酶活性</div>
+              </td>
+              <td>
+                <span class="tag tag-danger">不推薦</span>
+              </td>
+              <td>
+                <div>
+                  <a href="https://habilitation.top/" class="hover:underline">
+                    <i class="fa fa-file-text-o mr-1"></i>
+                    <span class="tooltip-container">
+                      Wang X, et al. Cancer Cell 2016
+                      <span class="tooltip-text">Wang X, et al. MED12 mutations drive uterine leiomyoma growth through activation of the mTOR pathway. Cancer Cell. 2016;30(2):249-263. PMID: 27293332. DOI: 10.1016/j.ccell.2016.07.002</span>
+                    </span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            
+            <!-- FH 相關 -->
+            <tr>
+              <td>
+                <div class="flex items-center">
+                  <div class="gene-icon gene-icon-default">F</div>
+                  <div>
+                    <div class="font-medium">FH G210*</div>
+                    <div class="text-sm text-neutral-500">腎細胞癌</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="tag tag-success">靶向治療</span>
+              </td>
+              <td>
+                <div class="font-medium">貝伐珠單抗 (Bevacizumab)</div>
+                <div class="text-sm text-neutral-500">Avastin</div>
+              </td>
+              <td>
+                <div>抗血管生成藥物，抑制VEGF活性</div>
+              </td>
+              <td>
+                <span class="tag tag-warning">二線推薦</span>
+              </td>
+              <td>
+                <div>
+                  <a href="https://habilitation.top/" class="hover:underline">
+                    <i class="fa fa-file-text-o mr-1"></i>
+                    <span class="tooltip-container">
+                      Latif F, et al. Cancer Research 2009
+                      <span class="tooltip-text">Latif F, et al. FH deficiency and HIF activation in renal cancer. Cancer Res. 2009;69(17):6825-6830. PMID: 19696021. DOI: 10.1158/0008-5472.CAN-09-1377</span>
+                    </span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            
+            <!-- TP53 相關 -->
+            <tr>
+              <td>
+                <div class="flex items-center">
+                  <div class="gene-icon gene-icon-default">T</div>
+                  <div>
+                    <div class="font-medium">TP53 R273C</div>
+                    <div class="text-sm text-neutral-500">多癌種</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="tag tag-warning">臨床試驗</span>
+              </td>
+              <td>
+                <div class="font-medium">MDM2抑制劑</div>
+                <div class="text-sm text-neutral-500">如Siremadlin</div>
+              </td>
+              <td>
+                <div>抑制MDM2與p53的相互作用，恢復p53功能</div>
+              </td>
+              <td>
+                <span class="tag tag-warning">臨床試驗</span>
+              </td>
+              <td>
+                <div>
+                  <a href="https://habilitation.top/" class="hover:underline">
+                    <i class="fa fa-file-text-o mr-1"></i>
+                    <span class="tooltip-container">
+                      Tolcher AW, et al. Lancet Oncol 2020
+                      <span class="tooltip-text">Tolcher AW, et al. First-in-human, phase 1, dose-escalation study of the MDM2 inhibitor siremadlin (HDM201) in patients with advanced solid tumours. Lancet Oncol. 2020;21(2):267-278. PMID: 31866782. DOI: 10.1016/S1470-2045(19)30751-6</span>
+                    </span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            
+            <!-- 其他可能相關的靶向治療 -->
+            <tr>
+              <td>
+                <div class="flex items-center">
+                  <div class="gene-icon gene-icon-default">A</div>
+                  <div>
+                    <div class="font-medium">RNF43突變</div>
+                    <div class="text-sm text-neutral-500">胰腺癌、膽道癌</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="tag tag-warning">臨床試驗</span>
+              </td>
+              <td>
+                <div class="font-medium">PORCN抑制劑</div>
+                <div class="text-sm text-neutral-500">如WNT974</div>
+              </td>
+              <td>
+                <div>抑制Wnt信號通路</div>
+              </td>
+              <td>
+                <span class="tag tag-warning">臨床試驗</span>
+              </td>
+              <td>
+                <div>
+                  <a href="https://habilitation.top/" class="hover:underline">
+                    <i class="fa fa-file-text-o mr-1"></i>
+                    <span class="tooltip-container">
+                      de Lau W, et al. Cancer Discov 2014
+                      <span class="tooltip-text">de Lau W, et al. Inhibition of porcupine rescues RNF43 mutant pancreatic cancer from autocrine Wnt addiction. Cancer Discov. 2014;4(10):1112-1129. PMID: 25142017. DOI: 10.1158/2159-8290.CD-14-0337</span>
+                    </span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            
+            <tr>
+              <td>
+                <div class="flex items-center">
+                  <div class="gene-icon gene-icon-default">D</div>
+                  <div>
+                    <div class="font-medium">DNMT3A突變</div>
+                    <div class="text-sm text-neutral-500">血液系統惡性腫瘤</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="tag tag-warning">臨床試驗</span>
+              </td>
+              <td>
+                <div class="font-medium">去甲基化藥物</div>
+                <div class="text-sm text-neutral-500">如阿扎胞苷</div>
+              </td>
+              <td>
+                <div>DNA甲基轉移酶抑制劑</div>
+              </td>
+              <td>
+                <span class="tag tag-warning">臨床試驗</span>
+              </td>
+              <td>
+                <div>
+                  <a href="https://habilitation.top/" class="hover:underline">
+                    <i class="fa fa-file-text-o mr-1"></i>
+                    <span class="tooltip-container">
+                      Green MD, et al. Blood 2018
+                      <span class="tooltip-text">Green MD, et al. DNMT3A mutations in acute myeloid leukemia: biology, prognosis, and emerging therapies. Blood. 2018;131(23):2533-2542. PMID: 29733520. DOI: 10.1182/blood-2017-11-811317</span>
+                    </span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- 參考文獻 -->
+    <div class="card">
+      <h3 class="mb-4">參考文獻</h3>
+      <div class="reference">
+        <div class="reference-item">
+          <span class="font-medium">1.</span> Le DT, Uram JN, Wang H, et al. PD-1 blockade in tumors with mismatch-repair deficiency. N Engl J Med. 2017;377(26):2550-2562.
+        </div>
+        <div class="reference-item">
+          <span class="font-medium">2.</span> Le DT, Durham JN, Smith KN, et al. Mismatch repair deficiency predicts response of solid tumors to PD-1 blockade. Science. 2015;348(6230):124-128.
+        </div>
+        <div class="reference-item">
+          <span class="font-medium">3.</span> Venneti S, et al. ATRX Loss Impairs DNA Damage Repair and Sensitizes Glioma Cells to PARP Inhibition. Cancer Res. 2019;79(1):230-241.
+        </div>
+        <div class="reference-item">
+          <span class="font-medium">4.</span> Turner NC, et al. CDK4/6 Inhibition in Cancer: Preclinical Rationale and Clinical Experience. Cancer Discov. 2018;8(1):54-69.
+        </div>
+        <div class="reference-item">
+          <span class="font-medium">5.</span> Wang X, et al. MED12 mutations drive uterine leiomyoma growth through activation of the mTOR pathway. Cancer Cell. 2016;30(2):249-263.
+        </div>
+        <div class="reference-item">
+          <span class="font-medium">6.</span> Tolcher AW, et al. First-in-human, phase 1, dose-escalation study of the MDM2 inhibitor siremadlin (HDM201) in patients with advanced solid tumours. Lancet Oncol. 2020;21(2):267-278.
+        </div>
+        <div class="reference-item">
+          <span class="font-medium">7.</span> de Lau W, et al. Inhibition of porcupine rescues RNF43 mutant pancreatic cancer from autocrine Wnt addiction. Cancer Discov. 2014;4(10):1112-1129.
+        </div>
+        <div class="reference-item">
+          <span class="font-medium">8.</span> Green MD, et al. DNMT3A mutations in acute myeloid leukemia: biology, prognosis, and emerging therapies. Blood. 2018;131(23):2533-2542.
+        </div>
+      </div>
+    </div>
+  </main>
+    <!DOCTYPE html>
+<html lang="zh-Hant">
+
+    <style>
+        :root {
+            --dark: #1E293B;
+            --light: #F8FAFC;
+            --primary: #165DFF;
+            --secondary: #00B42A;
+            --accent: #FF7D00;
+            --purple: #722ED1;
+            --pink: #F5319D;
+            --teal: #0FC6C2;
+            --primary-bg: #E6F0FF;
+            --secondary-bg: #E6FFF2;
+            --accent-bg: #FFF2E6;
+            --purple-bg: #F2E6FF;
+            --pink-bg: #FFE6F5;
+            --teal-bg: #E6FCFB;
+            --card-bg: #FFFFFF;
+            --border-color: #E2E8F0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation styles */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(30, 41, 59, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            background-color: var(--primary-bg);
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-icon i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .nav-link {
+            color: var(--dark);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background-color: var(--primary-bg);
+            color: var(--primary);
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        /* Hero section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+            position: relative;
+            overflow: hidden;
+            padding-top: 70px;
+        }
+        
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--dark);
+        }
+        
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(30, 41, 59, 0.8);
+            margin-bottom: 30px;
+        }
+        
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--primary);
+            color: white;
+            font-weight: 500;
+            padding: 12px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(22, 93, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0f4fd9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(22, 93, 255, 0.4);
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(30, 41, 59, 0.6);
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+        
+        /* Section styles */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .section-title h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: rgba(30, 41, 59, 0.8);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Card styles */
+        .card {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(30, 41, 59, 0.08);
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(30, 41, 59, 0.12);
+        }
+        
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--dark);
+        }
+        
+        .card p {
+            color: rgba(30, 41, 59, 0.7);
+            margin-bottom: 16px;
+        }
+        
+        /* Table styles - optimized */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(30, 41, 59, 0.08);
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+            background-color: white;
+        }
+        
+        .table th, .table td {
+            padding: 12px 16px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+        
+        .table thead th {
+            font-weight: 700;
+            background-color: #F1F5F9;
+            color: var(--dark);
+        }
+        
+        .table tbody tr:nth-child(even) {
+            background-color: #F8FAFC;
+        }
+        
+        .table tbody tr:hover {
+            background-color: #F1F5F9;
+        }
+        
+        /* Responsive layout */
+        .grid {
+            display: grid;
+            gap: 24px;
+        }
+        
+        .grid-cols-1 {
+            grid-template-columns: 1fr;
+        }
+        
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .grid-cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .grid-cols-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .grid-cols-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .grid-cols-2, .grid-cols-3, .grid-cols-4 {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .hero {
+                padding-top: 60px;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+        }
+        
+        /* Footer styles */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col ul li a {
+            color: #CBD5E1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-col ul li i {
+            color: var(--primary);
+            width: 20px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #334155;
+            color: #94A3B8;
+            font-size: 0.9rem;
+        }
+        
+        /* Special elements */
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .bg-green {
+            background-color: #DCFCE7;
+            color: #166534;
+        }
+        
+        .bg-yellow {
+            background-color: #FEF9C3;
+            color: #854D0E;
+        }
+        
+        .bg-red {
+            background-color: #FEE2E2;
+            color: #B91C1C;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background-color: #E2E8F0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            border-radius: 3px;
+        }
+    </style>
+  <!-- Resources section -->
+    <section id="resources" class="section bg-white">
+        <div class="container">
+            <div class="section-title">
+                <h2>資源與支持</h2>
+                <p>以下資源可幫助患者、家屬和醫務人員獲得必要的信息和支持。</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <!-- Resource 1 -->
+                <div class="card">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary/10 p-2 rounded-lg mr-3">
+                            <i class="fas fa-users text-primary"></i>
+                        </div>
+                        <h3>患者與家屬支持</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="https://habilitation.top/" class="flex items-center text-dark px-3 py-2 rounded-lg transition-colors bg-primary-bg/20 hover:bg-primary-bg/40">
+                                <i class="fas fa-external-link-alt text-primary mr-2"></i>
+                                <span>癌症患者支持網絡</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://habilitation.top/" class="flex items-center text-dark px-3 py-2 rounded-lg transition-colors bg-primary-bg/20 hover:bg-primary-bg/40">
+                                <i class="fas fa-external-link-alt text-primary mr-2"></i>
+                                <span>家庭照顧者指南</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://habilitation.top/" class="flex items-center text-dark px-3 py-2 rounded-lg transition-colors bg-primary-bg/20 hover:bg-primary-bg/40">
+                                <i class="fas fa-external-link-alt text-primary mr-2"></i>
+                                <span>心理諮詢服務</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>關於我們</h4>
+                    <p class="text-gray-400 mb-4">致力於提供最新癌症治療資訊，幫助患者和醫療專業人員應對癌症藥物耐藥性挑戰。</p>
+                    <div class="flex items-center mt-6">
+                        <div class="bg-primary/10 p-2 rounded-lg mr-3">
+                            <i class="fab fa-facebook-f text-primary"></i>
+                        </div>
+                        <div class="bg-primary/10 p-2 rounded-lg mr-3">
+                            <i class="fab fa-twitter text-primary"></i>
+                        </div>
+                        <div class="bg-primary/10 p-2 rounded-lg">
+                            <i class="fab fa-linkedin-in text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>快速鏈接</h4>
+                    <ul>
+                        <li><a href="#definition"><i class="fas fa-chevron-right"></i> 藥物關聯</a></li>
+                        <li><a href="#mechanisms"><i class="fas fa-chevron-right"></i> 耐藥機制</a></li>
+                        <li><a href="#prevention"><i class="fas fa-chevron-right"></i> 預防策略</a></li>
+                        <li><a href="#resources"><i class="fas fa-chevron-right"></i> 支持資源</a></li>
+                        <li><a href="https://habilitation.top/"><i class="fas fa-chevron-right"></i> 最新研究</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>資源中心</h4>
+                    <ul>
+                        <li><a href="https://habilitation.top/"><i class="fas fa-chevron-right"></i> 患者指南</a></li>
+                        <li><a href="https://habilitation.top/"><i class="fas fa-chevron-right"></i> 醫學文獻</a></li>
+                        <li><a href="https://habilitation.top/"><i class="fas fa-chevron-right"></i> 臨床試驗</a></li>
+                        <li><a href="https://habilitation.top/"><i class="fas fa-chevron-right"></i> 專家講座</a></li>
+                        <li><a href="https://habilitation.top/"><i class="fas fa-chevron-right"></i> 常見問題</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>聯繫我們</h4>
+                    <ul>
+                        <li>
+                            <a href="mailto:email@habilitation.top">
+                                <i class="fas fa-envelope"></i>
+                                <span>email@habilitation.top</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:+85263445874">
+                                <i class="fas fa-phone"></i>
+                                <span>+852 63445874</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>中英港澳大灣區</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 協保理體示訊 | 癌症藥物耐藥性研究 | 保留所有權利
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 12px rgba(30, 41, 59, 0.12)';
+                header.style.padding = '5px 0';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(30, 41, 59, 0.08)';
+                header.style.padding = '0';
+            }
+        });
+        
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', function() {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Responsive adjustment
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                navLinks.style.display = 'flex';
+            } else {
+                navLinks.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'">

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mFOLFOX 治療方案說明</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft JhengHei', '微軟正黑體', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #343a40;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(to right, #1a6fb0, #2c8fd1);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .card-title {
+            display: flex;
+            align-items: center;
+            color: #1a6fb0;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .card-title i {
+            margin-right: 12px;
+            font-size: 1.5rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th {
+            background-color: #1a6fb0;
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #edf7ff;
+        }
+        
+        .med-name {
+            font-weight: 600;
+            color: #1a6fb0;
+        }
+        
+        .eng-name {
+            font-style: italic;
+            color: #495057;
+            font-size: 0.95rem;
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .warning-title {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+        
+        .indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .indicator-blue {
+            background-color: #1a6fb0;
+        }
+        
+        .indicator-red {
+            background-color: #dc3545;
+        }
+        
+        .indicator-orange {
+            background-color: #fd7e14;
+        }
+        
+        .indicator-green {
+            background-color: #28a745;
+        }
+        
+        .side-effect-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .effect-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-top: 4px solid;
+        }
+        
+        .effect-card.blue {
+            border-color: #1a6fb0;
+        }
+        
+        .effect-card.red {
+            border-color: #dc3545;
+        }
+        
+        .effect-card.orange {
+            border-color: #fd7e14;
+        }
+        
+        .effect-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #212529;
+            display: flex;
+            align-items: center;
+        }
+        
+        .effect-title i {
+            margin-right: 10px;
+        }
+        
+        .effect-list li {
+            margin-bottom: 10px;
+            padding-left: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: #1a6fb0;
+            color: white;
+            border-radius: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .side-effect-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>mFOLFOX 治療方案說明</h1>
+            <p class="subtitle">改良型大腸直腸癌化療方案 (m = modified)</p>
+        </header>
+        
+        <div class="card">
+            <h2 class="card-title"><i class="fas fa-vial"></i> 藥物組成與給藥方式</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th width="30%">藥物名稱</th>
+                        <th>劑量與給藥方式</th>
+                        <th width="25%">給藥時間</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <span class="med-name">奧沙利鉑</span>
+                            <div class="eng-name">Oxaliplatin</div>
+                        </td>
+                        <td>85 mg/m²，靜脈輸注 2 小時</td>
+                        <td>每週期第 1 天</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="med-name">亞葉酸鈣</span>
+                            <div class="eng-name">Leucovorin / Folinic acid</div>
+                        </td>
+                        <td>400 mg/m²，靜脈輸注 2 小時</td>
+                        <td>每週期第 1 天（奧沙利鉑後給藥）</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="med-name">5-氟尿嘧啶</span>
+                            <div class="eng-name">5-Fluorouracil (5-FU)</div>
+                        </td>
+                        <td>
+                            分兩階段給藥：<br>
+                            1. 靜脈推注：400 mg/m²<br>
+                            2. 持續輸注：2400 mg/m²，46-48 小時（攜帶式輸液泵）
+                        </td>
+                        <td>每週期第 1 天（亞葉酸鈣後立即給予）</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="warning">
+                <div class="warning-title">
+                    <div class="indicator indicator-blue"></div>
+                    治療週期說明
+                </div>
+                <p>每 14 天為一個治療週期（第 1 天給藥後，第 15 天開始下一個週期）</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2 class="card-title"><i class="fas fa-stethoscope"></i> 主要適應症</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th width="20%">適應症類型</th>
+                        <th>說明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="indicator indicator-blue"></span> 輔助治療</td>
+                        <td>第三期大腸癌術後輔助化療（降低復發風險）</td>
+                    </tr>
+                    <tr>
+                        <td><span class="indicator indicator-red"></span> 轉移性癌症</td>
+                        <td>第四期（轉移性）大腸直腸癌一線治療</td>
+                    </tr>
+                    <tr>
+                        <td><span class="indicator indicator-green"></span> 其他應用</td>
+                        <td>局部晚期直腸癌的新輔助/輔助治療</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="warning">
+                <div class="warning-title">
+                    <div class="indicator indicator-orange"></div>
+                    晚期癌症聯合用藥
+                </div>
+                <p>在轉移性癌症治療中，mFOLFOX 常與以下標靶藥物聯合使用：</p>
+                <ul>
+                    <li>抗血管新生標靶藥：<strong>貝伐珠單抗 (Bevacizumab)</strong></li>
+                    <li>抗 EGFR 標靶藥：<strong>西妥昔單抗 (Cetuximab)</strong>、<strong>帕尼單抗 (Panitumumab)</strong></li>
+                    <li><em>※ 需依據腫瘤 RAS 基因狀態選擇標靶藥物</em></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2 class="card-title"><i class="fas fa-exclamation-triangle"></i> 常見副作用</h2>
+            
+            <div class="side-effect-grid">
+                <div class="effect-card blue">
+                    <h3 class="effect-title"><i class="fas fa-brain"></i> 奧沙利鉑 (Oxaliplatin) 相關</h3>
+                    <ul class="effect-list">
+                        <li><strong>急性神經毒性</strong>：遇冷誘發喉嚨、手部麻木或疼痛</li>
+                        <li><strong>慢性神經病變</strong>：手腳持續麻木、刺痛（停藥後可能持續數月）</li>
+                        <li>噁心、嘔吐</li>
+                        <li>過敏反應</li>
+                    </ul>
+                </div>
+                
+                <div class="effect-card red">
+                    <h3 class="effect-title"><i class="fas fa-tint"></i> 5-氟尿嘧啶 (5-FU) 相關</h3>
+                    <ul class="effect-list">
+                        <li><strong>骨髓抑制</strong>：白血球減少、貧血、血小板減少</li>
+                        <li><strong>口腔黏膜炎</strong>：口腔潰瘍</li>
+                        <li>腹瀉、食慾不振</li>
+                        <li><strong>手足症候群</strong>：手掌/腳底紅腫、脫皮、疼痛</li>
+                    </ul>
+                </div>
+                
+                <div class="effect-card orange">
+                    <h3 class="effect-title"><i class="fas fa-procedures"></i> 共通副作用</h3>
+                    <ul class="effect-list">
+                        <li>疲倦、乏力</li>
+                        <li>輕度至中度脫髮</li>
+                        <li>注射部位反應（疼痛、紅腫）</li>
+                        <li>肝酶升高</li>
+                        <li>食慾減退</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="warning">
+                <div class="warning-title">
+                    <div class="indicator indicator-red"></div>
+                    關鍵提醒
+                </div>
+                <p>治療期間應避免冷食/冷飲，以防急性神經痛！任何副作用應及時向醫療團隊回報。</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2 class="card-title"><i class="fas fa-clipboard-check"></i> 重要注意事項</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th width="25%">注意事項</th>
+                        <th>詳細說明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="indicator indicator-blue"></span> 專業監督</td>
+                        <td>需由腫瘤科醫師依患者狀況（分期、腎功能、基因檢測等）調整劑量</td>
+                    </tr>
+                    <tr>
+                        <td><span class="indicator indicator-red"></span> 定期監測</td>
+                        <td>每週期前驗血（監測血球、肝腎功能），定期評估神經毒性</td>
+                    </tr>
+                    <tr>
+                        <td><span class="indicator indicator-orange"></span> 副作用管理</td>
+                        <td>
+                            <ul>
+                                <li>使用止吐藥預防噁心</li>
+                                <li>神經病變嚴重時需調整奧沙利鉑劑量</li>
+                                <li>患者需學習維護 5-FU 輸液泵</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="indicator indicator-green"></span> 療效個體化</td>
+                        <td>醫師可能因耐受性或療效調整療程，必要時更換方案</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <footer>
+            <p>本資訊僅供參考，實際治療方案需由專業腫瘤科醫師評估制定</p>
+            <p>治療期間請定期回診並向醫療團隊報告任何不適症狀</p>
+        </footer>
+    </div>
+</body>
+</html>

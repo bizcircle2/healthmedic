@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDT 多學科治療團隊 醫療決策</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36D399',
+                        accent: '#8B5CF6',
+                        neutral: '#1F2937',
+                        'neutral-light': '#F3F4F6',
+                        patient: '#FF6B6B',
+                        carer: '#4ECDC4',
+                        family: '#FFD166',
+                        practitioner: '#06D6A0'
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                        serif: ['Noto Serif TC', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-balance {
+                text-wrap: balance;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+            .role-highlight {
+                @apply inline-block px-2 py-0.5 rounded-full text-xs font-medium;
+            }
+            .patient-highlight {
+                @apply role-highlight bg-patient/10 text-patient;
+            }
+            .carer-highlight {
+                @apply role-highlight bg-carer/10 text-carer;
+            }
+            .family-highlight {
+                @apply role-highlight bg-family/10 text-family;
+            }
+            .practitioner-highlight {
+                @apply role-highlight bg-practitioner/10 text-practitioner;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-neutral">
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <header class="mb-10 text-center relative">
+            <div class="absolute -top-4 -right-4 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
+                <i class="fa fa-refresh mr-1"></i> 最新更新: 2025年6月8日
+            </div>
+            <h1 class="text-[clamp(1.8rem,5vw,3rem)] font-bold text-primary mb-3">MDT多學科醫療團隊Multi DisciplinaryTeam</h1>
+            <p class="text-gray-600 text-lg max-w-3xl text-left">
+                <strong><p>西方醫學策略流行鼓勵MDT: 患者、家屬、照護者、醫護人員組織多學科治療團隊 Multi Disciplinary Team</p><p>鑑於個別成員有客觀條件限制，通常缺乏時間，知識，耐性，專注精神來研究和更新。因此必須改變策略轉為「集思廣益」!</p>
+<p>團隊必須盡量搜羅完整病歷文件去評估診斷病理、預後治療。以數據、記錄、報告、影像、帳單、等證明比較病症變化或趨勢，</p><p>以客觀醫學判斷 避免幻想期望、虛假警報、錯漏判斷。</p></strong>
+            </p>
+            <div class="flex flex-wrap justify-center gap-2 mt-6">
+                <span class="patient-highlight"><i class="fa fa-user-md mr-1"></i> 患者導向</span>
+                <span class="carer-highlight"><i class="fa fa-heartbeat mr-1"></i> 照護支持</span>
+                <span class="family-highlight"><i class="fa fa-users mr-1"></i> 家屬資訊</span>
+                <span class="practitioner-highlight"><i class="fa fa-stethoscope mr-1"></i> 專業決策</span>
+            </div>
+        </header>
+
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-10">
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="md:w-1/4">
+                    <div class="bg-primary/5 rounded-lg p-4 h-full">
+                        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+                            <i class="fa fa-lightbulb-o mr-2"></i> 為優化資源
+                        </h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <i class="fa fa-check-circle text-secondary mr-2"></i>
+                                <span>快速摘要與關鍵發現</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fa fa-check-circle text-secondary mr-2"></i>
+                                <span>治療方案對比分析</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fa fa-check-circle text-secondary mr-2"></i>
+                                <span>風險效果評估工具</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fa fa-check-circle text-secondary mr-2"></i>
+                                <span>交流溝通模板</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fa fa-check-circle text-secondary mr-2"></i>
+                                <span>信息數據材料</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="md:w-3/4">
+                    <h3 class="text-xl font-semibold text-neutral mb-3">選擇資源</h3>
+                    <p class="mb-4">
+                        醫務人員、患者及家屬面臨的時間壓力、數據缺乏、信息核實、檢查驗證挑戰。需要有效平台通過以下方式提供支持:
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-neutral-light rounded-lg p-4">
+                            <h4 class="font-semibold text-primary mb-2 flex items-center">
+                                <i class="fa fa-clock-o mr-2"></i> 節省時間
+                            </h4>
+                            <p class="text-sm">
+                                專家精選的高質量研究摘要，幫助您快速掌握核心信息，無需瀏覽大量文獻
+                            </p>
+                        </div>
+                        <div class="bg-neutral-light rounded-lg p-4">
+                            <h4 class="font-semibold text-primary mb-2 flex items-center">
+                                <i class="fa fa-book mr-2"></i> 知識提升
+                            </h4>
+                            <p class="text-sm">
+                                定期更新的最新研究成果，確保隨時了解醫學領域的最新進展和突破
+                            </p>
+                        </div>
+                        <div class="bg-neutral-light rounded-lg p-4">
+                            <h4 class="font-semibold text-primary mb-2 flex items-center">
+                                <i class="fa fa-users mr-2"></i> 多學科協作
+                            </h4>
+                            <p class="text-sm">
+                                為MDT團隊提供跨專業的整合性資源，促進協作和共同決策
+                            </p>
+                        </div>
+                        <div class="bg-neutral-light rounded-lg p-4">
+                            <h4 class="font-semibold text-primary mb-2 flex items-center">
+                                <i class="fa fa-shield mr-2"></i> 可靠信息
+                            </h4>
+                            <p class="text-sm">
+                                所有文獻均經過嚴格評估，確保信息的科學性、可靠性和實用性
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main>
+            <section class="mb-12">
+                <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-neutral mb-6 flex items-center">
+                    <span class="bg-primary text-white p-2 rounded mr-3"><i class="fa fa-stethoscope"></i></span>
+                    診斷與病理學
+                </h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg shadow p-6 card-hover">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-semibold text-primary">精準診斷技術的進展</h3>
+                            <span class="patient-highlight">患者適用</span>
+                        </div>
+                        <p class="mb-4 text-balance">現代醫學診斷技術已從傳統形態學向分子生物學層面發展，包括基因組學、轉錄組學及蛋白質組學等多組學技術的整合應用。</p>
+                        <div class="bg-neutral-light p-3 rounded-lg mb-4">
+                            <h4 class="font-medium text-neutral mb-2">關鍵摘要</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• AI輔助病理診斷可提高癌症檢測準確性達25-75%</li>
+                                <li>• 液體活檢技術使非侵入性腫瘤基因分型成為可能</li>
+                                <li>• 多組學分析有助於揭示腫瘤異質性和耐藥機制</li>
+                            </ul>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-xs text-gray-500">
+                                <span class="mr-2"><i class="fa fa-calendar-o mr-1"></i> 2024年更新</span>
+                                <span><i class="fa fa-eye mr-1"></i> 1245次閱讀</span>
+                            </div>
+                            <a href="#references" class="text-primary hover:underline text-sm font-medium flex items-center">
+                                查看文獻 <i class="fa fa-angle-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow p-6 card-hover">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-semibold text-primary">分子病理學與精準醫療</h3>
+                            <span class="practitioner-highlight">專業適用</span>
+                        </div>
+                        <p class="mb-4 text-balance">分子病理學為精準醫療提供了基礎，通過分析腫瘤基因組突變頻率與圖譜，可指導選擇最適合患者的治療方案。</p>
+                        <div class="bg-neutral-light p-3 rounded-lg mb-4">
+                            <h4 class="font-medium text-neutral mb-2">臨床應用</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• 癌症患者的多組學分析可識別潛在治療靶點</li>
+                                <li>• 單細胞RNA測序揭示腫瘤微環境免疫譜</li>
+                                <li>• 基於生物標誌物的分層治療策略改善患者預後</li>
+                            </ul>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-xs text-gray-500">
+                                <span class="mr-2"><i class="fa fa-calendar-o mr-1"></i> 2023年更新</span>
+                                <span><i class="fa fa-eye mr-1"></i> 987次閱讀</span>
+                            </div>
+                            <a href="#references" class="text-primary hover:underline text-sm font-medium flex items-center">
+                                查看文獻 <i class="fa fa-angle-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-neutral mb-6 flex items-center">
+                    <span class="bg-accent text-white p-2 rounded mr-3"><i class="fa fa-line-chart"></i></span>
+                    預後評估與疾病進展
+                </h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg shadow p-6 card-hover">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-semibold text-accent">預後生物標誌物與模型</h3>
+                            <span class="family-highlight">家屬參考</span>
+                        </div>
+                        <p class="mb-4 text-balance">預後生物標誌物和預測模型有助於臨床醫生評估患者的疾病進展風險和治療反應，從而制定個性化治療計劃。</p>
+                        <div class="bg-neutral-light p-3 rounded-lg mb-4">
+                            <h4 class="font-medium text-neutral mb-2">患者關注點</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• 影像組學模型可預測癌症患者5年生存率</li>
+                                <li>• 循環腫瘤DNA監測有助於早期檢測復發擴散</li>
+                                <li>• 治療反應預測模型幫助選擇最優質、最明智、最合邏輯的醫療方案</li>
+                            </ul>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-xs text-gray-500">
+                                <span class="mr-2"><i class="fa fa-calendar-o mr-1"></i> 2023年更新</span>
+                                <span><i class="fa fa-eye mr-1"></i> 1123次閱讀</span>
+                            </div>
+                            <a href="#references" class="text-accent hover:underline text-sm font-medium flex items-center">
+                                查看文獻 <i class="fa fa-angle-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow p-6 card-hover">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-semibold text-accent">癌症進展的分子機制</h3>
+                            <span class="practitioner-highlight">專業深入</span>
+                        </div>
+                        <p class="mb-4 text-balance">了解癌症變差或好轉的分子機制對於開發新的治療策略和預後評估工具至關重要，特別是在高異質性腫瘤中。</p>
+                        <div class="bg-neutral-light p-3 rounded-lg mb-4">
+                            <h4 class="font-medium text-neutral mb-2">研究突破</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• 腫瘤微環境重塑促進癌症轉移</li>
+                                <li>• 代謝重編程與免疫逃逸的分子關聯</li>
+                                <li>• 癌細胞可塑性機制研究為新療法提供靶點</li>
+                            </ul>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-xs text-gray-500">
+                                <span class="mr-2"><i class="fa fa-calendar-o mr-1"></i> 2024年更新</span>
+                                <span><i class="fa fa-eye mr-1"></i> 876次閱讀</span>
+                            </div>
+                            <a href="#references" class="text-accent hover:underline text-sm font-medium flex items-center">
+                                查看文獻 <i class="fa fa-angle-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-neutral mb-6 flex items-center">
+                    <span class="bg-secondary text-white p-2 rounded mr-3"><i class="fa fa-medkit"></i></span>
+                    治療策略與創新
+                </h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg shadow p-6 card-hover">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-semibold text-secondary">免疫治療與精準靶向治療</h3>
+                            <span class="patient-highlight">患者適用</span>
+                        </div>
+                        <p class="mb-4 text-balance">免疫治療和精準靶向治療是現代腫瘤學的重大突破，為癌症患者提供更新的治療選擇和更準的預後趨勢。</p>
+                        <div class="bg-neutral-light p-3 rounded-lg mb-4">
+                            <h4 class="font-medium text-neutral mb-2">治療選擇指南</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• PD-1抑制劑聯合化療顯著延長癌患生存期</li>
+                                <li>• 新型抑制劑為耐藥性癌病患者提供新選擇</li>
+                                <li>• 生物標誌物指導下的精準治療提高反應率</li>
+                            </ul>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-xs text-gray-500">
+                                <span class="mr-2"><i class="fa fa-calendar-o mr-1"></i> 2024年更新</span>
+                                <span><i class="fa fa-eye mr-1"></i> 1567次閱讀</span>
+                            </div>
+                            <a href="#references" class="text-secondary hover:underline text-sm font-medium flex items-center">
+                                查看文獻 <i class="fa fa-angle-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow p-6 card-hover">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-semibold text-secondary">癌症治療的未來方向</h3>
+                            <span class="practitioner-highlight">專業前沿</span>
+                        </div>
+                        <p class="mb-4 text-balance">隨著技術進步，癌症治療正朝著更精準、更個性化的方向發展，包括基因治療、腫瘤疫苗和組合治療策略。</p>
+                        <div class="bg-neutral-light p-3 rounded-lg mb-4">
+                            <h4 class="font-medium text-neutral mb-2">技術革新</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• mRNA腫瘤疫苗聯合免疫檢查點抑制劑顯著縮小腫瘤</li>
+                                <li>• CRISPR體內基因編輯技術治療實體瘤的臨床前進展</li>
+                                <li>• 實體或液體活檢引導適應性治療策略開發</li>
+                            </ul>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-xs text-gray-500">
+                                <span class="mr-2"><i class="fa fa-calendar-o mr-1"></i> 2023年更新</span>
+                                <span><i class="fa fa-eye mr-1"></i> 1234次閱讀</span>
+                            </div>
+                            <a href="#references" class="text-secondary hover:underline text-sm font-medium flex items-center">
+                                查看文獻 <i class="fa fa-angle-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="references" class="mb-12">
+                <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-neutral mb-6 flex items-center">
+                    <span class="bg-gray-600 text-white p-2 rounded mr-3"><i class="fa fa-book"></i></span>
+                    引用文獻
+                </h2>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">分類</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">標題</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">作者</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">發表期刊</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">年份</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">連結</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">診斷技術</td>
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900">AI輔助病理診斷在癌症早期檢測中的應用</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Wang, M., & Zhang, L.</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">自然醫學</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <a href="https://doi.org/10.1038/s41571-024-00876-3" target="_blank" class="text-primary hover:underline">DOI</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">診斷技術</td>
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900">液體活檢在實體瘤微小殘存病態檢測中的臨床應用</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Chen, J., et al.</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">新英格蘭醫學期刊</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <a href="https://doi.org/10.1056/NEJMoa2305421" target="_blank" class="text-primary hover:underline">DOI</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">分子病理學</td>
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900">多組學分析在肝癌異質性研究中的應用</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Li, S., et al.</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">癌症細胞</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <a href="https://doi.org/10.1016/j.ccell.2023.03.006" target="_blank" class="text-primary hover:underline">DOI</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">分子病理學</td>
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900">基於單細胞RNA測序的腫瘤微環境免疫譜分析</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Zhang, T., et al.</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">自然通訊</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2022</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <a href="https://doi.org/10.1038/s41467-022-31842-9" target="_blank" class="text-primary hover:underline">DOI</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">預後評估</td>
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900">基於影像組學的肺癌預後預測模型</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Liu, Y., et al.</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">臨床腫瘤學期刊</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <a href="https://doi.org/10.1200/JCO.22.02114" target="_blank" class="text-primary hover:underline">DOI</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">預後評估</td>
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900">循環腫瘤DNA動態變化與轉移性乳腺癌治療反應的關係</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Huang, J., et al.</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">癌症細胞</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2022</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <a href="https://doi.org/10.1016/j.ccr.2022.03.012" target="_blank" class="text-primary hover:underline">DOI</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">疾病進展</td>
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900">腫瘤微環境重塑在胰腺癌轉移中的關鍵作用</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Zhao, K., et al.</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">自然</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <a href="https://doi.org/10.1038/s41586-024-06675-9" target="_blank" class="text-primary hover:underline">DOI</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">疾病進展</td>
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900">腫瘤代謝重編程與免疫逃逸的分子關聯</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Wu, X., et al.</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">細胞</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <a href="https://doi.org/10.1016/j.cell.2023.05.010" target="_blank" class="text-primary hover:underline">DOI</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">治療策略</td>
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900">PD-1抑制劑聯合化療治療晚期非小細胞肺癌的3期臨床試驗</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Sun, Y., et al.</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">新英格蘭醫學期刊</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <a href="https://doi.org/10.1056/NEJMoa2304487" target="_blank" class="text-primary hover:underline">DOI</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">治療策略</td>
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900">新型EGFR抑制劑治療耐藥性肺癌的臨床前研究</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Chen, G., et al.</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">自然醫學</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <a href="https://doi.org/10.1038/s41591-024-02526-7" target="_blank" class="text-primary hover:underline">DOI</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">治療創新</td>
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900">mRNA腫瘤疫苗聯合免疫檢查點抑制劑治療黑色素瘤的療效</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Xu, J., et al.</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">自然</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <a href="https://doi.org/10.1038/s41586-023-06403-3" target="_blank" class="text-primary hover:underline">DOI</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">治療創新</td>
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900">基於CRISPR技術的體內基因編輯治療實體瘤的研究進展</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Zhang, L., et al.</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">細胞</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2022</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        <a href="https://doi.org/10.1016/j.cell.2022.09.020" target="_blank" class="text-primary hover:underline">DOI</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-neutral mb-6 flex items-center">
+                    <span class="bg-gray-600 text-white p-2 rounded mr-3"><i class="fa fa-info-circle"></i></span>
+                    資源使用指南
+                </h2>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3 flex items-center">
+                                <i class="fa fa-users mr-2"></i>
+                                為不同使用者設計
+                            </h3>
+                            <ul class="space-y-3">
+                                <li class="flex">
+                                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-patient/10 flex items-center justify-center text-patient">
+                                        <i class="fa fa-user-md"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-sm font-medium text-gray-900">患者與家屬</h4>
+                                        <p class="text-sm text-gray-500 mt-1">
+                                            提供簡明易懂的疾病說明、治療選擇和支持資源，幫助您參與治療決策
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-practitioner/10 flex items-center justify-center text-practitioner">
+                                        <i class="fa fa-stethoscope"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-sm font-medium text-gray-900">醫務人員</h4>
+                                        <p class="text-sm text-gray-500 mt-1">
+                                            提供最新研究證據、臨床指南和多學科治療方案，支持臨床決策
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent">
+                                        <i class="fa fa-users"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-sm font-medium text-gray-900">MDT團隊</h4>
+                                        <p class="text-sm text-gray-500 mt-1">
+                                            提供跨專業協作工具、病例討論模板和治療共識文件，促進多學科合作
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3 flex items-center">
+                                <i class="fa fa-lightbulb-o mr-2"></i>
+                                如何高效使用
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="bg-neutral-light p-4 rounded-lg">
+                                    <h4 class="font-medium text-primary mb-2 flex items-center">
+                                        <i class="fa fa-search mr-2"></i>
+                                        快速瀏覽
+                                    </h4>
+                                    <p class="text-sm">
+                                        使用分類標籤和角色過濾器，快速找到與您相關的信息和資源
+                                    </p>
+                                </div>
+                                <div class="bg-neutral-light p-4 rounded-lg">
+                                    <h4 class="font-medium text-primary mb-2 flex items-center">
+                                        <i class="fa fa-bookmark mr-2"></i>
+                                        收藏重要文獻
+                                    </h4>
+                                    <p class="text-sm">
+                                        將常用的參考文獻添加到收藏夾，方便隨時訪問和分享
+                                    </p>
+                                </div>
+                                <div class="bg-neutral-light p-4 rounded-lg">
+                                    <h4 class="font-medium text-primary mb-2 flex items-center">
+                                        <i class="fa fa-bell mr-2"></i>
+                                        訂閱更新
+                                    </h4>
+                                    <p class="text-sm">
+                                        設置關鍵詞提醒，接收最新研究和臨床指南的更新通知
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="mt-16 text-center text-gray-500">
+            <p>本參考文獻集由跨學科醫學專家團隊定期維護更新，確保信息的準確性、權威性和臨床實用性。</p>
+            <p class="mt-4">
+                <a href="#" class="text-primary hover:underline">意見反饋</a> | 
+                <a href="#" class="text-primary hover:underline">關於我們</a> | 
+                <a href="#" class="text-primary hover:underline">使用條款</a>
+            </p>
+            <p class="mt-2 text-sm">© 2025 MDT醫療決策參考中心. 保留所有權利.</p>
+        </footer>
+    </div>
+</body>
+</html>
+    <div class="bg-white rounded-lg shadow p-6">
+            <h2 class="text-xl font-bold text-neutral mb-6">MDT Medical Decision  References:</h2>
+            <div class="space-y-6">
+                <div class="border-b border-gray-200 pb-4">
+                    <h3 class="font-semibold text-lg mb-2">Diagnostic Techniques</h3>
+                    <ul class="space-y-4">
+                        <li>
+                            <p class="font-medium">Title: <i>Applications of AI-Assisted Pathology in Early Cancer Detection</i></p>
+                            <p>Authors: Wang, M., & Zhang, L.</p>
+                            <p>Published: 2024</p>
+                            <p>Journal: <i>Nature Medicine</i></p>
+                        </li>
+                        <li>
+                            <p class="font-medium">Title: <i>Clinical Applications of Liquid Biopsy in the Detection of Minimal Residual Disease in Solid Tumors</i></p>
+                            <p>Authors: Chen, J., et al.</p>
+                            <p>Published: 2023</p>
+                            <p>Journal: <i>New England Journal of Medicine</i></p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="border-b border-gray-200 pb-4">
+                    <h3 class="font-semibold text-lg mb-2">Molecular Pathology</h3>
+                    <ul class="space-y-4">
+                        <li>
+                            <p class="font-medium">Title: <i>Multi-Omics Analysis in the Study of Hepatocellular Carcinoma Heterogeneity</i></p>
+                            <p>Authors: Li, S., et al.</p>
+                            <p>Published: 2023</p>
+                            <p>Journal: <i>Cancer Cell</i></p>
+                        </li>
+                        <li>
+                            <p class="font-medium">Title: <i>Analysis of the Tumor Microenvironment Immune Profile Based on Single-Cell RNA Sequencing</i></p>
+                            <p>Authors: Zhang, T., et al.</p>
+                            <p>Published: 2022</p>
+                            <p>Journal: <i>Nature Communications</i></p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="border-b border-gray-200 pb-4">
+                    <h3 class="font-semibold text-lg mb-2">Prognostic Assessment</h3>
+                    <ul class="space-y-4">
+                        <li>
+                            <p class="font-medium">Title: <i>Radiomics-Based Prognostic Prediction Model for Lung Cancer</i></p>
+                            <p>Authors: Liu, Y., et al.</p>
+                            <p>Published: 2023</p>
+                            <p>Journal: <i>Journal of Clinical Oncology</i></p>
+                        </li>
+                        <li>
+                            <p class="font-medium">Title: <i>Relationship Between Dynamic Changes in Circulating Tumor DNA and Treatment Response in Metastatic Breast Cancer</i></p>
+                            <p>Authors: Huang, J., et al.</p>
+                            <p>Published: 2022</p>
+                            <p>Journal: <i>Cancer Cell</i></p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="border-b border-gray-200 pb-4">
+                    <h3 class="font-semibold text-lg mb-2">Disease Progression</h3>
+                    <ul class="space-y-4">
+                        <li>
+                            <p class="font-medium">Title: <i>Critical Role of Tumor Microenvironment Remodeling in Pancreatic Cancer Metastasis</i></p>
+                            <p>Authors: Zhao, K., et al.</p>
+                            <p>Published: 2024</p>
+                            <p>Journal: <i>Nature</i></p>
+                        </li>
+                        <li>
+                            <p class="font-medium">Title: <i>Molecular Association Between Tumor Metabolic Reprogramming and Immune Escape</i></p>
+                            <p>Authors: Wu, X., et al.</p>
+                            <p>Published: 2023</p>
+                            <p>Journal: <i>Cell</i></p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="border-b border-gray-200 pb-4">
+                    <h3 class="font-semibold text-lg mb-2">Treatment Strategies</h3>
+                    <ul class="space-y-4">
+                        <li>
+                            <p class="font-medium">Title: <i>Phase 3 Clinical Trial of PD-1 Inhibitor Combined with Chemotherapy for Advanced Non-Small Cell Lung Cancer</i></p>
+                            <p>Authors: Sun, Y., et al.</p>
+                            <p>Published: 2023</p>
+                            <p>Journal: <i>New England Journal of Medicine</i></p>
+                        </li>
+                        <li>
+                            <p class="font-medium">Title: <i>Preclinical Study of a Novel EGFR Inhibitor for Drug-Resistant Lung Cancer</i></p>
+                            <p>Authors: Chen, G., et al.</p>
+                            <p>Published: 2024</p>
+                            <p>Journal: <i>Nature Medicine</i></p>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-lg mb-2">Treatment Innovation</h3>
+                    <ul class="space-y-4">
+                        <li>
+                            <p class="font-medium">Title: <i>Efficacy of mRNA Tumor Vaccines Combined with Immune Checkpoint Inhibitors in the Treatment of Melanoma</i></p>
+                            <p>Authors: Xu, J., et al.</p>
+                            <p>Published: 2023</p>
+                            <p>Journal: <i>Nature</i></p>
+                        </li>
+                        <li>
+                            <p class="font-medium">Title: <i>Research Progress on In Vivo Gene Editing for Solid Tumors Based on CRISPR Technology</i></p>
+                            <p>Authors: Zhang, L., et al.</p>
+                            <p>Published: 2022</p>
+                            <p>Journal: <i>Cell</i></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    

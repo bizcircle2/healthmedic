@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <title>轉移性淋巴結完整病理分析</title>
+    <style>
+      body {
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+        color: #333;
+      }
+      .diagnostic-block {
+        border: 3px solid #4a5568;
+        padding: 15px;
+        margin-bottom: 25px;
+        border-radius: 5px;
+        background-color: #f8f9fa;
+      }
+      h2 {
+        color: #2c5282;
+        border-bottom: 2px solid #d9534f;
+        padding-bottom: 5px;
+      }
+      .evidence-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+      .evidence-table th,
+      .evidence-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      .evidence-table th {
+        background-color: #ffdebf;
+      }
+      .molecular-features {
+        background-color: #e6f7ff;
+        padding: 10px;
+        border-left: 4px solid #5bc0de;
+      }
+      .conclusion-box {
+        background-color: #fff8e6;
+        padding: 15px;
+        border: 2px dashed #d4b106;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="diagnostic-block">
+      <h2>一、腫瘤起源綜合判斷</h2>
+
+      <div class="molecular-features">
+        <h3>關鍵免疫組化結果：</h3>
+        <ul>
+          <li><strong>CLDN18</strong>: 陰性（&lt;1%腫瘤細胞表達）</li>
+          <li><strong>CK7/CK20</strong>: CK7- / CK20+</li>
+          <li><strong>CDX2</strong>: 陽性</li>
+          <li><strong>SATB2</strong>: 陰性</li>
+        </ul>
+      </div>
+
+      <table class="evidence-table">
+        <tr>
+          <th>診斷特徵</th>
+          <th>支持十二指腸起源</th>
+          <th>反對胃起源</th>
+        </tr>
+        <tr>
+          <td><strong>CLDN18表達</strong></td>
+          <td>✓ 十二指腸癌通常陰性（&lt;15%）</td>
+          <td>✗ 胃腺癌60-70%陽性</td>
+        </tr>
+        <tr>
+          <td><strong>CK7/CK20譜</strong></td>
+          <td>✓ CK7-/CK20+ 典型腸型</td>
+          <td>✗ 胃癌通常CK7+</td>
+        </tr>
+        <tr>
+          <td><strong>分子特徵</strong></td>
+          <td>✓ APC/RNF43突變常見於小腸癌</td>
+          <td>✗ 無HER2擴增（胃癌20%+）</td>
+        </tr>
+        <tr>
+          <td><strong>臨床病史</strong></td>
+          <td>✓ 原發十二指腸腫瘤記錄</td>
+          <td>✗ 無胃部病變報告</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="diagnostic-block">
+      <h2>二、病理演變時間軸</h2>
+
+      <table class="evidence-table">
+        <tr>
+          <th>時間</th>
+          <th>病理特徵</th>
+          <th>惡性度進展證據</th>
+        </tr>
+        <tr>
+          <td>2022-05</td>
+          <td>
+            <ul>
+              <li>中分化腺癌</li>
+              <li>Ki67 &gt;95%</li>
+            </ul>
+          </td>
+          <td>極高增殖指數</td>
+        </tr>
+        <tr>
+          <td>2022-12</td>
+          <td>
+            <ul>
+              <li>黏液腺癌特徵</li>
+              <li>印戒細胞出現</li>
+            </ul>
+          </td>
+          <td>組織學去分化</td>
+        </tr>
+        <tr>
+          <td>2025-05</td>
+          <td>
+            <ul>
+              <li>腫瘤壞死</li>
+              <li>結節外侵犯</li>
+            </ul>
+          </td>
+          <td>侵襲性增強</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="diagnostic-block">
+      <h2>三、治療影響評估</h2>
+
+      <div class="molecular-features">
+        <h3>CLDN18陰性的臨床意義：</h3>
+        <ol>
+          <li>
+            <strong>排除靶向治療</strong>：不適用zolbetuximab（抗CLDN18.2藥物）
+          </li>
+          <li><strong>化療選擇</strong>：FOLFOXIRI方案優先於含鉑類方案</li>
+          <li>
+            <strong>免疫治療</strong>：維持pembrolizumab（MSI-H狀態仍適用）
+          </li>
+        </ol>
+      </div>
+
+      <table class="evidence-table">
+        <tr>
+          <th>生物標記</th>
+          <th>治療建議</th>
+          <th>證據等級</th>
+        </tr>
+        <tr>
+          <td>MSI-H/TMB=56</td>
+          <td>免疫檢查點抑制劑</td>
+          <td>Ⅰ級（NCCN指南）</td>
+        </tr>
+        <tr>
+          <td>RNF43/APC突變</td>
+          <td>WNT通路抑制劑試驗</td>
+          <td>Ⅱ期試驗數據</td>
+        </tr>
+        <tr>
+          <td>TP53 R273C</td>
+          <td>APR-246聯合化療</td>
+          <td>Ⅲ期試驗中</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="conclusion-box">
+      <h2>最終病理診斷</h2>
+      <p><strong>左鎖骨上淋巴結轉移性腺癌</strong>，符合：</p>
+      <ol>
+        <li>
+          原發十二指腸腺癌轉移（依據CK7-/CK20+/CDX2+免疫表型及CLDN18陰性）
+        </li>
+        <li>高惡性度特徵（Ki67&gt;95%, TP53突變, 腫瘤壞死）</li>
+        <li>黏液性分化伴印戒細胞成分</li>
+      </ol>
+      <p>
+        <strong>注</strong
+        >：CLDN18陰性強烈不支持胃來源，與原發十二指腸腫瘤病史一致。
+      </p>
+    </div>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <title>轉移性淋巴結完整病理分析</title>
+    <style>
+      body {
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+        color: #333;
+      }
+      .diagnostic-block {
+        border: 3px solid #4a5568;
+        padding: 15px;
+        margin-bottom: 25px;
+        border-radius: 5px;
+        background-color: #f8f9fa;
+      }
+      h2 {
+        color: #2c5282;
+        border-bottom: 2px solid #d9534f;
+        padding-bottom: 5px;
+      }
+      .evidence-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+      .evidence-table th,
+      .evidence-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      .evidence-table th {
+        background-color: #ffdebf;
+      }
+      .molecular-features {
+        background-color: #e6f7ff;
+        padding: 10px;
+        border-left: 4px solid #5bc0de;
+      }
+      .conclusion-box {
+        background-color: #fff8e6;
+        padding: 15px;
+        border: 2px dashed #d4b106;
+        margin-top: 20px;
+      }
+      .diagnostic-correction {
+        background-color: #ffebee;
+        border-left: 4px solid #ef5350;
+        padding: 10px;
+        margin: 15px 0;
+      }
+      .amendment-note {
+        background-color: #e8f5e9;
+        border-left: 4px solid #43a047;
+        padding: 10px;
+        margin: 15px 0;
+      }
+      del {
+        background-color: #ffebee;
+        color: #b71c1c;
+      }
+      ins {
+        background-color: #e8f5e9;
+        color: #1b5e20;
+        text-decoration: none;
+      }
+      .footnote {
+        font-size: 0.9em;
+        color: #666;
+        font-style: italic;
+      }
+      .timeline-block {
+        background-color: #f3e5f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 20px 0;
+        border-left: 4px solid #9c27b0;
+      }
+      .consistency-analysis {
+        background-color: #e0f7fa;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 20px 0;
+        border-left: 4px solid #00acc1;
+      }
+      .key-concepts {
+        background-color: #fff3e0;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 20px 0;
+        border-left: 4px solid #fb8c00;
+      }
+      .evidence-comparison {
+        background-color: #e8eaf6;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 20px 0;
+        border-left: 4px solid #5c6bc0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="diagnostic-block">
+      <h2>一、腫瘤起源綜合判斷</h2>
+
+      <div class="molecular-features">
+        <h3>關鍵免疫組化結果：</h3>
+        <ul>
+          <li><strong>CLDN18</strong>: 陰性（&lt;1%腫瘤細胞表達）</li>
+          <li><strong>CK7/CK20</strong>: CK7- / CK20+</li>
+          <li><strong>CDX2</strong>: 陽性</li>
+          <li><strong>SATB2</strong>: 陰性</li>
+        </ul>
+      </div>
+
+      <table class="evidence-table">
+        <tr>
+          <th>診斷特徵</th>
+          <th>支持十二指腸起源</th>
+          <th>反對胃起源</th>
+        </tr>
+        <tr>
+          <td><strong>CLDN18表達</strong></td>
+          <td>✓ 十二指腸癌通常陰性（&lt;15%）</td>
+          <td>✗ 胃腺癌60-70%陽性</td>
+        </tr>
+        <tr>
+          <td><strong>CK7/CK20譜</strong></td>
+          <td>✓ CK7-/CK20+ 典型腸型</td>
+          <td>✗ 胃癌通常CK7+</td>
+        </tr>
+        <tr>
+          <td><strong>分子特徵</strong></td>
+          <td>✓ APC/RNF43突變常見於小腸癌</td>
+          <td>✗ 無HER2擴增（胃癌20%+）</td>
+        </tr>
+        <tr>
+          <td><strong>臨床病史</strong></td>
+          <td>✓ 原發十二指腸腫瘤記錄</td>
+          <td>✗ 無胃部病變報告</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="diagnostic-block">
+      <h2>二、病理演變時間軸</h2>
+
+      <table class="evidence-table">
+        <tr>
+          <th>時間</th>
+          <th>病理特徵</th>
+          <th>惡性度進展證據</th>
+        </tr>
+        <tr>
+          <td>2022-05</td>
+          <td>
+            <ul>
+              <li>中分化腺癌</li>
+              <li>Ki67 &gt;95%</li>
+            </ul>
+          </td>
+          <td>極高增殖指數</td>
+        </tr>
+        <tr>
+          <td>2022-12</td>
+          <td>
+            <ul>
+              <li>黏液腺癌特徵</li>
+              <li>印戒細胞出現</li>
+            </ul>
+          </td>
+          <td>組織學去分化</td>
+        </tr>
+        <tr>
+          <td>2025-05</td>
+          <td>
+            <ul>
+              <li>腫瘤壞死</li>
+              <li>結節外侵犯</li>
+            </ul>
+          </td>
+          <td>侵襲性增強</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="diagnostic-block">
+      <h2>三、治療影響評估</h2>
+
+      <div class="molecular-features">
+        <h3>CLDN18陰性的臨床意義：</h3>
+        <ol>
+          <li>
+            <strong>排除靶向治療</strong>：不適用zolbetuximab（抗CLDN18.2藥物）
+          </li>
+          <li><strong>化療選擇</strong>：FOLFOXIRI方案優先於含鉑類方案</li>
+          <li>
+            <strong>免疫治療</strong>：維持pembrolizumab（MSI-H狀態仍適用）
+          </li>
+        </ol>
+      </div>
+
+      <table class="evidence-table">
+        <tr>
+          <th>生物標記</th>
+          <th>治療建議</th>
+          <th>證據等級</th>
+        </tr>
+        <tr>
+          <td>MSI-H/TMB=56</td>
+          <td>免疫檢查點抑制劑</td>
+          <td>Ⅰ級（NCCN指南）</td>
+        </tr>
+        <tr>
+          <td>RNF43/APC突變</td>
+          <td>WNT通路抑制劑試驗</td>
+          <td>Ⅱ期試驗數據</td>
+        </tr>
+        <tr>
+          <td>TP53 R273C</td>
+          <td>APR-246聯合化療</td>
+          <td>Ⅲ期試驗中</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="timeline-block">
+      <h2>四、時間軸與診斷一致性分析</h2>
+
+      <h3>1. 2022年初始診斷背景</h3>
+      <p>當時依據：</p>
+      <ul>
+        <li>十二指腸原發病灶明確存在</li>
+        <li>淋巴結轉移灶的CK20+/CDX2+強烈支持消化道來源</li>
+      </ul>
+      <p>局限性：當時未檢測CLDN18（2023年後才成為常規檢測）</p>
+
+      <h3>2. 表面矛盾點解析</h3>
+      <table class="evidence-table">
+        <tr>
+          <th>時間點</th>
+          <th>診斷表述</th>
+          <th>2025年新證據</th>
+          <th>矛盾性分析</th>
+        </tr>
+        <tr>
+          <td>2022-05</td>
+          <td>"GI origin"</td>
+          <td>CLDN18陰性</td>
+          <td>術語使用不夠精確</td>
+        </tr>
+        <tr>
+          <td>2022-12</td>
+          <td>黏液腺癌特徵</td>
+          <td>與十二指腸癌特徵一致</td>
+          <td>無實質矛盾</td>
+        </tr>
+      </table>
+
+      <h3>3. 關鍵概念澄清</h3>
+      <div class="key-concepts">
+        <p>"GI origin"的合理範圍：</p>
+        <ul>
+          <li>廣義GI：包含胃、十二指腸、小腸等（2022年合理推測）</li>
+          <li>狹義定位：CLDN18陰性後才排除胃來源（2025年精確化）</li>
+        </ul>
+        <p>診斷術語演變：</p>
+        <p><del>2022年: "GI origin adenocarcinoma"</del></p>
+        <p><ins>2025年: "Duodenal-origin adenocarcinoma (CLDN18-)"</ins></p>
+      </div>
+
+      <h3>4. 臨床文檔修正建議</h3>
+      <div class="diagnostic-correction">
+        <h3>2022年診斷應修正為：</h3>
+        <p><del>"High-grade adenocarcinoma (GI origin)"</del></p>
+        <p>
+          <ins
+            >"Metastatic adenocarcinoma consistent with
+            <strong>duodenal primary</strong>"</ins
+          >
+        </p>
+        <p class="footnote">*基於後續CLDN18檢測結果（2025-05-21）回溯修正</p>
+      </div>
+    </div>
+
+    <div class="consistency-analysis">
+      <h2>五、矛盾解決方案</h2>
+
+      <h3>1. 科學解釋</h3>
+      <p>CLDN18的臨床意義在2022年尚未明確：</p>
+      <ul>
+        <li>該標誌物在2023年後才被NCCN指南納入常規檢測</li>
+        <li>2022年依賴CK20/CDX2判斷GI來源仍屬合理</li>
+      </ul>
+
+      <h3>2. 證據權重對比</h3>
+      <div class="evidence-comparison">
+        <table class="evidence-table">
+          <tr>
+            <th>證據類型</th>
+            <th>2022年支持胃來源</th>
+            <th>2025年反對胃來源</th>
+          </tr>
+          <tr>
+            <td>解剖位置</td>
+            <td>無直接證據</td>
+            <td>十二指腸原發明確</td>
+          </tr>
+          <tr>
+            <td>免疫組化</td>
+            <td>CK20+/CDX2+</td>
+            <td>CLDN18-</td>
+          </tr>
+          <tr>
+            <td>分子特徵</td>
+            <td>未檢測</td>
+            <td>RNF43/APC突變</td>
+          </tr>
+        </table>
+      </div>
+
+      <h3>3. 臨床文檔處理建議</h3>
+      <p><strong>診斷修正聲明：</strong></p>
+      <p>
+        "2022年初步診斷中的'GI
+        origin'表述應理解為包含十二指腸在內的廣義消化道來源。2025年CLDN18檢測結果進一步將原發部位精確到十二指腸，排除胃來源。"
+      </p>
+
+      <div class="amendment-note">
+        <h4>診斷修正說明：</h4>
+        <p>本病例充分展示了精準醫學時代診斷標準的演進：</p>
+        <ul>
+          <li>2022年：基於傳統免疫組化判斷消化道來源</li>
+          <li>2025年：通過CLDN18檢測實現解剖部位精確定位</li>
+        </ul>
+        <p>兩者在生物學本質上無矛盾，體現診斷精確度的提升。</p>
+      </div>
+
+      <p><strong>分子診斷溯源：</strong></p>
+      <ul>
+        <li>原始活檢組織應補做HER2免疫組化（完全排除胃來源）</li>
+        <li>建議NGS檢測確認是否存在DAXX/ATRX突變（輔助鑑別胰腺來源）</li>
+      </ul>
+    </div>
+
+    <div class="conclusion-box">
+      <h2>最終病理診斷</h2>
+      <p><strong>左鎖骨上淋巴結轉移性腺癌</strong>，符合：</p>
+      <ol>
+        <li>
+          原發十二指腸腺癌轉移（依據CK7-/CK20+/CDX2+免疫表型及CLDN18陰性）
+        </li>
+        <li>高惡性度特徵（Ki67&gt;95%, TP53突變, 腫瘤壞死）</li>
+        <li>黏液性分化伴印戒細胞成分</li>
+      </ol>
+      <p>
+        <strong>注</strong
+        >：CLDN18陰性強烈不支持胃來源，與原發十二指腸腫瘤病史一致。
+      </p>
+      <p><strong>最終診斷表述應統一為：</strong></p>
+      <p>
+        "左鎖骨上淋巴結轉移性腺癌，源自十二指腸原發（依據：CK7-/CK20+/CDX2+/CLDN18-，伴RNF43/APC突變）"
+      </p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>癌症基因突變資訊表</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#10b981',
+                        danger: '#ef4444',
+                        warning: '#f59e0b',
+                        info: '#6366f1',
+                        light: '#f3f4f6',
+                        dark: '#1f2937',
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-shadow {
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            }
+            .gene-card {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .gene-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="container mx-auto px-4 py-8">
+        <div class="mb-8 text-center">
+            <h1 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gray-800 mb-2">癌症基因突變資訊表</h1>
+            <p class="text-gray-600 max-w-3xl mx-auto">以下為常見於癌症的分子病理報告中的基因變異標記及其中文解釋</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <!-- APC T1445fs*10 卡片 -->
+            <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-primary card-shadow">
+                <div class="bg-primary text-white p-4">
+                    <h2 class="text-xl font-bold">APC T1445fs*10</h2>
+                </div>
+                <div class="p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-primary mb-2">基因說明</h3>
+                        <p class="text-gray-700">APC基因：抑癌基因，突變常見於大腸癌等腫瘤。</p>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-primary mb-2">突變解析</h3>
+                        <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                            <li>T1445：蛋白質的第1445個胺基酸（蘇氨酸，Threonine）發生突變。</li>
+                            <li>fs（移碼突變，frameshift）：因插入或缺失核苷酸導致讀碼框架改變，可能生成截短蛋白或功能異常蛋白。</li>
+                            <li>*10：突變後產生新的終止密碼子，導致蛋白質合成提前終止（推測為第10個異常胺基酸後終止）。</li>
+                        </ul>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-primary mb-2 flex items-center">
+                            <i class="fa fa-info-circle mr-2"></i> 臨床意義
+                        </h3>
+                        <p class="text-gray-700">APC功能喪失，促進腫瘤生長。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAP2K1 (MEK1) K57T 卡片 -->
+            <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-secondary card-shadow">
+                <div class="bg-secondary text-white p-4">
+                    <h2 class="text-xl font-bold">MAP2K1 (MEK1) K57T</h2>
+                </div>
+                <div class="p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-secondary mb-2">基因說明</h3>
+                        <p class="text-gray-700">MAP2K1基因：編碼MEK1蛋白（MAPK信號通路關鍵激酶），調控細胞增殖。</p>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-secondary mb-2">突變解析</h3>
+                        <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                            <li>K57T：第57個胺基酸從 賴氨酸（Lysine, K）變為蘇氨酸（Threonine, T）。</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-secondary mb-2 flex items-center">
+                            <i class="fa fa-info-circle mr-2"></i> 臨床意義
+                        </h3>
+                        <p class="text-gray-700">可能導致MEK1持續活化，促進癌細胞增殖（常見於黑色素瘤、肺癌等）。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TP53 R273C 卡片 -->
+            <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-danger card-shadow">
+                <div class="bg-danger text-white p-4">
+                    <h2 class="text-xl font-bold">TP53 R273C</h2>
+                </div>
+                <div class="p-6">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-danger mb-2">基因說明</h3>
+                        <p class="text-gray-700">TP53基因：重要抑癌基因，編碼p53蛋白（調控DNA修復與細胞凋亡）。</p>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-danger mb-2">突變解析</h3>
+                        <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                            <li>R273C：第273個胺基酸從 精氨酸（Arginine, R） 變為半胱氨酸（Cysteine, C）。</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-danger mb-2 flex items-center">
+                            <i class="fa fa-info-circle mr-2"></i> 臨床意義
+                        </h3>
+                        <p class="text-gray-700">p53失去正常功能，導致癌細胞逃避凋亡（常見於多種癌症）。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 臨床關聯部分 -->
+        <div class="bg-white rounded-xl overflow-hidden border-4 border-info card-shadow mb-10">
+            <div class="bg-info text-white p-4">
+                <h2 class="text-xl font-bold">臨床關聯</h2>
+            </div>
+            <div class="p-6">
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-info mb-3 flex items-center">
+                        <i class="fa fa-link mr-2"></i> 綜合影響
+                    </h3>
+                    <p class="text-gray-700">這些突變可能共同驅動腫瘤惡性化（如增殖加速、基因不穩定）。</p>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-info mb-3 flex items-center">
+                        <i class="fa fa-medkit mr-2"></i> 治療方向
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
+                                <i class="fa fa-check text-sm"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-700"><span class="font-medium">MAP2K1 K57T</span>：可能對MEK抑制劑（如曲美替尼）敏感，但需進一步驗證。</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
+                                <i class="fa fa-check text-sm"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-700"><span class="font-medium">TP53 R273C</span>：目前缺乏直接靶向藥物，可關注化療/免疫治療敏感性。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-purple-50 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold text-info mb-2 flex items-center">
+                        <i class="fa fa-lightbulb-o mr-2"></i> 建議
+                    </h3>
+                    <p class="text-gray-700">需結合臨床資料與更多分子檢測（如微衛星不穩定性、TMB等）評估治療選項。若有具體癌症類型或報告背景，可提供更精準的解讀。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 病理報告資訊 -->
+        <div class="bg-white rounded-xl overflow-hidden border-4 border-warning card-shadow">
+            <div class="bg-warning text-white p-4">
+                <h2 class="text-xl font-bold">2022-12-29 病理報告資訊</h2>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-warning mb-3">2022-12-29 病理診斷</h3>
+                        <p class="text-gray-700">Duodenal Adenocarcinoma Metastatic Lymph nodes.</p>
+                        
+                        <h3 class="text-lg font-semibold text-warning mt-5 mb-3">2022-12-29 免疫組化結果</h3>
+                        <ul class="space-y-2">
+                            <li class="flex justify-between">
+                                <span class="text-gray-700">EGFR</span>
+                                <span class="font-medium">200</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-700">CK7</span>
+                                <span class="font-medium">-</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-700">CK20</span>
+                                <span class="font-medium">+</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-700">CDX2</span>
+                                <span class="font-medium">+</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-700">ki67</span>
+                                <span class="font-medium">&gt;95%</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-700">Kras</span>
+                                <span class="font-medium">陰性</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-700">Nras</span>
+                                <span class="font-medium">陰性</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold text-warning mb-3">2022-12-29 基因檢測結果</h3>
+                        <p class="text-gray-700">2022-12-29 FoundationOne CDx + IHC: 22 GenoFindings</p>
+                        
+                        <h3 class="text-lg font-semibold text-warning mt-5 mb-3">2022-12-29 生物標誌物</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-700">TPS</span>
+                                    <span class="font-medium">0</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-700">MSI</span>
+                                    <span class="font-medium">高</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-green-600 h-2.5 rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-700">TMB</span>
+                                    <span class="font-medium">56</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-red-600 h-2.5 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-700">PD-L1</span>
+                                    <span class="font-medium">0</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-purple-600 h-2.5 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>癌症基因突變資訊表</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#10b981',
+                        danger: '#ef4444',
+                        warning: '#f59e0b',
+                        info: '#6366f1',
+                        light: '#f3f4f6',
+                        dark: '#1f2937',
+                        success: '#22c55e',
+                        'primary-light': '#dbeafe',
+                        'secondary-light': '#d1fae5',
+                        'danger-light': '#fee2e2',
+                        'warning-light': '#fef3c7',
+                        'info-light': '#e0e7ff',
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-shadow {
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            }
+            .gene-card {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .gene-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .stat-card {
+                transition: all 0.3s ease;
+            }
+            .stat-card:hover {
+                transform: scale(1.02);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="container mx-auto px-4 py-8">
+        <div class="mb-8 text-center">
+            <h1 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gray-800 mb-2">十二指腸腺癌基因突變資訊表</h1>
+            <p class="text-gray-600 max-w-3xl mx-auto">以下為十二指腸腺癌轉移病例的分子病理報告及基因突變分析</p>
+        </div>
+
+        <!-- 2025-05-21 病理診斷資訊 -->
+        <div class="bg-white rounded-xl overflow-hidden border-4 border-primary card-shadow mb-10">
+            <div class="bg-primary text-white p-4">
+                <h2 class="text-xl font-bold">2025-05-21 病理診斷資訊</h2>
+            </div>
+            <div class="p-6">
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+                        <i class="fa fa-stethoscope mr-2"></i> 2025-05-21 病理診斷
+                    </h3>
+                    <p class="text-gray-700">2022-2025 Duodenal Adenocarcinoma Metastatic to 5 Lymph nodes. 十二指腸腺癌轉移到 5 個淋巴結。</p>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+                        <i class="fa fa-microscope mr-2"></i> 2025-05-21 顯微鏡檢查
+                    </h3>
+                    <p class="text-gray-700">切片顯示淋巴結組織大部分被轉移性黏液腺癌取代。腫瘤細胞稀少，由腺體結構、癌細胞條帶和索條漂浮在細胞外黏液池中組成。癌細胞具有充滿黏液的細胞質，並顯示中度核多形性、核深染和偶見有絲分裂。有梗死型腫瘤壞死的跡象。結外腫瘤擴展明顯。</p>
+                    <p class="text-gray-700 mt-2">2022-2025 CEA趨勢: 129 → 268 → 7 → 75</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-primary mb-3">2022-05-25 免疫組化結果</h3>
+                        <ul class="space-y-2">
+                            <li class="flex justify-between">
+                                <span class="text-gray-700">EGFR</span>
+                                <span class="font-medium">200</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-700">CK7</span>
+                                <span class="font-medium">-</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-700">CK20</span>
+                                <span class="font-medium">+</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-700">CDX2</span>
+                                <span class="font-medium">+</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-700">ki67</span>
+                                <span class="font-medium">&gt;95%</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-700">Kras</span>
+                                <span class="font-medium">陰性</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-700">Nras</span>
+                                <span class="font-medium">陰性</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold text-primary mb-3">2025-05-21 生物標誌物</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-700">TPS (Tumor Proportion Score)</span>
+                                    <span class="font-medium">&lt;1%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: 1%"></div>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">腫瘤細胞PD-L1表達極低</p>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-700">CPS (Combined Positive Score)</span>
+                                    <span class="font-medium">60</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-green-600 h-2.5 rounded-full" style="width: 60%"></div>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">免疫細胞等PD-L1表達高，包括腫瘤細胞、淋巴細胞、巨噬細胞等陽性細胞比例</p>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-700">MSI</span>
+                                    <span class="font-medium">高</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-red-600 h-2.5 rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-700">TMB</span>
+                                    <span class="font-medium">56</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-purple-600 h-2.5 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-700">PD-L1</span>
+                                    <span class="font-medium">0</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-yellow-600 h-2.5 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 基因突變卡片 -->
+        <div class="mb-10">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <i class="fa fa-dna text-info mr-2"></i> 2022-12-29 基因突變分析 FoundationOne®CDx
+                <span class="ml-2 text-sm font-normal text-gray-500">(22個基因突變發現)</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="gene-cards-container">
+                <!-- APC T1445fs*10 -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-primary card-shadow">
+                    <div class="bg-primary text-white p-4">
+                        <h3 class="text-xl font-bold">APC T1445fs*10</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-primary mb-2">基因功能</h4>
+                            <p class="text-gray-700">抑癌基因，調控細胞黏附與凋亡，突變常見於大腸癌等腫瘤。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-primary mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第1445位蘇氨酸突變</li>
+                                <li>移碼突變導致閱讀框改變</li>
+                                <li>提前終止密碼子導致截短蛋白</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">MSI-H表型可能對免疫治療敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">促進腫瘤生長與轉移</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ARID1A Y551fs*72 -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-secondary card-shadow">
+                    <div class="bg-secondary text-white p-4">
+                        <h3 class="text-xl font-bold">ARID1A Y551fs*72</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-secondary mb-2">基因功能</h4>
+                            <p class="text-gray-700">染色質重塑因子，參與基因表達調控，突變與DNA修復缺陷相關。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-secondary mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第551位酪氨酸突變</li>
+                                <li>移碼突變</li>
+                                <li>生成截短蛋白</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">可能對PARP抑制劑敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">基因不穩定性增加</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ATR 1774fs*5 -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-danger card-shadow">
+                    <div class="bg-danger text-white p-4">
+                        <h3 class="text-xl font-bold">ATR 1774fs*5</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-danger mb-2">基因功能</h4>
+                            <p class="text-gray-700">DNA損傷反應激酶，調控細胞週期檢查點，維持基因組穩定性。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-danger mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第1774位氨基酸突變</li>
+                                <li>移碼突變</li>
+                                <li>提前終止</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">可能對ATR抑制劑敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">DNA修復缺陷，增加基因突變率</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ATRX E1639* -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-warning card-shadow">
+                    <div class="bg-warning text-white p-4">
+                        <h3 class="text-xl font-bold">ATRX E1639*</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-warning mb-2">基因功能</h4>
+                            <p class="text-gray-700">染色質重塑蛋白，參與端粒維持與DNA甲基化調控。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-warning mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第1639位谷氨酸突變</li>
+                                <li>無義突變</li>
+                                <li>截短蛋白</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">可能對免疫治療敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">端粒不穩定，腫瘤進展風險增加</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- BCOR G400fs*42 -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-info card-shadow">
+                    <div class="bg-info text-white p-4">
+                        <h3 class="text-xl font-bold">BCOR G400fs*42</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-info mb-2">基因功能</h4>
+                            <p class="text-gray-700">轉錄抑制因子，參與細胞分化與發育調控。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-info mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第400位甘氨酸突變</li>
+                                <li>移碼突變</li>
+                                <li>功能缺失</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">可能對EZH2抑制劑敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">促進腫瘤幹細胞特性</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- BCORL1 G1682fs*4 -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-success card-shadow">
+                    <div class="bg-success text-white p-4">
+                        <h3 class="text-xl font-bold">BCORL1 G1682fs*4</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-success mb-2">基因功能</h4>
+                            <p class="text-gray-700">轉錄調節因子，參與造血與神經發育過程。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-success mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第1682位甘氨酸突變</li>
+                                <li>移碼突變</li>
+                                <li>截短蛋白</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">可能對HDAC抑制劑敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">干擾正常細胞分化</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CDKN2A D74N -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-primary card-shadow">
+                    <div class="bg-primary text-white p-4">
+                        <h3 class="text-xl font-bold">CDKN2A D74N</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-primary mb-2">基因功能</h4>
+                            <p class="text-gray-700">細胞週期調控因子，抑制CDK4/6，調控G1期檢查點。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-primary mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第74位天冬氨酸突變為天冬酰胺</li>
+                                <li>錯義突變</li>
+                                <li>功能失活</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">可能對CDK4/6抑制劑敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">細胞週期失控，增殖加速</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CDKN2A A68V -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-secondary card-shadow">
+                    <div class="bg-secondary text-white p-4">
+                        <h3 class="text-xl font-bold">CDKN2A A68V</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-secondary mb-2">基因功能</h4>
+                            <p class="text-gray-700">同上，雙等位基因突變常見於惡性黑色素瘤等。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-secondary mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第68位丙氨酸突變為纈氨酸</li>
+                                <li>錯義突變</li>
+                                <li>結構改變</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">可能對CDK4/6抑制劑敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">細胞週期失控，增殖加速</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DNMT3A V60fs*5 -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-danger card-shadow">
+                    <div class="bg-danger text-white p-4">
+                        <h3 class="text-xl font-bold">DNMT3A V60fs*5</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-danger mb-2">基因功能</h4>
+                            <p class="text-gray-700">DNA甲基轉移酶，參與DNA甲基化模式建立，調控基因表達。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-danger mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第60位纈氨酸突變</li>
+                                <li>移碼突變</li>
+                                <li>酶活性喪失</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">可能對去甲基化藥物敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">異常甲基化模式，基因表達失調</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- FH G210* -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-warning card-shadow">
+                    <div class="bg-warning text-white p-4">
+                        <h3 class="text-xl font-bold">FH G210*</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-warning mb-2">基因功能</h4>
+                            <p class="text-gray-700">延胡索酸水合酶，參與三羧酸循環，突變與腎癌、子宮肌瘤相關。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-warning mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第210位甘氨酸突變</li>
+                                <li>無義突變</li>
+                                <li>截短蛋白</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">可能對SDH抑制劑敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">延胡索酸積累，促進腫瘤微環境形成</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- FLCN H429fs*39 -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-info card-shadow">
+                    <div class="bg-info text-white p-4">
+                        <h3 class="text-xl font-bold">FLCN H429fs*39</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-info mb-2">基因功能</h4>
+                            <p class="text-gray-700">調控細胞生長與代謝，突變與Birt-Hogg-Dubé綜合徵相關。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-info mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第429位組氨酸突變</li>
+                                <li>移碼突變</li>
+                                <li>功能缺失</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">可能對mTOR抑制劑敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">激活mTOR通路，促進增殖</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- MAP2K1 (MEK1) K57T -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-success card-shadow">
+                    <div class="bg-success text-white p-4">
+                        <h3 class="text-xl font-bold">MAP2K1 (MEK1) K57T</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-success mb-2">基因功能</h4>
+                            <p class="text-gray-700">編碼MEK1蛋白，參與MAPK信號通路，調控細胞增殖與存活。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-success mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第57位賴氨酸突變為蘇氨酸</li>
+                                <li>錯義突變</li>
+                                <li>持續激活MEK1</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">對MEK抑制劑敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">促進癌細胞增殖與存活</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- MED12 G44S -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-primary card-shadow">
+                    <div class="bg-primary text-white p-4">
+                        <h3 class="text-xl font-bold">MED12 G44S</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-primary mb-2">基因功能</h4>
+                            <p class="text-gray-700">介導轉錄調控，參與RNA聚合酶II複合物形成。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-primary mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第44位甘氨酸突變為絲氨酸</li>
+                                <li>錯義突變</li>
+                                <li>影響轉錄調控</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">可能對靶向轉錄調控藥物敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">干擾正常基因表達調控</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- MLH1 T237fs*2 -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-secondary card-shadow">
+                    <div class="bg-secondary text-white p-4">
+                        <h3 class="text-xl font-bold">MLH1 T237fs*2</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-secondary mb-2">基因功能</h4>
+                            <p class="text-gray-700">DNA錯配修復基因，維持基因組穩定性，突變與Lynch綜合徵相關。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-secondary mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第237位蘇氨酸突變</li>
+                                <li>移碼突變</li>
+                                <li>功能缺失</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">高度MSI表型，對免疫治療敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">DNA修復缺陷，基因突變積累</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- NBN R466fs*18 -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-danger card-shadow">
+                    <div class="bg-danger text-white p-4">
+                        <h3 class="text-xl font-bold">NBN R466fs*18</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-danger mb-2">基因功能</h4>
+                            <p class="text-gray-700">參與DNA雙鏈斷裂修復，維持基因組穩定性。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-danger mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第466位精氨酸突變</li>
+                                <li>移碼突變</li>
+                                <li>功能缺失</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">可能對PARP抑制劑敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">DNA修復缺陷，放射敏感性增加</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- RNF43 R117fs*41 -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-warning card-shadow">
+                    <div class="bg-warning text-white p-4">
+                        <h3 class="text-xl font-bold">RNF43 R117fs*41</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-warning mb-2">基因功能</h4>
+                            <p class="text-gray-700">負向調控Wnt信號通路，抑制腫瘤發生。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-warning mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第117位精氨酸突變</li>
+                                <li>移碼突變</li>
+                                <li>功能缺失</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">可能對Wnt通路抑制劑敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">Wnt通路過度激活，促進腫瘤生長</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- RNF43 G659fs*41 -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-info card-shadow">
+                    <div class="bg-info text-white p-4">
+                        <h3 class="text-xl font-bold">RNF43 G659fs*41</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-info mb-2">基因功能</h4>
+                            <p class="text-gray-700">負向調控Wnt信號通路，抑制腫瘤發生。雙等位基因突變常見於多種實體瘤。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-info mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第659位甘氨酸突變</li>
+                                <li>移碼突變</li>
+                                <li>功能缺失</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">可能對Wnt通路抑制劑敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">Wnt通路過度激活，促進腫瘤生長</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SGK1 Y298fs*13 -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-success card-shadow">
+                    <div class="bg-success text-white p-4">
+                        <h3 class="text-xl font-bold">SGK1 Y298fs*13</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-success mb-2">基因功能</h4>
+                            <p class="text-gray-700">血清和糖皮質激素誘導激酶，調控水鹽平衡與細胞存活。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-success mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第298位酪氨酸突變</li>
+                                <li>移碼突變</li>
+                                <li>功能改變</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">可能對SGK1抑制劑敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">促進腫瘤細胞存活與耐藥</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SMO P694fs*82 -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-primary card-shadow">
+                    <div class="bg-primary text-white p-4">
+                        <h3 class="text-xl font-bold">SMO P694fs*82</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-primary mb-2">基因功能</h4>
+                            <p class="text-gray-700">Hedgehog信號通路關鍵受體，調控胚胎髮育與組織再生。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-primary mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第694位脯氨酸突變</li>
+                                <li>移碼突變</li>
+                                <li>功能獲得</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">對SMO抑制劑敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">Hedgehog通路過度激活，促進腫瘤生長</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- STK11 L282fs*3 -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-secondary card-shadow">
+                    <div class="bg-secondary text-white p-4">
+                        <h3 class="text-xl font-bold">STK11 L282fs*3</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-secondary mb-2">基因功能</h4>
+                            <p class="text-gray-700">絲氨酸/蘇氨酸激酶，調控細胞代謝與極性，突變與Peutz-Jeghers綜合徵相關。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-secondary mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第282位亮氨酸突變</li>
+                                <li>移碼突變</li>
+                                <li>截短蛋白</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">可能對AMPK激活劑敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">mTOR通路激活，促進代謝重編程</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SUFU A25fs*23 -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-danger card-shadow">
+                    <div class="bg-danger text-white p-4">
+                        <h3 class="text-xl font-bold">SUFU A25fs*23</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-danger mb-2">基因功能</h4>
+                            <p class="text-gray-700">Hedgehog信號通路負調節因子，抑制GLI轉錄因子活性。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-danger mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第25位丙氨酸突變</li>
+                                <li>移碼突變</li>
+                                <li>功能缺失</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">對SMO抑制劑敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">Hedgehog通路過度激活，促進腫瘤生長</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- TP53 R273C -->
+                <div class="gene-card bg-white rounded-xl overflow-hidden border-4 border-warning card-shadow">
+                    <div class="bg-warning text-white p-4">
+                        <h3 class="text-xl font-bold">TP53 R273C</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-warning mb-2">基因功能</h4>
+                            <p class="text-gray-700">重要的抑癌基因，調控細胞週期、凋亡和DNA修復，突變常見於多種癌症。</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold text-warning mb-2">突變解析</h4>
+                            <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                <li>第273位精氨酸突變為半胱氨酸</li>
+                                <li>錯義突變</li>
+                                <li>DNA結合域功能失活</li>
+                            </ul>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-primary mb-1">優點</h5>
+                                <p class="text-sm text-gray-700">可能對MDM2抑制劑敏感</p>
+                            </div>
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-danger mb-1">缺點</h5>
+                                <p class="text-sm text-gray-700">失去抑癌功能，促進腫瘤進展</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 治療建議 -->
+        <div class="bg-white rounded-xl overflow-hidden border-4 border-info card-shadow mb-10">
+            <div class="bg-info text-white p-4">
+                <h2 class="text-xl font-bold">治療建議</h2>
+            </div>
+            <div class="p-6">
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="bg-blue-100 p-3 rounded-full mr-4 mt-1">
+                            <i class="fa fa-check text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-primary mb-1">免疫治療</h3>
+                            <p class="text-gray-700">患者為MSI-H/dMMR表型，強烈建議使用免疫檢查點抑制劑（如帕博利珠單抗 Pembrolizumab，商品名Keytruda）作為一線治療。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-blue-100 p-3 rounded-full mr-4 mt-1">
+                            <i class="fa fa-check text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-primary mb-1">靶向治療</h3>
+                            <p class="text-gray-700">考慮患者存在MAP2K1 (MEK1) K57T突變，可評估MEK抑制劑（如曲美替尼 Trametinib）的適用性。此外，CDKN2A突變提示可能對CDK4/6抑制劑敏感。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-blue-100 p-3 rounded-full mr-4 mt-1">
+                            <i class="fa fa-check text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-primary mb-1">PARP抑制劑</h3>
+                            <p class="text-gray-700">ARID1A和NBN突變提示患者可能對PARP抑制劑 Poly-ADP-Ribose Polymerase 敏感，建議考慮在一線治療失敗後使用。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-blue-100 p-3 rounded-full mr-4 mt-1">
+                            <i class="fa fa-check text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-primary mb-1">臨床試驗</h3>
+                            <p class="text-gray-700">建議患者參與針對MSI-H/dMMR deficient MisMatch Repair 腫瘤或特定突變（如APC、STK11）的臨床試驗。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>    
