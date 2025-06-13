@@ -1,0 +1,26 @@
+plugins = []
+headers = []
+redirects = []
+
+[functions]
+
+[functions."*"]
+
+[build]
+publish = "C:\\projects\\0-VScode-0\\workspce-lkyc-0\\healthmedic\\Disease-illness\\Critical\\Cancer\\tests\\L-SCF\\Pathologies"
+publishOrigin = "default"
+base = "C:\\projects\\0-VScode-0\\workspce-lkyc-0\\healthmedic\\Disease-illness\\Critical\\Cancer\\tests\\L-SCF\\Pathologies"
+
+[build.environment]
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]

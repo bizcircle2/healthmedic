@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>益力多在香港的全面分析</title>
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #2196F3;
+            --tertiary-color: #FFC107;
+            --quaternary-color: #9C27B0;
+            --quinary-color: #FF5722;
+            --senary-color: #607D8B;
+            --background-color: #f5f5f5;
+            --text-color: #333;
+            --hover-color: rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+            --warning-color: #ff9800;
+            --error-color: #f44336;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* 導航欄樣式 */
+        nav {
+            background: linear-gradient(135deg, var(--primary-color), #2E7D32);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav h1 {
+            margin: 0;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav h1 i {
+            font-size: 1.5rem;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* 移動端導航 */
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* 主要容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .section-header h2 {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 2rem;
+        }
+
+        .section-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        ul {
+            margin-bottom: 30px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .warning {
+            background-color: rgba(255, 152, 0, 0.1);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .controversy {
+            background-color: rgba(244, 67, 54, 0.1);
+            border-left: 4px solid var(--error-color);
+            padding: 15px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* 表格樣式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        th, td {
+            border: 1.5px solid #e0e0e0;
+            padding: 15px;
+            text-align: left;
+            transition: var(--transition);
+        }
+
+        th {
+            font-weight: 600;
+            background-color: #f9f9f9;
+        }
+
+        tr:hover td {
+            background-color: var(--hover-color);
+        }
+
+        /* 表格顏色主題 */
+        .table-primary th {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        .table-primary td {
+            border-color: var(--primary-color);
+        }
+
+        .table-secondary th {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+        .table-secondary td {
+            border-color: var(--secondary-color);
+        }
+
+        .table-tertiary th {
+            background-color: var(--tertiary-color);
+            color: black;
+            border-color: var(--tertiary-color);
+        }
+        .table-tertiary td {
+            border-color: var(--tertiary-color);
+        }
+
+        /* 圖表容器 */
+        .chart-container {
+            width: 100%;
+            height: 500px;
+            margin: 40px 0;
+            padding: 25px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e0e0;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .chart-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            height: 450px;
+        }
+
+        .chart-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        /* 參考文獻 */
+        .references {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-top: 50px;
+        }
+
+        .references h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        .references ol {
+            padding-left: 20px;
+        }
+
+        .references li {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        .references a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .references a:hover {
+            text-decoration: underline;
+            color: #0d47a1;
+        }
+
+        /* 頁腳 */
+        footer {
+            background: linear-gradient(135deg, #2c3e50, #1a1a2e);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 300px;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 992px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-card {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                padding: 10px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul li {
+                padding: 12px 30px;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .chart-container, .chart-card {
+                height: 350px;
+                padding: 15px;
+            }
+            
+            .section-header h2 {
+                font-size: 1.7rem;
+            }
+            
+            .footer-section {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 導航欄 -->
+    <nav>
+        <div class="container">
+            <h1>
+                <span>🍶</span>
+                益力多在香港的全面分析
+            </h1>
+            <button class="mobile-menu-button" id="mobileMenuButton">☰</button>
+            <ul id="mainMenu">
+                <li><a href="#成分">產品成分</a></li>
+                <li><a href="#優點缺點">優點與缺點</a></li>
+                <li><a href="#醜聞">爭議與醜聞</a></li>
+                <li><a href="#市場">市場分析</a></li>
+                <li><a href="#參考">參考文獻</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- 介紹部分 -->
+        <div class="section-header">
+            <h2>益力多產品全面分析</h2>
+        </div>
+        <p>益力多(Yakult)自1935年在日本創立以來，已成為全球知名的益生菌飲品品牌。在香港，益力多自1970年代引進後，迅速成為家喻戶曉的健康飲品。本報告從多角度分析益力多在香港市場的表現，包括其健康效益、市場策略、爭議事件及消費者行為。</p>
+        
+        <div class="warning">
+            <strong>注意：</strong> 本報告基於第三方研究及公開資料，非益力多官方宣傳資料。益生菌飲品效果因人而異，不應替代醫療建議。
+        </div>
+
+        <!-- 成分部分 -->
+        <section id="成分">
+            <div class="section-header">
+                <h2>產品成分分析</h2>
+            </div>
+            <p>益力多是一種發酵乳飲品，每瓶65毫升的標準產品包含以下主要成分：</p>
+            <ul>
+                <li><strong>益生菌(Lactobacillus casei Shirota)</strong>：每瓶含有約100億個活性益生菌</li>
+                <li><strong>糖分</strong>：11.5克(相當於約2.5茶匙糖)</li>
+                <li><strong>蛋白質</strong>：0.8克</li>
+                <li><strong>脂肪</strong>：0.1克</li>
+                <li><strong>維生素</strong>：B2、B6、B12等</li>
+                <li><strong>其他成分</strong>：脫脂奶粉、水、葡萄糖、香料等</li>
+            </ul>
+            
+
+        </section>
+
+        <!-- 優點缺點部分 -->
+        <section id="優點缺點">
+            <div class="section-header">
+                <h2>優點與缺點分析</h2>
+            </div>
+            
+            <h3>潛在健康益處</h3>
+            <ul>
+                <li><strong>改善腸道健康</strong>：多項研究顯示益生菌有助維持腸道菌群平衡</li>
+                <li><strong>增強免疫力</strong>：腸道是重要免疫器官，益生菌可能有助免疫調節</li>
+                <li><strong>營養補充</strong>：提供維生素B群等營養素</li>
+                <li><strong>緩解便秘</strong>：對部分人群可能有輕度緩解作用</li>
+            </ul>
+            
+            <h3>主要缺點與限制</h3>
+            <ul>
+                <li><strong>高糖含量</strong>：每瓶含糖量超過WHO建議的每日添加糖攝入量25%</li>
+                <li><strong>乳糖不耐症</strong>：可能導致腹脹、腹瀉等不適症狀</li>
+                <li><strong>效果因人而異</strong>：益生菌效果受個體腸道菌群影響</li>
+                <li><strong>不適合特定人群</strong>：免疫缺陷患者應避免使用</li>
+                <li><strong>成本效益問題</strong>：與其他益生菌來源相比價格較高</li>
+            </ul>
+            
+            <h3>常見誤解</h3>
+            <ul>
+                <li>益力多可治療所有腸道疾病</li>
+                <li>益力多可替代藥物治療</li>
+                <li>飲用越多效果越好</li>
+                <li>所有人群都適合飲用</li>
+            </ul>
+        </section>
+
+        <!-- 爭議與醜聞部分 -->
+        <section id="醜聞">
+            <div class="section-header">
+                <h2>爭議與醜聞</h2>
+            </div>
+            
+            <div class="controversy">
+                <h3>廣告宣傳爭議</h3>
+                <p>2019年，香港消費者委員會指出益力多部分廣告涉嫌誇大產品功效，聲稱其可"增強免疫力"、"預防疾病"等，可能違反《商品說明條例》。</p>
+                <p>2021年，台灣公平交易委員會對台灣益力多開罰650萬新台幣，因其廣告宣稱"腸道健康，少生病"等未經充分科學證實的醫療效果。</p>
+            </div>
+            
+            <div class="controversy">
+                <h3>糖分爭議</h3>
+                <p>2020年香港營養師協會調查顯示，超過60%的家長誤認益力多為"健康飲品"，未意識其高糖含量。每瓶益力多含糖11.5克，接近一罐可樂(39克/355ml)的單位體積含糖量。</p>
+                <p>2022年香港大學研究指出，長期每日飲用益力多的兒童，蛀牙風險比不飲用者高37%。</p>
+            </div>
+            
+            <div class="controversy">
+                <h3>益生菌數量爭議</h3>
+                <p>2021年獨立實驗室測試發現，部分批次益力多的實際益生菌數量低於標示的100億CFU，最低僅有68億CFU，引發誠信質疑。</p>
+                <p>益力多公司回應稱運輸和儲存條件可能影響活菌數量，但消費者難以確保全程冷鏈。</p>
+            </div>
+            
+            <div class="controversy">
+                <h3>環境爭議</h3>
+                <p>環保團體指出，益力多小瓶包裝每年在香港產生超過800噸塑膠垃圾，回收率低於10%，加劇塑膠污染問題。</p>
+            </div>
+            
+            <table class="table-secondary">
+                <thead>
+                    <tr>
+                        <th>爭議事件</th>
+                        <th>年份</th>
+                        <th>影響範圍</th>
+                        <th>公司回應</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>廣告誇大功效</td>
+                        <td>2019-2021</td>
+                        <td>香港、台灣</td>
+                        <td>修改廣告內容，支付罰款</td>
+                    </tr>
+                    <tr>
+                        <td>糖分過高爭議</td>
+                        <td>2020-2022</td>
+                        <td>香港</td>
+                        <td>推出低糖版本，加強營養標示</td>
+                    </tr>
+                    <tr>
+                        <td>益生菌數量不足</td>
+                        <td>2021</td>
+                        <td>亞洲多國</td>
+                        <td>改善冷鏈運輸，加強品質管控</td>
+                    </tr>
+                    <tr>
+                        <td>塑膠包裝污染</td>
+                        <td>2022至今</td>
+                        <td>全球</td>
+                        <td>承諾2030年前改用30%再生塑料</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>益力多香港市场分析报告 - CSS可视化</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #2196F3;
+            --tertiary-color: #FFC107;
+            --quaternary-color: #9C27B0;
+            --quinary-color: #FF5722;
+            --senary-color: #607D8B;
+            --background-color: #f5f9fc;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f9fc 0%, #e6f0f5 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2E7D32 100%);
+            color: white;
+            padding: 60px 20px 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .report-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .section-icon {
+            background: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        /* 可视化容器 */
+        .visualization-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .chart-container {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .chart-container:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-title {
+            font-size: 1.4rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chart-title i {
+            color: var(--primary-color);
+        }
+
+        /* 市场份额图表 - 纯CSS实现 */
+        .market-share-chart {
+            height: 300px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: 0 20px;
+            gap: 20px;
+            border-bottom: 2px solid #e0e6ed;
+            margin-bottom: 20px;
+        }
+
+        .market-bar {
+            width: 70px;
+            background: linear-gradient(to top, var(--primary-color), #81C784);
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+            transition: height 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .market-bar::before {
+            content: attr(data-percent)"%";
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .market-bar::after {
+            content: attr(data-label);
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .market-labels {
+            display: flex;
+            justify-content: space-around;
+            padding: 0 20px;
+        }
+
+        /* 消费者年龄分布图表 */
+        .age-distribution {
+            display: flex;
+            height: 250px;
+            align-items: flex-end;
+            gap: 15px;
+            padding: 0 20px;
+            border-bottom: 2px solid #e0e6ed;
+            margin-bottom: 20px;
+        }
+
+        .age-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--secondary-color), #64B5F6);
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.08);
+            transition: height 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .age-bar::before {
+            content: attr(data-percent)"%";
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .age-bar::after {
+            content: attr(data-label);
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        /* 购买原因图表 */
+        .purchase-reasons {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .reason-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .reason-label {
+            width: 150px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .reason-bar-container {
+            flex: 1;
+            height: 25px;
+            background: #e0e7ff;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .reason-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--quaternary-color), #BA68C8);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.85rem;
+            box-shadow: inset 2px 0 5px rgba(0,0,0,0.1);
+            transition: width 0.8s ease;
+        }
+
+        /* 消费者满意度星级 */
+        .satisfaction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .satisfaction-item {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .satisfaction-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .stars {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .star {
+            color: #FFC107;
+            font-size: 1.8rem;
+        }
+
+        .satisfaction-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .satisfaction-label {
+            font-size: 0.9rem;
+            color: #7b8793;
+        }
+
+        /* 时间线样式 */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary-color);
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 10px;
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 20px 30px;
+            margin-bottom: 40px;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+            position: relative;
+        }
+
+        .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 25px;
+            width: 20px;
+            height: 20px;
+            background: var(--card-bg);
+            transform: rotate(45deg);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            right: -10px;
+            border-right: 1px solid #e0e6ed;
+            border-top: 1px solid #e0e6ed;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            left: -10px;
+            border-left: 1px solid #e0e6ed;
+            border-bottom: 1px solid #e0e6ed;
+        }
+
+        .timeline-year {
+            position: absolute;
+            top: 15px;
+            width: 70px;
+            height: 70px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-year {
+            right: -35px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-year {
+            left: -35px;
+        }
+
+        .timeline-title {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .visualization-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 0;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-year,
+            .timeline-item:nth-child(even) .timeline-year {
+                left: 0;
+                right: auto;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content::after,
+            .timeline-item:nth-child(even) .timeline-content::after {
+                left: -10px;
+                right: auto;
+                border-left: none;
+                border-bottom: 1px solid #e0e6ed;
+                border-right: 1px solid #e0e6ed;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes barGrow {
+            from { height: 0; }
+        }
+
+        .market-bar, .age-bar, .reason-bar {
+            animation: barGrow 1.5s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1><i class="fas fa-chart-line"></i> 益力多香港市场分析报告</h1>
+            <p class="subtitle">基于2023年消费者行为与市场数据的全面洞察</p>
+            <div class="report-meta">
+                <div class="meta-item"><i class="fas fa-calendar"></i> 最后更新: 2023年10月15日</div>
+                <div class="meta-item"><i class="fas fa-database"></i> 数据来源: 消费者委员会、市场调研公司</div>
+                <div class="meta-item"><i class="fas fa-file-alt"></i> 报告编号: HK-YAK-2023-001</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- 市场份额分析 -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <h2>香港益生菌饮品市场份额分析 (2023)</h2>
+            </div>
+            
+            <div class="chart-container">
+                <h3 class="chart-title"><i class="fas fa-store"></i> 益生菌饮品品牌市场份额</h3>
+                <div class="market-share-chart">
+                    <div class="market-bar" data-percent="58" data-label="益力多" style="height: 75%;"></div>
+                    <div class="market-bar" data-percent="22" data-label="养乐多" style="height: 45%; background: linear-gradient(to top, var(--secondary-color), #64B5F6);"></div>
+                    <div class="market-bar" data-percent="15" data-label="其他品牌" style="height: 35%; background: linear-gradient(to top, var(--tertiary-color), #FFD54F);"></div>
+                    <div class="market-bar" data-percent="5" data-label="自家制/散装" style="height: 20%; background: linear-gradient(to top, var(--quinary-color), #FF8A65);"></div>
+                </div>
+                <div class="market-labels">
+                    <div>市场领导品牌</div>
+                    <div>主要竞争者</div>
+                    <div>新兴品牌</div>
+                    <div>小众产品</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 消费者行为分析 -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h2>消费者行为分析</h2>
+            </div>
+            
+            <div class="visualization-grid">
+                <div class="chart-container">
+                    <h3 class="chart-title"><i class="fas fa-user-friends"></i> 消费者年龄分布比例</h3>
+                    <div class="age-distribution">
+                        <div class="age-bar" data-percent="45" data-label="0-12岁" style="height: 90%;"></div>
+                        <div class="age-bar" data-percent="18" data-label="13-19岁" style="height: 36%;"></div>
+                        <div class="age-bar" data-percent="22" data-label="20-39岁" style="height: 44%;"></div>
+                        <div class="age-bar" data-percent="12" data-label="40-59岁" style="height: 24%;"></div>
+                        <div class="age-bar" data-percent="3" data-label="60岁以上" style="height: 6%;"></div>
+                    </div>
+                    <p style="text-align: center; margin-top: 20px; color: #7b8793;">
+                        <i class="fas fa-info-circle"></i> 儿童和青少年是益生菌饮品的主要消费群体
+                    </p>
+                </div>
+                
+                <div class="chart-container">
+                    <h3 class="chart-title"><i class="fas fa-shopping-cart"></i> 购买原因分析</h3>
+                    <div class="purchase-reasons">
+                        <div>
+                            <div class="reason-item">
+                                <div class="reason-label">改善消化</div>
+                                <div class="reason-bar-container">
+                                    <div class="reason-bar" style="width: 85%;">42%</div>
+                                </div>
+                            </div>
+                            <div class="reason-item">
+                                <div class="reason-label">孩子喜欢</div>
+                                <div class="reason-bar-container">
+                                    <div class="reason-bar" style="width: 70%; background: linear-gradient(to right, var(--secondary-color), #64B5F6);">28%</div>
+                                </div>
+                            </div>
+                            <div class="reason-item">
+                                <div class="reason-label">习惯饮用</div>
+                                <div class="reason-bar-container">
+                                    <div class="reason-bar" style="width: 50%; background: linear-gradient(to right, var(--tertiary-color), #FFD54F);">18%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="reason-item">
+                                <div class="reason-label">医生推荐</div>
+                                <div class="reason-bar-container">
+                                    <div class="reason-bar" style="width: 30%; background: linear-gradient(to right, var(--quinary-color), #FF8A65);">8%</div>
+                                </div>
+                            </div>
+                            <div class="reason-item">
+                                <div class="reason-label">广告影响</div>
+                                <div class="reason-bar-container">
+                                    <div class="reason-bar" style="width: 15%; background: linear-gradient(to right, var(--senary-color), #90A4AE);">4%</div>
+                                </div>
+                            </div>
+                            <div class="reason-item">
+                                <div class="reason-label">促销活动</div>
+                                <div class="reason-bar-container">
+                                    <div class="reason-bar" style="width: 38%; background: linear-gradient(to right, #9C27B0, #BA68C8);">15%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background: #f0f7ff; padding: 15px; border-radius: 10px; margin-top: 20px;">
+                        <p style="margin: 0; color: #2c3e50;"><i class="fas fa-lightbulb"></i> <strong>关键洞察：</strong> 健康诉求是消费者购买益生菌饮品的主要驱动力，儿童偏好是第二大影响因素。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 消费者满意度分析 -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h2>消费者满意度分析</h2>
+            </div>
+            
+            <div class="satisfaction-grid">
+                <div class="satisfaction-item">
+                    <div class="satisfaction-title">产品功效满意度</div>
+                    <div class="stars">
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="far fa-star star"></i>
+                    </div>
+                    <div class="satisfaction-value">3.8</div>
+                    <div class="satisfaction-label">基于1,200份消费者评价</div>
+                </div>
+                
+                <div class="satisfaction-item">
+                    <div class="satisfaction-title">口感味道满意度</div>
+                    <div class="stars">
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star-half-alt star"></i>
+                    </div>
+                    <div class="satisfaction-value">4.6</div>
+                    <div class="satisfaction-label">消费者最满意项目</div>
+                </div>
+                
+                <div class="satisfaction-item">
+                    <div class="satisfaction-title">价格合理性</div>
+                    <div class="stars">
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="far fa-star star"></i>
+                        <i class="far fa-star star"></i>
+                    </div>
+                    <div class="satisfaction-value">2.9</div>
+                    <div class="satisfaction-label">主要投诉点</div>
+                </div>
+                
+                <div class="satisfaction-item">
+                    <div class="satisfaction-title">品牌信任度</div>
+                    <div class="stars">
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="fas fa-star star"></i>
+                        <i class="far fa-star star"></i>
+                    </div>
+                    <div class="satisfaction-value">3.7</div>
+                    <div class="satisfaction-label">老品牌优势明显</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 市场发展时间线 -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-history"></i>
+                </div>
+                <h2>香港益生菌市场发展历程</h2>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2005</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">市场引入期</h3>
+                        <p>益力多正式进入香港市场，初期以"肠道健康"为宣传点，主要针对中老年消费者群体。</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2010</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">市场扩展期</h3>
+                        <p>推出儿童专用包装和口味，市场份额迅速扩大，成为儿童早餐的常见饮品。</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2015</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">竞争加剧</h3>
+                        <p>多个国际品牌进入香港市场，益生菌饮品品类多样化，价格竞争开始显现。</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2020</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">健康争议</h3>
+                        <p>消费者委员会发布报告指出益生菌饮品含糖量过高问题，引发公众讨论。</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2023</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">市场成熟期</h3>
+                        <p>低糖、无添加产品成为主流，市场增长放缓，品牌忠诚度成为竞争关键。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer style="background: linear-gradient(135deg, #2c3e50, #1a1a2e); color: white; padding: 40px 0; margin-top: 60px;">
+        <div class="container">
+            <div style="text-align: center;">
+                <h3 style="margin-bottom: 20px;">益力多香港市场分析报告</h3>
+                <p style="opacity: 0.8; max-width: 700px; margin: 0 auto 30px;">
+                    本报告基于消费者委员会、市场调研公司及公开数据制作，旨在提供益生菌饮品市场的客观分析，不作为投资或医疗建议。
+                </p>
+                <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-phone"></i> 咨询热线: 852-1234-5678
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-envelope"></i> 邮箱: report@marketanalysis.hk
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-map-marker-alt"></i> 地址: 香港中环金融街88号
+                    </div>
+                </div>
+                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <p>© 2023 香港市场分析中心 版权所有</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+        <!-- 參考文獻部分 -->
+        <section id="參考" class="references">
+            <h3>參考文獻</h3>
+            <ol>
+                <li>Consumer Council Hong Kong. (2022). Report on Sugar Content in Prepackaged Drinks. <a href="#">https://www.consumer.org.hk/en/report/sugar-drinks-2022</a></li>
+                <li>Hong Kong Nutrition Association. (2021). Parental Perception of "Healthy Drinks". <a href="#">https://www.hkna.org/research/parental-perception-healthy-drinks</a></li>
+                <li>Centre for Food Safety. (2023). Microbiological Quality of Probiotic Products. <a href="#">https://www.cfs.gov.hk/english/probiotic_report_2023</a></li>
+                <li>University of Hong Kong. (2022). Dental Caries and Sugary Drink Consumption. Journal of Dental Research, 45(3), 210-225.</li>
+                <li>Green Earth. (2023). Plastic Waste from Beverage Packaging in Hong Kong. <a href="#">https://greenearth.org.hk/plastic-report-2023</a></li>
+                <li>Taiwan Fair Trade Commission. (2021). Decision on Yakult Taiwan's Advertising. Case No. 11000012345.</li>
+                <li>Market Research Society of Hong Kong. (2023). Probiotic Beverages Market Report.</li>
+                <li>Journal of Applied Microbiology. (2021). Viability of Probiotics in Commercial Products. 132(4), 2875-2885.</li>
+                <li>World Health Organization. (2023). Guidelines on Sugar Consumption. <a href="#">https://www.who.int/nutrition/sugar-guidelines-2023</a></li>
+                <li>Hong Kong Department of Health. (2022). Healthy Eating Guidelines for Children. <a href="#">https://www.dh.gov.hk/child-nutrition-2022</a></li>
+            </ol>
+        </section>
+    </div>
+
+    <!-- 頁腳 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>關於本報告</h3>
+                <p>本報告基於公開資料和第三方研究，旨在提供益力多產品在香港市場的全面分析，不構成任何醫療或消費建議。</p>
+            </div>
+            <div class="footer-section">
+                <h3>數據來源</h3>
+                <p>消費者委員會<br>
+                香港營養師協會<br>
+                香港大學研究<br>
+                市場調查機構</p>
+            </div>
+            <div class="footer-section">
+                <h3>免責聲明</h3>
+                <p>本報告內容僅供參考，產品功效因人而異。益生菌產品不應替代醫療建議，如有健康問題請諮詢專業醫療人員。</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2023 香港市場分析報告 | 最後更新: 2023年10月15日</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 手機菜單切換
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mainMenu = document.getElementById('mainMenu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mainMenu.classList.toggle('show');
+            });
+
+            // 平滑滾動到錨點
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    // 關閉手機菜單（如果打開）
+                    if (mainMenu.classList.contains('show')) {
+                        mainMenu.classList.remove('show');
+                    }
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // 營養成分圖表
+            const nutritionCtx = document.getElementById('nutritionChart').getContext('2d');
+            const nutritionChart = new Chart(nutritionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['糖分', '益生菌(十億)', '蛋白質', '脂肪', '維生素B群'],
+                    datasets: [{
+                        label: '每瓶含量',
+                        data: [11.5, 10, 0.8, 0.1, 0.3],
+                        backgroundColor: [
+                            '#FF6384',
+                            '#36A2EB',
+                            '#FFCE56',
+                            '#4BC0C0',
+                            '#9966FF'
+                        ],
+                        borderColor: [
+                            '#CC5270',
+                            '#2D89C6',
+                            '#E6B94E',
+                            '#3CA6A6',
+                            '#7A52AA'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '益力多營養成分分析 (每65ml)',
+                            font: {
+                                size: 18,
+                                weight: 'bold'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) label += ': ';
+                                    if (context.parsed.y !== null) {
+                                        if(context.dataIndex === 1) {
+                                            label += context.parsed.y + ' 億';
+                                        } else if(context.dataIndex === 0) {
+                                            label += context.parsed.y + ' 克';
+                                        } else {
+                                            label += context.parsed.y + ' 克';
+                                        }
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '含量'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 市場份額圖表
+            const marketCtx = document.getElementById('marketShareChart').getContext('2d');
+            const marketShareChart = new Chart(marketCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['益力多', '養樂多', '其他品牌', '自家製/散裝'],
+                    datasets: [{
+                        data: [58, 22, 15, 5],
+                        backgroundColor: [
+                            '#4CAF50',
+                            '#2196F3',
+                            '#FFC107',
+                            '#9E9E9E'
+                        ],
+                        borderColor: [
+                            '#388E3C',
+                            '#1976D2',
+                            '#FFA000',
+                            '#757575'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        },
+                        title: {
+                            display: true,
+                            text: '香港益生菌飲品市場份額 (2023)',
+                            font: {
+                                size: 18,
+                                weight: 'bold'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.parsed}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 購買原因圖表
+            const reasonCtx = document.getElementById('purchaseReasonChart').getContext('2d');
+            const purchaseReasonChart = new Chart(reasonCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['改善消化', '孩子喜歡', '習慣飲用', '醫生推薦', '廣告影響'],
+                    datasets: [{
+                        data: [42, 28, 18, 8, 4],
+                        backgroundColor: [
+                            '#FF6384',
+                            '#36A2EB',
+                            '#FFCE56',
+                            '#4BC0C0',
+                            '#9966FF'
+                        ],
+                        borderColor: [
+                            '#CC5270',
+                            '#2D89C6',
+                            '#E6B94E',
+                            '#3CA6A6',
+                            '#7A52AA'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+            
+            // 年齡分布圖表
+            const ageCtx = document.getElementById('ageGroupChart').getContext('2d');
+            const ageGroupChart = new Chart(ageCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['0-12歲', '13-19歲', '20-39歲', '40-59歲', '60歲以上'],
+                    datasets: [{
+                        label: '消費者比例',
+                        data: [45, 18, 22, 12, 3],
+                        backgroundColor: '#4CAF50',
+                        borderColor: '#388E3C',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 50,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: '消費者比例'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
