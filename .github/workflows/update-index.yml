@@ -1,0 +1,37 @@
+name: Update Index Page
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Update index.html
+      run: |
+        # Create a header
+        echo "<!DOCTYPE html><html><head><title>HealthMedic Index</title></head><body><h1>HealthMedic Content Index</h1><ul>" > index.html
+        
+        # Find all HTML files (excluding index.html) and add links
+        find . -name "*.html" ! -name "index.html" | sort | while read file; do
+          # Remove leading ./
+          file="${file#./}"
+          # Create link text (replace dashes/underscores with spaces and capitalize)
+          link_text=$(basename "$file" .html | tr '-' ' ' | tr '_' ' ' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) substr($i,2)}1')
+          echo "<li><a href=\"$file\">$link_text</a></li>" >> index.html
+        done
+        
+        # Add footer
+        echo "</ul><p>Last updated: $(date)</p></body></html>" >> index.html
+
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add index.html
+        git commit -m "Update index.html with new files" || echo "No changes to commit"
+        git push
