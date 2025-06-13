@@ -1,5 +1,4 @@
 name: Update Index Page
-
 on:
   push:
     branches: [ main ]
@@ -11,27 +10,62 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Update index.html
+    - name: Generate index.html
       run: |
-        # Create a header
-        echo "<!DOCTYPE html><html><head><title>HealthMedic Index</title></head><body><h1>HealthMedic Content Index</h1><ul>" > index.html
+        # List all HTML files except index.html
+        html_files=$(find . -type f -name "*.html" | grep -v "index.html" | sort)
         
-        # Find all HTML files (excluding index.html) and add links
-        find . -name "*.html" ! -name "index.html" | sort | while read file; do
-          # Remove leading ./
-          file="${file#./}"
-          # Create link text (replace dashes/underscores with spaces and capitalize)
-          link_text=$(basename "$file" .html | tr '-' ' ' | tr '_' ' ' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) substr($i,2)}1')
-          echo "<li><a href=\"$file\">$link_text</a></li>" >> index.html
+        # Create header for index.html
+        cat > index.html << 'EOF'
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>HealthMedic Site Map</title>
+          <style>
+            body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+            h1 { color: #333; }
+            ul { list-style-type: none; padding: 0; }
+            li { margin: 10px 0; }
+            a { text-decoration: none; color: #0066cc; transition: color 0.2s; }
+            a:hover { color: #0044aa; }
+            .file-path { color: #666; font-size: 0.9em; }
+          </style>
+        </head>
+        <body>
+          <h1>HealthMedic Site Map</h1>
+          <ul>
+        EOF
+        
+        # Add links for each HTML file
+        for file in $html_files; do
+          # Format file name (remove .html and convert to title case)
+          file_name=$(basename "$file" .html)
+          title=$(echo "$file_name" | sed 's/_/ /g' | awk '{for(i=1;i<=NF;i++){sub(/^./,toupper(substr($i,1,1)),$i)}}1')
+          
+          # Add link to index.html
+          echo "            <li><a href=\"$file\">$title</a><br><span class=\"file-path\">$file</span></li>" >> index.html
         done
         
-        # Add footer
-        echo "</ul><p>Last updated: $(date)</p></body></html>" >> index.html
+        # Close index.html
+        cat >> index.html << 'EOF'
+          </ul>
+        </body>
+        </html>
+        EOF
+        
+        # Print the generated index.html for debugging
+        echo "Generated index.html content:"
+        cat index.html
 
     - name: Commit changes
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add index.html
-        git commit -m "Update index.html with new files" || echo "No changes to commit"
-        git push
+        # Check if index.html was modified
+        if git diff --quiet index.html; then
+          echo "No changes to index.html, skipping commit."
+        else
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add index.html
+          git commit -m "Update index.html sitemap" || true
+          git push
+        fi
