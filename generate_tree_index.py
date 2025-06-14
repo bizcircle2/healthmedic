@@ -1,55 +1,60 @@
 import os
 
-def walk_dir(root):
-    tree = []
-    for entry in sorted(os.listdir(root)):
-        path = os.path.join(root, entry)
-        # Exclude .git, .vscode, etc.
-        if entry.startswith("."):
-            continue
-        if os.path.isdir(path):
-            tree.append({
-                'type': 'dir',
-                'name': entry,
-                'children': walk_dir(path)
+def scan_dir(path, rel_path=""):
+    items = []
+    for name in sorted(os.listdir(path)):
+        if name.startswith('.'):
+            continue  # skip hidden files/folders
+        full_path = os.path.join(path, name)
+        rel_item_path = os.path.join(rel_path, name) if rel_path else name
+        if os.path.isdir(full_path):
+            items.append({
+                "type": "dir",
+                "name": name,
+                "rel_path": rel_item_path + '/',
+                "children": scan_dir(full_path, rel_item_path)
             })
-        elif entry.endswith('.html'):
-            tree.append({
-                'type': 'file',
-                'name': entry,
-                'path': os.path.relpath(path)
-            })
-    return tree
-
-def render_tree(tree, parent_path=""):
-    html = "<ul>"
-    for node in tree:
-        if node['type'] == 'dir':
-            html += f"<li><strong>{node['name']}/</strong>{render_tree(node['children'], os.path.join(parent_path, node['name']))}</li>"
         else:
-            url = os.path.join(parent_path, node['name']).replace("\\", "/")
-            html += f'<li><a href="{url}">{node["name"]}</a></li>'
-    html += "</ul>"
+            items.append({
+                "type": "file",
+                "name": name,
+                "rel_path": rel_item_path
+            })
+    return items
+
+def render_tree(items):
+    html = "<ul>\n"
+    for item in items:
+        if item["type"] == "dir":
+            html += f'  <li><details><summary>📁 <a href="{item["rel_path"]}">{item["name"]}/</a></summary>\n'
+            html += render_tree(item["children"])
+            html += "  </details></li>\n"
+        else:
+            html += f'  <li>📄 <a href="{item["rel_path"]}">{item["name"]}</a></li>\n'
+    html += "</ul>\n"
     return html
 
-tree = walk_dir(".")
-html_tree = render_tree(tree)
+tree = scan_dir(".")
 
 with open("index.html", "w", encoding="utf-8") as f:
-    f.write(f"""<!DOCTYPE html>
-<html>
+    f.write("""<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>HealthMedic Site Map</title>
-    <style>
-        ul {{ list-style-type: none; }}
-        li {{ margin-left: 1em; }}
-        strong {{ cursor: pointer; }}
-    </style>
+  <meta charset="UTF-8">
+  <title>Project Index</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    ul { list-style-type: none; }
+    summary { cursor: pointer; }
+    a { text-decoration: none; color: #0055aa; }
+    a:hover { text-decoration: underline; }
+  </style>
 </head>
 <body>
-    <h1>HealthMedic Site Map</h1>
-    {html_tree}
+  <h1>Project Directory Index</h1>
+""")
+    f.write(render_tree(tree))
+    f.write("""
 </body>
 </html>
 """)
