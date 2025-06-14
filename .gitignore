@@ -4,4 +4,13 @@ __pycache__/
 *.pyo
 *.pyd
 .DS_Store
+<<<<<<< HEAD
 *.swp
+=======
+*.swp
+env-env/
+.env
+*.log
+*.bat
+*.txt
+>>>>>>> master
