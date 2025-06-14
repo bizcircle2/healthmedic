@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基因清單與骨肉瘤關聯性對比表</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36D399',
+                        danger: '#F87272',
+                        warning: '#FBBD23',
+                        info: '#3ABFF8',
+                        neutral: '#3D4451',
+                        'neutral-content': '#F2F7FF',
+                        'base-100': '#FFFFFF',
+                        'base-200': '#F2F7FF',
+                        'base-300': '#E5E9F2',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .table-hover-effect {
+                @apply transition-all duration-200 hover:bg-primary/5 hover:shadow-md;
+            }
+            .badge-status {
+                @apply px-2.5 py-0.5 rounded-full text-xs font-medium;
+            }
+            .tooltip-trigger {
+                @apply relative cursor-help;
+            }
+            .tooltip-content {
+                @apply invisible absolute z-50 bg-neutral text-white text-xs rounded py-1 px-2 -mt-10 left-1/2 transform -translate-x-1/2 opacity-0 transition-opacity duration-200;
+            }
+            .tooltip-trigger:hover .tooltip-content {
+                @apply visible opacity-100;
+            }
+            .fade-in {
+                animation: fadeIn 0.5s ease-in-out;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        }
+    </style>
+</head>
+<body class="bg-base-200 font-sans text-neutral">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <!-- 頁面標題 -->
+        <header class="mb-8 text-center fade-in">
+            <h1 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-primary mb-2">基因清單與骨肉瘤關聯性對比表</h1>
+            <p class="text-neutral/70 max-w-3xl mx-auto">分析兩份癌症基因清單中的基因突變與誘導相關骨肉瘤的關聯性，並提供科學解釋</p>
+        </header>
+
+        <!-- 控制面板 -->
+        <div class="bg-white rounded-xl shadow-md p-4 mb-6 fade-in" style="animation-delay: 0.1s">
+            <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <div class="relative">
+                        <input type="text" id="search-input" placeholder="搜尋基因名稱..." 
+                            class="pl-10 pr-4 py-2 rounded-lg border border-base-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all w-full md:w-64">
+                        <i class="fa fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral/50"></i>
+                    </div>
+                    <div class="flex gap-2">
+                        <button id="btn-reset" class="px-4 py-2 bg-base-200 hover:bg-base-300 rounded-lg transition-colors">
+                            <i class="fa fa-refresh mr-1"></i>重置
+                        </button>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <div class="relative inline-block text-left">
+                        <button id="filter-btn" class="px-4 py-2 bg-base-200 hover:bg-base-300 rounded-lg transition-colors flex items-center gap-1">
+                            <i class="fa fa-filter mr-1"></i>篩選
+                            <i class="fa fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="filter-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-10">
+                            <div class="py-1">
+                                <a href="#" class="block px-4 py-2 text-sm hover:bg-base-200 filter-option" data-value="all">全部</a>
+                                <a href="#" class="block px-4 py-2 text-sm hover:bg-base-200 filter-option" data-value="high">高度相關</a>
+                                <a href="#" class="block px-4 py-2 text-sm hover:bg-base-200 filter-option" data-value="partial">部分相關</a>
+                                <a href="#" class="block px-4 py-2 text-sm hover:bg-base-200 filter-option" data-value="weak">弱相關</a>
+                                <a href="#" class="block px-4 py-2 text-sm hover:bg-base-200 filter-option" data-value="indirect">間接相關</a>
+                                <a href="#" class="block px-4 py-2 text-sm hover:bg-base-200 filter-option" data-value="pending">待驗證</a>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="expand-all" class="px-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors">
+                        <i class="fa fa-plus-square-o mr-1"></i>展開全部
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 表格區域 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden fade-in" style="animation-delay: 0.2s">
+            <div class="overflow-x-auto">
+                <table class="w-full" id="gene-table">
+                    <thead>
+                        <tr class="bg-primary/10 text-primary">
+                            <th class="px-6 py-4 text-left font-semibold">基因/變異</th>
+                            <th class="px-6 py-4 text-left font-semibold">2025-05-21 清單</th>
+                            <th class="px-6 py-4 text-left font-semibold">2022-12-29 清單</th>
+                            <th class="px-6 py-4 text-left font-semibold">骨肉瘤關聯性</th>
+                            <th class="px-6 py-4 text-left font-semibold">關聯性解釋</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="partial">
+                            <td class="px-6 py-4 font-medium">APC T1445fs*10</td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-warning/20 text-warning">部分相關</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">APC基因主要與結直腸癌相關，但其突變可能通過Wnt信號通路異常參與骨肉瘤發生，不過相關性低於經典骨肉瘤基因。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>APC是一種抑癌基因，正常功能是調節β-catenin蛋白水平，抑制Wnt信號通路過度活化。</p>
+                                    <p>突變導致β-catenin積累，激活下游靶基因表達，促進細胞增殖與存活。</p>
+                                    <p>在骨肉瘤中，APC突變較少見，但可能與其他驅動突變協同作用。</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="pending">
+                            <td class="px-6 py-4 font-medium">ADAMTS18 R1047*</td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-neutral/20 text-neutral">待驗證</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">ADAMTS18屬於細胞外基質調節因子，其突變在少數骨肉瘤研究中被提及，但具體誘導機制尚不明確。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>ADAMTS18編碼一種分泌型金屬蛋白酶，參與降解細胞外基質成分。</p>
+                                    <p>功能缺失突變可能影響基質重塑與細胞粘附，促進腫瘤細胞浸潤與轉移。</p>
+                                    <p>目前僅在少數骨肉瘤全基因組測序研究中發現突變，需更多功能實驗驗證。</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="weak">
+                            <td class="px-6 py-4 font-medium">ATRX E1639*</td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-info/20 text-info">弱相關</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">ATRX參與染色質重塑，突變常見於其他惡性腫瘤（如神經膠質瘤），骨肉瘤中檢出率較低。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>ATRX與DAXX形成複合物，介導組蛋白H3.3在端粒區域的沉積，維持染色質結構穩定。</p>
+                                    <p>突變導致端粒長度異常（ALT表型），促進基因組不穩定性。</p>
+                                    <p>在骨肉瘤中，ATRX突變率約為5-10%，多見於複雜核型骨肉瘤亞型。</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="indirect">
+                            <td class="px-6 py-4 font-medium">B2M S16fs/B2M L15fs</td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-info/20 text-info">間接相關</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">B2M參與MHC I類分子表達，突變可能影響免疫監視，與骨肉瘤的免疫逃逸相關，但非直接誘導基因。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>B2微球蛋白是MHC I類分子的組成部分，負責抗原肽呈遞給CD8+ T細胞。</p>
+                                    <p>突變導致MHC I類分子表達缺失，使腫瘤細胞逃避免疫系統攻擊。</p>
+                                    <p>在骨肉瘤中，B2M突變與免疫治療抵抗相關，但不直接驅動腫瘤發生。</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="high">
+                            <td class="px-6 py-4 font-medium">CDKN2A D74N/CDKN2A A68V</td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-secondary/20 text-secondary">高度相關</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">CDKN2A編碼p16INK4A，是重要的細胞週期抑制因子，其突變導致細胞增殖失控，是骨肉瘤中最常見的抑癌基因突變之一。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>p16INK4A抑制CDK4/6活性，阻止Rb蛋白磷酸化，使細胞停留在G1期。</p>
+                                    <p>突變或缺失導致CDK4/6過度活化，Rb失活，細胞週期檢查點功能喪失。</p>
+                                    <p>在骨肉瘤中，CDKN2A缺失或突變率高達50-70%，是骨肉瘤發生的早期關鍵事件。</p>
+                                    <p>臨床研究顯示，CDKN2A異常與骨肉瘤患者預後不良相關。</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="weak">
+                            <td class="px-6 py-4 font-medium">DNMT3A V60fs*5</td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-info/20 text-info">弱相關</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">DNMT3A參與DNA甲基化，突變常見於血液系統惡性腫瘤，骨肉瘤中罕見直接關聯報導。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>DNMT3A是一種DNA甲基轉移酶，負責建立胚胎髮育過程中的新甲基化模式。</p>
+                                    <p>突變導致全基因組低甲基化和特定基因啓動子高甲基化，影響基因表達。</p>
+                                    <p>主要在急性髓系白血病中發現頻繁突變，在固體腫瘤中罕見，骨肉瘤中的作用尚不清楚。</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="pending">
+                            <td class="px-6 py-4 font-medium">FH G210*</td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-neutral/20 text-neutral">待驗證</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">FH參與三羧酸循環，突變與遺傳性平滑肌瘤病和腎細胞癌相關，骨肉瘤中相關性數據不足。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>FH（延胡索酸水合酶）催化延胡索酸轉化為蘋果酸，是三羧酸循環的關鍵酶。</p>
+                                    <p>突變導致延胡索酸積累，誘發假性低氧反應和DNA損傷。</p>
+                                    <p>在骨肉瘤中鮮有報導，需更多研究確定其作用。</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="weak">
+                            <td class="px-6 py-4 font-medium">GNAS R201H</td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-times text-danger"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-info/20 text-info">弱相關</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">GNAS編碼G蛋白α亞基，突變常見於甲狀旁腺功能亢進等疾病，骨肉瘤中僅有零星案例報導。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>GNAS突變導致Gsα蛋白持續活化，激活腺苷酸環化酶，升高cAMP水平。</p>
+                                    <p>最常見於McCune-Albright綜合征和甲狀旁腺腺瘤。</p>
+                                    <p>在骨肉瘤中，僅有個別案例報導GNAS突變，可能與骨過度增生表型相關。</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="pending">
+                            <td class="px-6 py-4 font-medium">MED12 G44S</td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-neutral/20 text-neutral">待驗證</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">MED12參與轉錄調節，突變與多種間葉組織腫瘤相關，但在骨肉瘤中的誘導作用需進一步研究。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>MED12是介體複合物的亞基，調節RNA聚合酶II的活性和基因轉錄起始。</p>
+                                    <p>突變常見於子宮平滑肌瘤、乳腺癌和前列腺癌。</p>
+                                    <p>在骨肉瘤中的功能研究有限，可能通過影響生長因子信號通路參與腫瘤發生。</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="indirect">
+                            <td class="px-6 py-4 font-medium">MLH1 T237fs*2</td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-info/20 text-info">間接相關</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">MLH1屬於DNA錯配修復基因，突變導致微衛星不穩定性，與遺傳性非息肉病性結直腸癌相關，骨肉瘤中多為散發性突變，相關性低。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>MLH1與PMS2形成複合物，參與DNA複製過程中的錯配修復。</p>
+                                    <p>突變導致微衛星不穩定（MSI）表型，增加基因組突變負荷。</p>
+                                    <p>在骨肉瘤中，MSI現象罕見，MLH1突變多為散發性，與腫瘤誘導的直接關係不明確。</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="indirect">
+                            <td class="px-6 py-4 font-medium">NBN R466fs*18</td>
+                            <td class="px-6 py-4"><i class="fa fa-times text-danger"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-info/20 text-info">間接相關</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">NBN參與DNA損傷修復，突變與范可尼貧血等疾病相關，骨肉瘤中可能通過基因組不穩定性間接促進腫瘤發生。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>NBN（NBS1）是MRN複合物的組成部分，參與DNA雙鏈斷裂的感知和修復。</p>
+                                    <p>突變導致對DNA損傷的反應缺陷，增加基因組不穩定性。</p>
+                                    <p>胚系突變與尼曼-匹克病C型（Nijmegen breakage syndrome）相關，患者患癌風險升高，但在散發性骨肉瘤中突變率低於5%。</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="weak">
+                            <td class="px-6 py-4 font-medium">RNF43 R117fs*41</td>
+                            <td class="px-6 py-4"><i class="fa fa-times text-danger"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-info/20 text-info">弱相關</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">RNF43是Wnt通路抑制因子，突變可能激活Wnt信號，在少數骨肉瘤樣本中檢出，但非關鍵驅動基因。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>RNF43是一種E3泛素連接酶，通過泛素化和降解Frizzled受體抑制Wnt信號。</p>
+                                    <p>功能缺失突變導致Wnt通路持續激活，促進細胞增殖。</p>
+                                    <p>在骨肉瘤中，RNF43突變率低於10%，可能與APC突變協同作用，但非主要驅動事件。</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="weak">
+                            <td class="px-6 py-4 font-medium">RNF43 G659fs*41</td>
+                            <td class="px-6 py-4"><i class="fa fa-times text-danger"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-info/20 text-info">弱相關</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">同RNF43 R117fs*41，突變機制相似，相關性需更多數據支持。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>與RNF43 R117fs*41同屬功能缺失突變，導致Wnt通路抑制功能喪失。</p>
+                                    <p>具體在骨肉瘤中的作用機制尚未完全闡明，可能與腫瘤微環境或免疫逃逸相關。</p>
+                                    <p>需要更大規模的研究驗證其作為治療靶點的潛力。</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="pending">
+                            <td class="px-6 py-4 font-medium">SGK1 Y298fs*13</td>
+                            <td class="px-6 py-4"><i class="fa fa-times text-danger"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-neutral/20 text-neutral">待驗證</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">SGK1參與細胞存活信號，突變在骨肉瘤中的功能研究甚少，目前缺乏明確誘導證據。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>SGK1（血清和糖皮質激素誘導激酶1）調節離子通道、轉運蛋白和凋亡相關蛋白。</p>
+                                    <p>激活PI3K/AKT通路下游的存活信號，促進細胞增殖和抵抗凋亡。</p>
+                                    <p>在骨肉瘤中，SGK1表達水平與預後不良相關，但突變功能研究有限。</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="partial">
+                            <td class="px-6 py-4 font-medium">SMO P694fs*82</td>
+                            <td class="px-6 py-4"><i class="fa fa-times text-danger"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-warning/20 text-warning">部分相關</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">SMO是Hedgehog信號通路關鍵分子，其突變可能驅動少數骨肉瘤（尤其是原發性骨惡性腫瘤）的發生。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>SMO（Smoothened）是一種G蛋白偶聯受體，介導Hedgehog信號通路的激活。</p>
+                                    <p>突變導致配體非依賴性激活，持續促進Gli轉錄因子核轉位和靶基因表達。</p>
+                                    <p>在基底細胞癌和髓母細胞瘤中常見突變，骨肉瘤中突變率約為5-10%，但可能代表特定亞型。</p>
+                                    <p>臨床試驗正在評估SMO抑制劑對Hedgehog通路激活骨肉瘤的療效。</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="indirect">
+                            <td class="px-6 py-4 font-medium">STK11 L282fs*3</td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-info/20 text-info">間接相關</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">STK11編碼AMPK激酶，參與能量代謝調節，突變與Peutz-Jeghers綜合征相關，骨肉瘤中多為次級突變，非主要誘導因素。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>STK11（也稱為LKB1）感知細胞能量狀態，激活AMPK抑制mTOR通路。</p>
+                                    <p>突變導致代謝重編程，促進有氧糖酵解和合成代謝。</p>
+                                    <p>在骨肉瘤中，STK11突變率低於5%，可能與腫瘤進展和轉移相關，而非起始事件。</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="weak">
+                            <td class="px-6 py-4 font-medium">SUFU A25fs*23</td>
+                            <td class="px-6 py-4"><i class="fa fa-times text-danger"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-info/20 text-info">弱相關</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">SUFU抑制Hedgehog通路，突變可能與SMO突變協同促進骨肉瘤，但發生率較低。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>SUFU（Suppressor of Fused）是Hedgehog通路的負調節因子，抑制Gli轉錄因子活性。</p>
+                                    <p>突變導致Gli蛋白解抑制，激活下游靶基因表達。</p>
+                                    <p>在骨肉瘤中，SUFU突變罕見，主要見於家族性基底細胞癌綜合征患者的繼發性骨肉瘤。</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="high">
+                            <td class="px-6 py-4 font-medium">TP53 R273C</td>
+                            <td class="px-6 py-4"><i class="fa fa-times text-danger"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-secondary/20 text-secondary">高度相關</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">TP53是經典抑癌基因，R273C突變導致p53蛋白功能喪失，是骨肉瘤中最常見的驅動突變之一，直接參與腫瘤誘導與進展。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>TP53是「基因組守護者」，在DNA損傷、應激或癌基因激活時誘導細胞週期停滯、凋亡或衰老。</p>
+                                    <p>R273C突變位於DNA結合結構域，破壞p53與靶基因啟動子的相互作用。</p>
+                                    <p>在骨肉瘤中，TP53突變率約為60%，尤其在放療後的繼發性骨肉瘤中更常見。</p>
+                                    <p>突變型p53還具有獲得性功能，促進上皮間質轉化、血管生成和免疫逃逸。</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-base-300 table-hover-effect gene-row" data-status="pending">
+                            <td class="px-6 py-4 font-medium">UGT1A1 rs4148323</td>
+                            <td class="px-6 py-4"><i class="fa fa-check text-secondary"></i></td>
+                            <td class="px-6 py-4"><i class="fa fa-times text-danger"></i></td>
+                            <td class="px-6 py-4">
+                                <span class="badge-status bg-neutral/20 text-neutral">待驗證</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="explanation-toggle cursor-pointer flex items-center gap-1">
+                                    <span class="explanation-text">UGT1A1參與 bilirubin代謝，其多態性與Gilbert綜合征相關，與骨肉瘤的誘導關聯性無明確證據。</span>
+                                    <i class="fa fa-angle-down ml-1 text-neutral/50 explanation-icon"></i>
+                                </div>
+                                <div class="explanation-details hidden mt-2 text-sm text-neutral/70">
+                                    <p>UGT1A1編碼尿苷二磷酸葡萄糖醛酸轉移酶，參與膽紅素和化療藥物的代謝。</p>
+                                    <p>rs4148323多態性（TA7/TA7）導致酶活性降低，與Gilbert綜合征相關。</p>
+                                    <p>在骨肉瘤中，UGT1A1多態性可能影響化療藥物（如伊立替康）的代謝，但與腫瘤發生的直接關係尚未確立。</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 關鍵結論卡片 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 fade-in" style="animation-delay: 0.3s">
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+                <h2 class="text-xl font-bold text-primary mb-4 flex items-center">
+                    <i class="fa fa-star text-secondary mr-2"></i>高度相關基因
+                </h2>
+                <div class="space-y-4">
+                    <div class="p-4 bg-secondary/10 rounded-lg border-l-4 border-secondary">
+                        <h3 class="font-bold text-secondary mb-2">CDKN2A突變（D74N、A68V）</h3>
+                        <p class="text-sm">抑制細胞週期檢查點，突變導致細胞無限增殖，是骨肉瘤發生的關鍵驅動事件，約50%病例存在突變。</p>
+                    </div>
+                    <div class="p-4 bg-secondary/10 rounded-lg border-l-4 border-secondary">
+                        <h3 class="font-bold text-secondary mb-2">TP53突變（R273C）</h3>
+                        <p class="text-sm">破壞p53蛋白功能，導致細胞凋亡調控與DNA修復缺失，促進免疫逃逸，見於約60%散發性骨肉瘤。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+                <h2 class="text-xl font-bold text-primary mb-4 flex items-center">
+                    <i class="fa fa-info-circle text-info mr-2"></i>術語說明
+                </h2>
+                <div class="space-y-2">
+                    <div class="flex items-start">
+                        <span class="badge-status bg-secondary/20 text-secondary mr-2 mt-0.5">高度相關</span>
+                        <p class="text-sm">直接參與骨肉瘤誘導，突變頻率高，功能研究充分</p>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="badge-status bg-warning/20 text-warning mr-2 mt-0.5">部分相關</span>
+                        <p class="text-sm">可能參與骨肉瘤發生，但突變頻率較低或機制複雜</p>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="badge-status bg-info/20 text-info mr-2 mt-0.5">間接相關</span>
+                        <p class="text-sm">通過免疫逃逸、代謝重編程等間接途徑促進腫瘤進展</p>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="badge-status bg-neutral/20 text-neutral mr-2 mt-0.5">待驗證</span>
+                        <p class="text-sm">數據有限，需更多研究確定在骨肉瘤中的作用</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 頁腳 -->
+        <footer class="mt-12 text-center text-neutral/60 text-sm fade-in" style="animation-delay: 0.4s">
+            <p>© 2025 基因研究中心 | 數據分析與視覺化</p>
+        </footer>
+    </div>
+
+    <script>
+        // 展開/收縮解釋
+        document.querySelectorAll('.explanation-toggle').forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const details = toggle.nextElementSibling;
+                const icon = toggle.querySelector('.explanation-icon');
+                
+                if (details.classList.contains('hidden')) {
+                    details.classList.remove('hidden');
+                    icon.classList.remove('fa-angle-down');
+                    icon.classList.add('fa-angle-up');
+                } else {
+                    details.classList.add('hidden');
+                    icon.classList.remove('fa-angle-up');
+                    icon.classList.add('fa-angle-down');
+                }
+            });
+        });
+
+        // 展開/收縮全部
+        document.getElementById('expand-all').addEventListener('click', () => {
+            const allDetails = document.querySelectorAll('.explanation-details');
+            const allIcons = document.querySelectorAll('.explanation-icon');
+            const button = document.getElementById('expand-all');
+            
+            if (allDetails[0].classList.contains('hidden')) {
+                // 展開全部
+                allDetails.forEach(detail => detail.classList.remove('hidden'));
+                allIcons.forEach(icon => {
+                    icon.classList.remove('fa-angle-down');
+                    icon.classList.add('fa-angle-up');
+                });
+                button.innerHTML = '<i class="fa fa-minus-square-o mr-1"></i>收縮全部';
+            } else {
+                // 收縮全部
+                allDetails.forEach(detail => detail.classList.add('hidden'));
+                allIcons.forEach(icon => {
+                    icon.classList.remove('fa-angle-up');
+                    icon.classList.add('fa-angle-down');
+                });
+                button.innerHTML = '<i class="fa fa-plus-square-o mr-1"></i>展開全部';
+            }
+        });
+
+        // 下拉篩選
+        document.getElementById('filter-btn').addEventListener('click', () => {
+            const dropdown = document.getElementById('filter-dropdown');
+            dropdown.classList.toggle('hidden');
+        });
+
+        // 點擊外部關閉下拉
+        document.addEventListener('click', (event) => {
+            const filterBtn = document.getElementById('filter-btn');
+            const dropdown = document.getElementById('filter-dropdown');
+            
+            if (!filterBtn.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        // 篩選功能
+        document.querySelectorAll('.filter-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                const status = option.getAttribute('data-value');
+                const rows = document.querySelectorAll('.gene-row');
+                const filterBtn = document.getElementById('filter-btn');
+                
+                filterBtn.innerHTML = `${option.textContent} <i class="fa fa-chevron-down text-xs"></i>`;
+                
+                rows.forEach(row => {
+                    if (status === 'all' || row.getAttribute('data-status') === status) {
+                        row.classList.remove('hidden');
+                    } else {
+                        row.classList.add('hidden');
+                    }
+                });
+                
+                document.getElementById('filter-dropdown').classList.add('hidden');
+            });
+        });
+
+        // 搜索功能
+        document.getElementById('search-input').addEventListener('input', () => {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const rows = document.querySelectorAll('.gene-row');
+            
+            rows.forEach(row => {
+                const geneName = row.querySelector('td:first-child').textContent.toLowerCase();
+                if (geneName.includes(searchTerm)) {
+                    row.classList.remove('hidden');
+                } else {
+                    row.classList.add('hidden');
+                }
+            });
+        });
+
+        // 重置按鈕
+        document.getElementById('btn-reset').addEventListener('click', () => {
+            document.getElementById('search-input').value = '';
+            document.querySelectorAll('.gene-row').forEach(row => {
+                row.classList.remove('hidden');
+            });
+            document.getElementById('filter-btn').innerHTML = '<i class="fa fa-filter mr-1"></i>篩選 <i class="fa fa-chevron-down text-xs"></i>';
+        });
+    </script>
+</body>
+</html>
+    
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>骨肉瘤驅動基因分析報告</title>
+    <style>
+        body { font-family: "Microsoft JhengHei", sans-serif; margin: 20px; }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 5px; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th { background-color: #3498db; color: white; text-align: left; }
+        td, th { border: 1px solid #ddd; padding: 8px; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .high-risk { background-color: #ffebee !important; }
+        .mod-risk { background-color: #fff8e1 !important; }
+        .gene-impact { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 5px; }
+        .high-impact { background-color: #e53935; }
+        .medium-impact { background-color: #ffb300; }
+        .low-impact { background-color: #43a047; }
+    </style>
+</head>
+<body>
+    <h2>骨肉瘤核心驅動基因分析</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>基因</th>
+                <th>突變類型</th>
+                <th>致癌機制</th>
+                <th>骨肉瘤關聯證據</th>
+                <th>臨床意義</th>
+                <th>功能影響</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="high-risk">
+                <td>TP53</td>
+                <td>R273C</td>
+                <td>
+                    <ul>
+                        <li>DNA損傷修復失能</li>
+                        <li>基因組不穩定性增加</li>
+                        <li>細胞凋亡抑制</li>
+                    </ul>
+                </td>
+                <td>
+                    ★★★★★<br>
+                    >90%骨肉瘤存在TP53突變<br>
+                    TCGA肉瘤數據庫確認
+                </td>
+                <td>預後不良標誌物<br>化療抗性預測因子</td>
+                <td><span class="gene-impact high-impact"></span>高</td>
+            </tr>
+            <tr class="high-risk">
+                <td>CDKN2A</td>
+                <td>D74N, A68V</td>
+                <td>
+                    <ul>
+                        <li>p16<sup>INK4a</sup>蛋白功能喪失</li>
+                        <li>Rb通路異常激活</li>
+                        <li>細胞週期失控</li>
+                    </ul>
+                </td>
+                <td>
+                    ★★★★☆<br>
+                    75%骨肉瘤存在CDKN2A缺失/突變<br>
+                    Nature Genetics 2020確認
+                </td>
+                <td>腫瘤早期驅動事件<br>轉移風險增加</td>
+                <td><span class="gene-impact high-impact"></span>高</td>
+            </tr>
+            <tr class="high-risk">
+                <td>ATRX</td>
+                <td>E1639*</td>
+                <td>
+                    <ul>
+                        <li>染色質重塑功能障礙</li>
+                        <li>端粒維持異常</li>
+                        <li>表觀遺傳失調</li>
+                    </ul>
+                </td>
+                <td>
+                    ★★★★☆<br>
+                    兒童骨肉瘤突變率15-20%<br>
+                    Science 2019研究確認
+                </td>
+                <td>促進腫瘤異質性<br>放療敏感性降低</td>
+                <td><span class="gene-impact high-impact"></span>高</td>
+            </tr>
+            <tr class="mod-risk">
+                <td>STK11</td>
+                <td>L282fs*3</td>
+                <td>
+                    <ul>
+                        <li>AMPK/mTOR通路失調</li>
+                        <li>細胞代謝紊亂</li>
+                        <li>極性喪失</li>
+                    </ul>
+                </td>
+                <td>
+                    ★★★☆☆<br>
+                    Peutz-Jeghers症候群關聯<br>
+                    骨肉瘤風險增加50倍
+                </td>
+                <td>遺傳性骨肉瘤標誌<br>代謝重編程驅動</td>
+                <td><span class="gene-impact medium-impact"></span>中</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>潛在相關基因驗證需求</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>基因</th>
+                <th>突變類型</th>
+                <th>可能機制</th>
+                <th>實驗驗證建議</th>
+                <th>現有證據等級</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>B2M</td>
+                <td>S16fs, L15fs</td>
+                <td>MHC-I複合物缺失導致的免疫逃逸</td>
+                <td>免疫組化驗證HLA表達<br>PD-1抑制劑敏感性測試</td>
+                <td>★★☆☆☆ (小鼠模型顯示關聯)</td>
+            </tr>
+            <tr>
+                <td>BCOR</td>
+                <td>G400fs*42</td>
+                <td>表觀遺傳調控異常<br>(PRC1.1複合物失能)</td>
+                <td>ChIP-seq分析H2A泛素化<br>成骨細胞分化實驗</td>
+                <td>★★☆☆☆ (肉瘤亞型報告)</td>
+            </tr>
+            <tr>
+                <td>MAP2K1</td>
+                <td>K57T</td>
+                <td>MAPK信號通路持續激活</td>
+                <td>ERK磷酸化檢測<br>MEK抑制劑體外敏感性</td>
+                <td>★★★☆☆ (骨肉瘤細胞系證據)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>排除基因清單及科學依據</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>基因</th>
+                <th>排除原因</th>
+                <th>主要相關疾病</th>
+                <th>參考文獻</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>UGT1A1</td>
+                <td>膽紅素代謝基因，與致癌過程無直接關聯</td>
+                <td>吉伯特氏症候群</td>
+                <td>Pharmacogenomics J. 2014</td>
+            </tr>
+            <tr>
+                <td>FH</td>
+                <td>三羧酸循環酶基因，缺乏骨肉瘤關聯證據</td>
+                <td>遺傳性平滑肌瘤病</td>
+                <td>Nat Rev Cancer. 2021</td>
+            </tr>
+            <tr>
+                <td>GNAS</td>
+                <td>G蛋白偶聯受體信號，影響內分泌腫瘤</td>
+                <td>McCune-Albright症候群</td>
+                <td>Endocr Rev. 2018</td>
+            </tr>
+            <tr>
+                <td>APC</td>
+                <td>WNT通路調控，典型結直腸癌基因</td>
+                <td>家族性腺瘤性息肉病</td>
+                <td>Cell. 2020</td>
+            </tr>
+            <tr>
+                <td>MLH1</td>
+                <td>錯配修復基因，微衛星不穩定表型</td>
+                <td>林奇症候群</td>
+                <td>J Clin Oncol. 2019</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>關鍵結論與建議</h2>
+    <h3>致癌機制分析</h3>
+    <ul>
+        <li><strong>核心通路破壞：</strong> TP53-CDKN2A軸突變導致基因組不穩定性+細胞週期失控</li>
+        <li><strong>表觀遺傳失調：</strong> ATRX/BCOR突變引發染色質結構異常</li>
+        <li><strong>微環境交互：</strong> B2M缺失創造免疫豁免微環境</li>
+    </ul>
+    
+    <h3>功能驗證優先級</h3>
+    <ol>
+        <li><strong>TP53 R273C：</strong> CRISPR敲入小鼠模型驗證成骨細胞惡性轉化</li>
+        <li><strong>CDKN2A雙突變：</strong> 類器官模型測試聯合突變協同效應</li>
+        <li><strong>B2M缺失：</strong> PD-1抑制劑在免疫缺陷模型療效評估</li>
+    </ol>
+    
+    <h3>臨床轉化建議</h3>
+    <ul>
+        <li>開發TP53突變狀態作為術前化療反應預測生物標誌物</li>
+        <li>探索ATRX缺失腫瘤的ALT（端粒延長替代機制）靶向療法</li>
+        <li>MAP2K1突變患者納入MEK抑制劑臨床試驗</li>
+    </ul>
+</body>
+</html>
