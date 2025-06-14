@@ -1,33 +1,24 @@
 import os
 
-# List of exact names to exclude
-EXCLUDE_NAMES = {
-    'env', 'Include', 'Lib', 'site-packages', 'Scripts', '__pycache__',
-    # ... (other names as before)
-}
+# Set the root directory you want to index (change this if needed)
+INDEX_ROOT = os.path.join(os.path.dirname(__file__), "your_content_folder")  # e.g., "src" or "docs" or "public"
+# If you want the current folder, use "."
+INDEX_ROOT = "."
 
-# Exclude if name contains any of these substrings (case-insensitive)
-EXCLUDE_SUBSTRINGS = [
-    'env',         # catches env, env-env, virtualenv, etc.
-    '__pycache__',
-    '.dist-info',
-    '.egg-info',
-]
+# Names and patterns to exclude
+EXCLUDE_NAMES = {"env", "env-env", "venv", "__pycache__", ".git", ".github", ".vscode"}
+EXCLUDE_PATTERNS = ["env", "venv", "__pycache__", ".dist-info", ".egg-info"]
 
 def should_exclude(name):
     lname = name.lower()
-    # Exclude by exact name
-    if lname in {n.lower() for n in EXCLUDE_NAMES}:
+    if lname in EXCLUDE_NAMES:
         return True
-    # Exclude if any substring matches (case-insensitive)
-    for sub in EXCLUDE_SUBSTRINGS:
-        if sub in lname:
+    for pat in EXCLUDE_PATTERNS:
+        if pat in lname:
             return True
-    # Exclude hidden files/folders
-    if lname.startswith('.'):
+    if not all(ord(c) < 128 for c in name):  # Exclude non-ASCII
         return True
-    # Exclude folders/files that start with underscore (optional)
-    if lname.startswith('_'):
+    if lname.startswith('.'):
         return True
     return False
 
@@ -40,7 +31,7 @@ def scan_dir(path, rel_path=""):
         rel_item_path = os.path.join(rel_path, name) if rel_path else name
         if os.path.isdir(full_path):
             children = scan_dir(full_path, rel_item_path)
-            if children:  # Only include directory if it has visible children
+            if children:
                 items.append({
                     "type": "dir",
                     "name": name,
@@ -59,15 +50,15 @@ def render_tree(items):
     html = "<ul>\n"
     for item in items:
         if item["type"] == "dir":
-            html += f'  <li><details><summary>📁 <a href="{item["rel_path"]}">{item["name"]}/</a></summary>\n'
+            html += f'  <li><details><summary>📁 <a href="{item["rel_path"].replace(os.sep, "/")}">{item["name"]}/</a></summary>\n'
             html += render_tree(item["children"])
             html += "  </details></li>\n"
         else:
-            html += f'  <li>📄 <a href="{item["rel_path"]}">{item["name"]}</a></li>\n'
+            html += f'  <li>📄 <a href="{item["rel_path"].replace(os.sep, "/")}">{item["name"]}</a></li>\n'
     html += "</ul>\n"
     return html
 
-tree = scan_dir(".")
+tree = scan_dir(INDEX_ROOT)
 
 with open("index.html", "w", encoding="utf-8") as f:
     f.write("""<!DOCTYPE html>
