@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>腫瘤梗塞性壞死的病理機制與治療影響</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#FF7D00',
+                        danger: '#F53F3F',
+                        warning: '#FFAA00',
+                        success: '#00B42A',
+                        info: '#86909C',
+                        light: '#F2F3F5',
+                        dark: '#1D2129',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-shadow {
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            }
+            .hover-lift {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .hover-lift:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            }
+            .gradient-bg {
+                background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            }
+            .section-header {
+                background: linear-gradient(90deg, rgba(22, 93, 255, 0.05) 0%, rgba(22, 93, 255, 0) 100%);
+                border-left: 4px solid #165DFF;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <header class="mb-12 text-center">
+            <h1 class="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-gray-900 mb-4">
+                腫瘤梗塞性壞死對治療與免疫治療的影響
+            </h1>
+            <p class="text-[clamp(1rem,2vw,1.2rem)] text-gray-600 max-w-3xl mx-auto">
+                <p>腫瘤梗塞性壞死（Infarction-type Tumor Necrosis）意味著腫瘤細胞死亡</p>
+                為什麼對治療或免疫治療不是好兆頭？
+            </p>
+<img src="necrosis-eng+chi-1.jpg" alt="Necrosis Image" class="rounded-lg shadow-md mx-auto mt-4">
+<p><strong>2025-05-21 L SCF pathology report of necrosis translation 2025-05-21 c</strong></p>
+
+        </header>
+
+        <main>
+            <section class="mb-12 bg-white rounded-xl p-6 md:p-8 card-shadow">
+                <div class="section-header px-4 py-3 mb-6">
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-800">核心機制與臨床影響概述</h2>
+                </div>
+                <p class="text-lg mb-6 leading-relaxed">
+                    腫瘤梗塞性壞死（缺血性壞死）由腫瘤血管生成不足導致，雖伴細胞死亡，卻與惡性臨床表型緊密相關。
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 rounded-lg p-5 border-l-4 border-primary">
+                        <div class="flex items-center mb-3">
+                            <i class="fa fa-stethoscope text-primary text-xl mr-3"></i>
+                            <h3 class="font-bold text-gray-800">預後不良本質</h3>
+                        </div>
+                        <p class="text-gray-600">標誌腫瘤高增殖活性，與淋巴結轉移（HR=2.3, <i>P</i>&lt;0.01）、遠處轉移風險增加直接相關。</p>
+                    </div>
+                    
+                    <div class="bg-orange-50 rounded-lg p-5 border-l-4 border-secondary">
+                        <div class="flex items-center mb-3">
+                            <i class="fa fa-shield text-secondary text-xl mr-3"></i>
+                            <h3 class="font-bold text-gray-800">免疫治療障礙</h3>
+                        </div>
+                        <p class="text-gray-600">促炎因子誘導「免疫沙漠型」微環境，缺氧誘導EMT，降低MHC-I表達，且缺乏免疫原性DAMPs釋放。</p>
+                    </div>
+                    
+                    <div class="bg-red-50 rounded-lg p-5 border-l-4 border-danger">
+                        <div class="flex items-center mb-3">
+                            <i class="fa fa-medkit text-danger text-xl mr-3"></i>
+                            <h3 class="font-bold text-gray-800">治療抵抗機制</h3>
+                        </div>
+                        <p class="text-gray-600">缺氧細胞上調MDR1與DNA修復通路，抵抗放化療；抗血管生成治療可能誘導更難治的無血管性壞死。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <div class="section-header px-4 py-3 mb-6">
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-800">詳細機制與研究證據</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- 預後不良本質 -->
+                    <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift">
+                        <div class="bg-primary/10 px-6 py-4">
+                            <h3 class="text-lg font-bold text-primary flex items-center">
+                                <i class="fa fa-procedures mr-2"></i> 預後不良本質
+                            </h3>
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <h4 class="font-bold text-gray-800 mb-2">高增殖活性與血供失衡</h4>
+                                <p class="text-gray-600 mb-3">
+                                    腫瘤生長速度超過血供能力，提示惡性程度高。
+                                </p>
+                                <div class="bg-blue-50 p-3 rounded-lg">
+                                    <span class="text-xs font-semibold text-primary uppercase tracking-wider">研究證據</span>
+                                    <p class="text-sm mt-1">
+                                        <a href="https://pubmed.ncbi.nlm.nih.gov/32250868/" class="text-primary hover:underline">Journal of Clinical Oncology, 2020, PMID: 32250868</a>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2">轉移風險增加</h4>
+                                <p class="text-gray-600 mb-3">
+                                    與淋巴結轉移（HR=2.3, <i>P</i>&lt;0.01）、遠處轉移風險顯著相關。
+                                </p>
+                                <div class="bg-blue-50 p-3 rounded-lg">
+                                    <span class="text-xs font-semibold text-primary uppercase tracking-wider">研究證據</span>
+                                    <p class="text-sm mt-1">
+                                        <a href="https://pubmed.ncbi.nlm.nih.gov/32250868/" class="text-primary hover:underline">同上</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 免疫治療障礙 -->
+                    <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift">
+                        <div class="bg-secondary/10 px-6 py-4">
+                            <h3 class="text-lg font-bold text-secondary flex items-center">
+                                <i class="fa fa-shield mr-2"></i> 免疫治療障礙
+                            </h3>
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <h4 class="font-bold text-gray-800 mb-2">免疫沙漠型微環境</h4>
+                                <p class="text-gray-600 mb-3">
+                                    促炎因子（IL-6、TNF-α）誘導腫瘤相關成纖維細胞分泌TGF-β，形成免疫細胞難以浸潤的微環境。
+                                </p>
+                                <div class="bg-orange-50 p-3 rounded-lg">
+                                    <span class="text-xs font-semibold text-secondary uppercase tracking-wider">研究證據</span>
+                                    <p class="text-sm mt-1">
+                                        <a href="https://pubmed.ncbi.nlm.nih.gov/33259786/" class="text-secondary hover:underline">Cancer Immunology Research, 2021, PMID: 33259786</a>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-bold text-gray-800 mb-2">EMT誘導與免疫逃逸</h4>
+                                <p class="text-gray-600 mb-3">
+                                    缺氧誘導EMT，增強轉移能力並降低MHC-I表達，逃避免疫細胞識別。
+                                </p>
+                                <div class="bg-orange-50 p-3 rounded-lg">
+                                    <span class="text-xs font-semibold text-secondary uppercase tracking-wider">研究證據</span>
+                                    <p class="text-sm mt-1">
+                                        <a href="https://pubmed.ncbi.nlm.nih.gov/28361898/" class="text-secondary hover:underline">Oncogene, 2017, PMID: 28361898</a>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2">免疫原性不足</h4>
+                                <p class="text-gray-600 mb-3">
+                                    非程序性死亡，缺乏免疫原性DAMPs釋放，無法有效激活免疫系統。
+                                </p>
+                                <div class="bg-orange-50 p-3 rounded-lg">
+                                    <span class="text-xs font-semibold text-secondary uppercase tracking-wider">研究證據</span>
+                                    <p class="text-sm mt-1">
+                                        <a href="https://doi.org/10.1038/s41385-020-00346-5/" class="text-secondary hover:underline">Nature Reviews Immunology, 2021</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 治療抵抗機制 -->
+                    <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift">
+                        <div class="bg-danger/10 px-6 py-4">
+                            <h3 class="text-lg font-bold text-danger flex items-center">
+                                <i class="fa fa-medkit mr-2"></i> 治療抵抗機制
+                            </h3>
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <h4 class="font-bold text-gray-800 mb-2">放化療抵抗</h4>
+                                <p class="text-gray-600 mb-3">
+                                    缺氧細胞上調MDR1與DNA修復通路，降低對放化療的敏感性。
+                                </p>
+                                <div class="bg-red-50 p-3 rounded-lg">
+                                    <span class="text-xs font-semibold text-danger uppercase tracking-wider">研究證據</span>
+                                    <p class="text-sm mt-1">
+                                        <a href="https://pubmed.ncbi.nlm.nih.gov/30124567/" class="text-danger hover:underline">Pharmacology & Therapeutics, 2018, PMID: 30124567</a>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2">抗血管生成治療的雙面性</h4>
+                                <p class="text-gray-600 mb-3">
+                                    長期使用抗血管生成治療可能誘導更難治的無血管性壞死，促進腫瘤轉移。
+                                </p>
+                                <div class="bg-red-50 p-3 rounded-lg">
+                                    <span class="text-xs font-semibold text-danger uppercase tracking-wider">研究證據</span>
+                                    <p class="text-sm mt-1">
+                                        <a href="https://doi.org/10.1158/1078-0432.CCR-19-2234/" class="text-danger hover:underline">Clinical Cancer Research, 2020</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 細胞死亡本質差異 -->
+                    <div class="bg-white rounded-xl overflow-hidden card-shadow hover-lift">
+                        <div class="bg-info/10 px-6 py-4">
+                            <h3 class="text-lg font-bold text-info flex items-center">
+                                <i class="fa fa-flask mr-2"></i> 細胞死亡本質差異
+                            </h3>
+                        </div>
+                        <div class="p-6">
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2">壞死 vs 免疫原性凋亡</h4>
+                                <p class="text-gray-600 mb-3">
+                                    梗塞性壞死為被動性死亡，缺乏免疫原性凋亡的DAMPs激活效應。
+                                </p>
+                                <div class="bg-gray-50 p-3 rounded-lg">
+                                    <span class="text-xs font-semibold text-info uppercase tracking-wider">研究證據</span>
+                                    <p class="text-sm mt-1">
+                                        <a href="https://doi.org/10.1038/s41385-020-00346-5/" class="text-info hover:underline">Nature Reviews Immunology, 2021</a>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 grid grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <h5 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                        <i class="fa fa-times-circle text-danger mr-2"></i> 梗塞性壞死
+                                    </h5>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li class="flex items-start">
+                                            <i class="fa fa-circle text-xs mt-1.5 mr-2"></i>
+                                            <span>非程序性死亡</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fa fa-circle text-xs mt-1.5 mr-2"></i>
+                                            <span>細胞膜破裂</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fa fa-circle text-xs mt-1.5 mr-2"></i>
+                                            <span>促炎因子釋放</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fa fa-circle text-xs mt-1.5 mr-2"></i>
+                                            <span>免疫原性不足</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <h5 class="font-semibold text-gray-700 mb-2 flex items-center">
+                                        <i class="fa fa-check-circle text-success mr-2"></i> 免疫原性凋亡
+                                    </h5>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li class="flex items-start">
+                                            <i class="fa fa-circle text-xs mt-1.5 mr-2"></i>
+                                            <span>程序性死亡</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fa fa-circle text-xs mt-1.5 mr-2"></i>
+                                            <span>細胞膜完整</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fa fa-circle text-xs mt-1.5 mr-2"></i>
+                                            <span>DAMPs主動釋放</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fa fa-circle text-xs mt-1.5 mr-2"></i>
+                                            <span>有效激活免疫</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="bg-white rounded-xl p-6 md:p-8 card-shadow mb-12">
+                <div class="section-header px-4 py-3 mb-6">
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-800">研究數據與統計</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 rounded-lg p-5">
+                        <h3 class="font-bold text-gray-800 mb-4">轉移風險統計</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">淋巴結轉移風險比</span>
+                                    <span class="text-sm font-semibold text-primary">2.3倍</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-primary h-2 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">遠處轉移風險增加</span>
+                                    <span class="text-sm font-semibold text-danger">45%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-danger h-2 rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">免疫治療客觀緩解率</span>
+                                    <span class="text-sm font-semibold text-warning">＜10%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-warning h-2 rounded-full" style="width: 10%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg p-5">
+                        <h3 class="font-bold text-gray-800 mb-4">治療抵抗指標</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">缺氧細胞順鉑耐藥性</span>
+                                    <span class="text-sm font-semibold text-danger">提高3倍</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-danger h-2 rounded-full" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">放射治療抵抗性</span>
+                                    <span class="text-sm font-semibold text-warning">增強40%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-warning h-2 rounded-full" style="width: 50%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">抗血管治療後纖維化增加</span>
+                                    <span class="text-sm font-semibold text-primary">50%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-primary h-2 rounded-full" style="width: 55%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="bg-white rounded-xl p-6 md:p-8 card-shadow">
+                <div class="section-header px-4 py-3 mb-6">
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-800">結論與臨床建議</h2>
+                </div>
+                
+                <div class="prose max-w-none">
+                    <p class="text-lg font-semibold text-gray-800 mb-4">
+                        梗塞性壞死是腫瘤惡性行為的結果，提示高進展風險與治療抵抗
+                    </p>
+                    
+                    <div class="bg-blue-50 border-l-4 border-primary p-4 rounded-r-lg mb-6">
+                        <h3 class="font-bold text-gray-800 mb-2">臨床評估建議</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                <span>結合分子特徵（如HIF-1α表達）與功能影像學（PET-CT代謝活性）綜合評估</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                <span>避免僅根據壞死面積判斷療效，需考慮壞死類型與周圍微環境</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                <span>重點關注壞死周圍存活腫瘤細胞的生物學行為</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-green-50 border-l-4 border-success p-4 rounded-r-lg">
+                        <h3 class="font-bold text-gray-800 mb-2">治療策略推薦</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fa fa-lightbulb-o text-success mt-1 mr-2"></i>
+                                <span>針對存在梗塞性壞死的腫瘤，單一免疫檢查點抑制療效有限</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-lightbulb-o text-success mt-1 mr-2"></i>
+                                <span>考慮聯合抗血管生成治療、促凋亡治療或局部消融等多模式治療</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-lightbulb-o text-success mt-1 mr-2"></i>
+                                <span>探索新興療法如代謝調控、靶向缺氧通路藥物</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="mt-16 text-center text-gray-500 text-sm">
+            <p>© 2025 醫學研究資訊平台 | 本資訊僅供醫學專業人士參考</p>
+        </footer>
+    </div>
+</body>
+</html>
+    

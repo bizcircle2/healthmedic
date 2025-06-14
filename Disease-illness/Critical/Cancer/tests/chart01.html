@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <style>
+      .chart-container {
+        width: 600px;
+        height: 400px;
+        margin: 20px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chart-container">
+      <canvas id="turnaroundTimeChart"></canvas>
+    </div>
+    <div class="chart-container"><canvas id="geneCoverageChart"></canvas></div>
+    <div class="chart-container">
+      <canvas id="clinicalValidationChart"></canvas>
+    </div>
+    <script>
+      // PASTE YOUR ORIGINAL CHART.JS SCRIPT HERE
+      document.addEventListener("DOMContentLoaded", function () {
+        // Bar chart code
+        const turnaroundCtx = document.getElementById("turnaroundTimeChart").getContext("2d");
+        new Chart(turnaroundCtx, { type: "bar", data: { ... } }); // Your full config
+
+        // Radar chart code
+        const coverageCtx = document.getElementById("geneCoverageChart").getContext("2d");
+        new Chart(coverageCtx, { type: "radar", data: { ... } }); // Your full config
+
+        // Line chart code
+        const validationCtx = document.getElementById("clinicalValidationChart").getContext("2d");
+        new Chart(validationCtx, { type: "line", data: { ... } }); // Your full config
+      });
+    </script>
+  </body>
+</html>

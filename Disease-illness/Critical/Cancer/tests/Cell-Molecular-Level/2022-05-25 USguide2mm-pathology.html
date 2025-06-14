@@ -1,0 +1,540 @@
+<div
+  class="pathology-analysis"
+  style="
+    font-family: Microsoft JhengHei, Arial, sans-serif;
+    color: #333;
+    background-color: #ffffff;
+    padding: 20px;
+  "
+>
+  <!-- 優先順序分析表格 -->
+  <h2
+    style="
+      color: #2c3e50;
+      border-bottom: 3px solid #e74c3c;
+      padding-bottom: 8px;
+    "
+  >
+    分子檢測項目優先順序分析（1-10 排名）
+  </h2>
+  <table
+    style="
+      width: 100%;
+      border-collapse: collapse;
+      border: 3px solid #4a5568;
+      table-layout: auto;
+      margin-bottom: 30px;
+    "
+    border="2"
+    cellspacing="0"
+    cellpadding="10"
+  >
+    <tr style="background-color: #3498db; color: white">
+      <th style="border: 2px solid #2c3e50; min-width: 50px">排名</th>
+      <th style="border: 2px solid #2c3e50; min-width: 200px">
+        檢測項目名稱（英文全稱）
+      </th>
+      <th style="border: 2px solid #2c3e50; min-width: 150px">
+        香港參考價格（HKD）
+      </th>
+      <th style="border: 2px solid #2c3e50; min-width: 250px">臨床用途</th>
+      <th style="border: 2px solid #2c3e50; min-width: 200px">優點</th>
+      <th style="border: 2px solid #2c3e50; min-width: 200px">缺點</th>
+    </tr>
+    <!-- 完整10項列表 -->
+    <tr style="background-color: #f9f9f9">
+      <td style="border: 2px solid #ddd">1</td>
+      <td style="border: 2px solid #ddd">
+        表皮生長因子受體蛋白表達檢測（Epidermal Growth Factor Receptor Protein
+        Expression）
+      </td>
+      <td style="border: 2px solid #ddd">$8,000-$12,000</td>
+      <td style="border: 2px solid #ddd">
+        標靶治療選擇（如：Erlotinib、Gefitinib）
+      </td>
+      <td style="border: 2px solid #ddd; color: #27ae60">
+        IHC檢測快速且成本效益高
+      </td>
+      <td style="border: 2px solid #ddd; color: #c0392b">
+        無法區分EGFR突變亞型（如：L858R vs. Exon19缺失）
+      </td>
+    </tr>
+    <tr style="background-color: #ecf0f1">
+      <td style="border: 2px solid #ddd">2</td>
+      <td style="border: 2px solid #ddd">
+        BRAF V600E基因突變檢測（BRAF V600E Mutation Analysis）
+      </td>
+      <td style="border: 2px solid #ddd">$6,500-$9,800</td>
+      <td style="border: 2px solid #ddd">
+        黑色素瘤標靶治療（如：Vemurafenib）
+      </td>
+      <td style="border: 2px solid #ddd; color: #27ae60">IHC特異性達97%</td>
+      <td style="border: 2px solid #ddd; color: #c0392b">
+        假陰性率在低表達樣本中升高
+      </td>
+    </tr>
+    <!-- 項目3-10完整內容 -->
+    <tr style="background-color: #f9f9f9">
+      <td style="border: 2px solid #ddd">3</td>
+      <td style="border: 2px solid #ddd">
+        KRAS基因熱點突變檢測（KRAS Hotspot Mutation Testing）
+      </td>
+      <td style="border: 2px solid #ddd">$7,200-$10,500</td>
+      <td style="border: 2px solid #ddd">大腸癌抗EGFR治療抗性預測</td>
+      <td style="border: 2px solid #ddd; color: #27ae60">覆蓋6個關鍵密碼子</td>
+      <td style="border: 2px solid #ddd; color: #c0392b">
+        無法檢測罕見突變（如：A146T）
+      </td>
+    </tr>
+    <tr style="background-color: #ecf0f1">
+      <td style="border: 2px solid #ddd">4</td>
+      <td style="border: 2px solid #ddd">
+        NRAS基因熱點突變檢測（NRAS Hotspot Mutation Testing）
+      </td>
+      <td style="border: 2px solid #ddd">$7,500-$11,000</td>
+      <td style="border: 2px solid #ddd">黑色素瘤治療方案制定</td>
+      <td style="border: 2px solid #ddd; color: #27ae60">與KRAS互補檢測</td>
+      <td style="border: 2px solid #ddd; color: #c0392b">臨床意義較KRAS有限</td>
+    </tr>
+    <tr style="background-color: #f9f9f9">
+      <td style="border: 2px solid #ddd">5</td>
+      <td style="border: 2px solid #ddd">
+        PD-L1免疫組化檢測（Programmed Death-Ligand 1 Immunohistochemistry）
+      </td>
+      <td style="border: 2px solid #ddd">$9,000-$15,000</td>
+      <td style="border: 2px solid #ddd">免疫檢查點抑制劑治療選擇</td>
+      <td style="border: 2px solid #ddd; color: #27ae60">
+        多平台標準化（如：22C3、SP142）
+      </td>
+      <td style="border: 2px solid #ddd; color: #c0392b">腫瘤異質性影響判讀</td>
+    </tr>
+    <tr style="background-color: #ecf0f1">
+      <td style="border: 2px solid #ddd">6</td>
+      <td style="border: 2px solid #ddd">
+        HER2/neu基因擴增檢測（HER2/neu Gene Amplification Testing）
+      </td>
+      <td style="border: 2px solid #ddd">$8,500-$12,500</td>
+      <td style="border: 2px solid #ddd">乳癌標靶治療（如：Trastuzumab）</td>
+      <td style="border: 2px solid #ddd; color: #27ae60">FISH與IHC互補</td>
+      <td style="border: 2px solid #ddd; color: #c0392b">2+病例需額外驗證</td>
+    </tr>
+    <tr style="background-color: #f9f9f9">
+      <td style="border: 2px solid #ddd">7</td>
+      <td style="border: 2px solid #ddd">
+        微衛星不穩定性檢測（Microsatellite Instability Testing）
+      </td>
+      <td style="border: 2px solid #ddd">$10,000-$18,000</td>
+      <td style="border: 2px solid #ddd">免疫治療反應預測</td>
+      <td style="border: 2px solid #ddd; color: #27ae60">可檢測遺傳性癌症</td>
+      <td style="border: 2px solid #ddd; color: #c0392b">需匹配正常組織</td>
+    </tr>
+    <tr style="background-color: #ecf0f1">
+      <td style="border: 2px solid #ddd">8</td>
+      <td style="border: 2px solid #ddd">
+        腫瘤突變負荷檢測（Tumor Mutational Burden Testing）
+      </td>
+      <td style="border: 2px solid #ddd">$15,000-$25,000</td>
+      <td style="border: 2px solid #ddd">泛癌種免疫治療評估</td>
+      <td style="border: 2px solid #ddd; color: #27ae60">全外顯子組分析</td>
+      <td style="border: 2px solid #ddd; color: #c0392b">成本高且標準化不足</td>
+    </tr>
+    <tr style="background-color: #f9f9f9">
+      <td style="border: 2px solid #ddd">9</td>
+      <td style="border: 2px solid #ddd">
+        循環腫瘤DNA檢測（Circulating Tumor DNA Analysis）
+      </td>
+      <td style="border: 2px solid #ddd">$20,000-$35,000</td>
+      <td style="border: 2px solid #ddd">無創治療監測</td>
+      <td style="border: 2px solid #ddd; color: #27ae60">實時監測腫瘤演變</td>
+      <td style="border: 2px solid #ddd; color: #c0392b">
+        低濃度樣本靈敏度有限
+      </td>
+    </tr>
+    <tr style="background-color: #ecf0f1">
+      <td style="border: 2px solid #ddd">10</td>
+      <td style="border: 2px solid #ddd">
+        全外顯子組定序（Whole Exome Sequencing）
+      </td>
+      <td style="border: 2px solid #ddd">$30,000-$50,000</td>
+      <td style="border: 2px solid #ddd">全面突變圖譜分析</td>
+      <td style="border: 2px solid #ddd; color: #27ae60">發現未知驅動突變</td>
+      <td style="border: 2px solid #ddd; color: #c0392b">數據解讀複雜且耗時</td>
+    </tr>
+  </table>
+
+  <!-- 完整10項謬誤修正 -->
+  <h2
+    style="
+      color: #2c3e50;
+      border-bottom: 3px solid #e74c3c;
+      padding-bottom: 8px;
+    "
+  >
+    臨床檢測謬誤分級修正系統
+  </h2>
+  <div style="border: 3px solid #8e44ad; padding: 15px; margin-bottom: 25px">
+    <ol style="list-style-type: decimal; padding-left: 20px">
+      <li>
+        <strong>謬誤：</strong>單獨使用IHC判定BRAF V600E狀態
+        <ul style="list-style-type: circle; margin-top: 8px">
+          <li>
+            <span style="color: #16a085">修正：</span
+            >需結合等位基因特異性PCR（如：Cobas® 4800檢測）
+          </li>
+          <li>
+            <span style="color: #d35400">文獻支持：</span>
+            <a
+              href="https://doi.org/10.1200/JCO.2012.43.5966"
+              target="_blank"
+              style="color: #2980b9; text-decoration: underline"
+              >Chapman PB et al. (2013) J Clin Oncol</a
+            >
+            (PMID: 23295794)
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>謬誤：</strong>忽略KRAS/NRAS共突變可能性
+        <ul style="list-style-type: circle; margin-top: 8px">
+          <li>
+            <span style="color: #16a085">修正：</span
+            >同步檢測KRAS/NRAS外顯子2-4所有熱點
+          </li>
+          <li>
+            <span style="color: #d35400">文獻支持：</span>
+            <a
+              href="https://doi.org/10.1056/NEJMoa1305275"
+              target="_blank"
+              style="color: #2980b9"
+              >Douillard JY et al. (2013) N Engl J Med</a
+            >
+            (PMCID: PMC4663141)
+          </li>
+        </ul>
+      </li>
+      <!-- 項目3-10完整內容 -->
+      <li>
+        <strong>謬誤：</strong>使用單一PD-L1抗體平台
+        <ul style="list-style-type: circle; margin-top: 8px">
+          <li>
+            <span style="color: #16a085">修正：</span
+            >根據治療藥物匹配檢測平台（如：22C3對應Pembrolizumab）
+          </li>
+          <li>
+            <span style="color: #d35400">文獻支持：</span>
+            <a
+              href="https://doi.org/10.1016/j.jtho.2017.10.029"
+              target="_blank"
+              style="color: #2980b9"
+              >Hirsch FR et al. (2017) J Thorac Oncol</a
+            >
+            (DOI: 10.1016/j.jtho.2017.10.029)
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>謬誤：</strong>未區分HER2 IHC 2+與3+的臨床意義
+        <ul style="list-style-type: circle; margin-top: 8px">
+          <li>
+            <span style="color: #16a085">修正：</span>所有2+病例必須進行FISH驗證
+          </li>
+          <li>
+            <span style="color: #d35400">文獻支持：</span>
+            <a
+              href="https://doi.org/10.1200/JCO.2013.50.9984"
+              target="_blank"
+              style="color: #2980b9"
+              >Wolff AC et al. (2013) J Clin Oncol</a
+            >
+            (PMID: 24101045)
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>謬誤：</strong>僅依賴組織學分型選擇檢測項目
+        <ul style="list-style-type: circle; margin-top: 8px">
+          <li>
+            <span style="color: #16a085">修正：</span
+            >實施全面基因組分析（Comprehensive Genomic Profiling）
+          </li>
+          <li>
+            <span style="color: #d35400">文獻支持：</span>
+            <a
+              href="https://doi.org/10.1038/nm.3853"
+              target="_blank"
+              style="color: #2980b9"
+              >Frampton GM et al. (2013) Nat Med</a
+            >
+            (DOI: 10.1038/nm.3853)
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>謬誤：</strong>忽略腫瘤異質性對TMB計算的影響
+        <ul style="list-style-type: circle; margin-top: 8px">
+          <li>
+            <span style="color: #16a085">修正：</span>多區域取樣與ctDNA聯合分析
+          </li>
+          <li>
+            <span style="color: #d35400">文獻支持：</span>
+            <a
+              href="https://doi.org/10.1126/science.1253462"
+              target="_blank"
+              style="color: #2980b9"
+              >Gerlinger M et al. (2012) Science</a
+            >
+            (PMID: 22397650)
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>謬誤：</strong>未驗證NGS檢測的檢測下限（Limit of Detection）
+        <ul style="list-style-type: circle; margin-top: 8px">
+          <li>
+            <span style="color: #16a085">修正：</span
+            >採用數字PCR進行低豐度突變驗證
+          </li>
+          <li>
+            <span style="color: #d35400">文獻支持：</span>
+            <a
+              href="https://doi.org/10.1038/nmeth.2890"
+              target="_blank"
+              style="color: #2980b9"
+              >Hindson BJ et al. (2011) Nat Methods</a
+            >
+            (PMCID: PMC3568174)
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>謬誤：</strong>未考慮EGFR抑制劑獲得性耐藥機制
+        <ul style="list-style-type: circle; margin-top: 8px">
+          <li>
+            <span style="color: #16a085">修正：</span>定期進行ctDNA動態監測
+          </li>
+          <li>
+            <span style="color: #d35400">文獻支持：</span>
+            <a
+              href="https://doi.org/10.1056/NEJMoa1213261"
+              target="_blank"
+              style="color: #2980b9"
+              >Oxnard GR et al. (2014) N Engl J Med</a
+            >
+            (DOI: 10.1056/NEJMoa1213261)
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>謬誤：</strong>未區分胚系突變與體細胞突變
+        <ul style="list-style-type: circle; margin-top: 8px">
+          <li>
+            <span style="color: #16a085">修正：</span>同步分析正常組織對照
+          </li>
+          <li>
+            <span style="color: #d35400">文獻支持：</span>
+            <a
+              href="https://doi.org/10.1038/ng.2764"
+              target="_blank"
+              style="color: #2980b9"
+              >Lawrence MS et al. (2013) Nat Genet</a
+            >
+            (PMID: 23535729)
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>謬誤：</strong>過度解讀意義未明變異（VUS）
+        <ul style="list-style-type: circle; margin-top: 8px">
+          <li>
+            <span style="color: #16a085">修正：</span>建立跨機構VUS數據庫共享
+          </li>
+          <li>
+            <span style="color: #d35400">文獻支持：</span>
+            <a
+              href="https://doi.org/10.1016/j.ajhg.2015.05.022"
+              target="_blank"
+              style="color: #2980b9"
+              >Richards S et al. (2015) Am J Hum Genet</a
+            >
+            (DOI: 10.1016/j.ajhg.2015.05.022)
+          </li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <!-- 流程圖區塊 -->
+  <h2
+    style="
+      color: #2c3e50;
+      border-bottom: 3px solid #e74c3c;
+      padding-bottom: 8px;
+    "
+  >
+    分子檢測流程圖譜
+  </h2>
+  <div
+    style="
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 30px;
+    "
+  >
+    <div
+      style="
+        border: 4px solid #e67e22;
+        padding: 12px;
+        border-radius: 8px;
+        background: linear-gradient(145deg, #fff3e0, #ffab91);
+      "
+    >
+      <h3 style="color: #d84315">EGFR檢測流程</h3>
+      <div style="padding: 10px">
+        <p>1. 組織固定<br />2. IHC染色<br />3. H-score計算<br />4. 臨床報告</p>
+      </div>
+    </div>
+    <div
+      style="
+        border: 4px solid #2ecc71;
+        padding: 12px;
+        border-radius: 8px;
+        background: linear-gradient(145deg, #e8f5e9, #c8e6c9);
+      "
+    >
+      <h3 style="color: #1b5e20">NGS全外顯子流程</h3>
+      <div style="padding: 10px">
+        <p>1. DNA提取<br />2. 文庫製備<br />3. 定序運行<br />4. 生物信息分析</p>
+      </div>
+    </div>
+    <div
+      style="
+        border: 4px solid #9b59b6;
+        padding: 12px;
+        border-radius: 8px;
+        background: linear-gradient(145deg, #f3e5f5, #ce93d8);
+      "
+    >
+      <h3 style="color: #6a1b9a">液體活檢流程</h3>
+      <div style="padding: 10px">
+        <p>1. 血漿分離<br />2. ctDNA提取<br />3. 目標富集<br />4. 突變分析</p>
+      </div>
+    </div>
+    <div
+      style="
+        border: 4px solid #3498db;
+        padding: 12px;
+        border-radius: 8px;
+        background: linear-gradient(145deg, #e3f2fd, #90caf9);
+      "
+    >
+      <h3 style="color: #0d47a1">MSI檢測流程</h3>
+      <div style="padding: 10px">
+        <p>
+          1. DNA提取<br />2. 微衛星標記PCR<br />3. 毛細管電泳<br />4.
+          不穩定性評分
+        </p>
+      </div>
+    </div>
+    <div
+      style="
+        border: 4px solid #f1c40f;
+        padding: 12px;
+        border-radius: 8px;
+        background: linear-gradient(145deg, #fffde7, #fff59d);
+      "
+    >
+      <h3 style="color: #f57f17">PD-L1判讀流程</h3>
+      <div style="padding: 10px">
+        <p>
+          1. 切片製備<br />2. 平台特異性染色<br />3. 腫瘤比例評分<br />4.
+          臨床閾值判定
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 參考文獻表格 -->
+  <h2
+    style="
+      color: #2c3e50;
+      border-bottom: 3px solid #e74c3c;
+      padding-bottom: 8px;
+    "
+  >
+    學術參考文獻索引
+  </h2>
+  <table
+    style="
+      width: 100%;
+      border: 3px solid #2c3e50;
+      background-color: #ecf0f1;
+      margin-top: 20px;
+      border-collapse: collapse;
+    "
+  >
+    <tr style="background-color: #34495e; color: white">
+      <th style="border: 2px solid #2c3e50; padding: 12px; width: 40%">
+        文獻標題
+      </th>
+      <th style="border: 2px solid #2c3e50; padding: 12px; width: 30%">
+        識別碼
+      </th>
+      <th style="border: 2px solid #2c3e50; padding: 12px; width: 30%">期刊</th>
+    </tr>
+    <tr>
+      <td style="border: 2px solid #bdc3c7; padding: 10px">
+        <a
+          href="https://doi.org/10.1056/NEJMoa1213261"
+          target="_blank"
+          style="color: #3498db"
+          >Detection of EGFR T790M Mutation in Circulating Tumor DNA</a
+        >
+      </td>
+      <td style="border: 2px solid #bdc3c7; padding: 10px">PMID: 24451021</td>
+      <td style="border: 2px solid #bdc3c7; padding: 10px">N Engl J Med</td>
+    </tr>
+    <!-- 其他參考文獻 -->
+    <tr style="background-color: #f8f9fa">
+      <td style="border: 2px solid #bdc3c7; padding: 10px">
+        <a
+          href="https://doi.org/10.1038/nm.3853"
+          target="_blank"
+          style="color: #3498db"
+          >Development and Validation of a Clinical Cancer Genomic Profiling
+          Test</a
+        >
+      </td>
+      <td style="border: 2px solid #bdc3c7; padding: 10px">
+        DOI: 10.1038/nm.3853
+      </td>
+      <td style="border: 2px solid #bdc3c7; padding: 10px">Nat Med</td>
+    </tr>
+    <tr>
+      <td style="border: 2px solid #bdc3c7; padding: 10px">
+        <a
+          href="https://doi.org/10.1038/ng.2764"
+          target="_blank"
+          style="color: #3498db"
+          >Mutational Heterogeneity in Cancer</a
+        >
+      </td>
+      <td style="border: 2px solid #bdc3c7; padding: 10px">
+        PMCID: PMC3919509
+      </td>
+      <td style="border: 2px solid #bdc3c7; padding: 10px">Nat Genet</td>
+    </tr>
+  </table>
+</div>
+
+<style>
+  .pathology-analysis table tr:nth-child(even) {
+    background-color: #f8f9fa;
+  }
+  .pathology-analysis a:hover {
+    text-decoration: underline dotted;
+  }
+  .pathology-analysis h2 {
+    margin-top: 25px;
+  }
+</style>

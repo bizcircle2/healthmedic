@@ -1,0 +1,989 @@
+<div class="container mx-auto px-4 py-8" style="font-family: 'Noto Sans TC', sans-serif;">
+    <h1 class="text-3xl font-bold mb-6 text-center" style="color: #333;">ACTOnco Pro與FoundationOne檢測比較分析</h1>
+    
+    <div class="mb-8">
+      <h2 class="text-xl font-bold mb-4" style="color: #555;">檢測資訊概覽</h2>
+      <table style="width: 100%; border-collapse: collapse; border: 2px solid #333; table-layout: auto;" border="2" cellspacing="0" cellpadding="8">
+        <thead>
+          <tr class="bg-primary text-white" style="background-color: #ffdebf;">
+            <th style="border: 2px solid #333; padding: 12px;">檢測名稱</th>
+            <th style="border: 2px solid #333; padding: 12px;">檢測類型</th>
+            <th style="border: 2px solid #333; padding: 12px;">香港價格</th>
+            <th style="border: 2px solid #333; padding: 12px;">報告時間</th>
+            <th style="border: 2px solid #333; padding: 12px;">適用癌症類型</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="border: 2px solid #333; padding: 12px; font-weight: bold;">ACTOnco Pro</td>
+            <td style="border: 2px solid #333; padding: 12px;">DNA+RNA NGS檢測 + PD-L1</td>
+            <td style="border: 2px solid #333; padding: 12px;">港幣 $48,000 - $58,000</td>
+            <td style="border: 2px solid #333; padding: 12px;">約2-3週</td>
+            <td style="border: 2px solid #333; padding: 12px;">固體腫瘤（肺癌、乳癌、結直腸癌等）</td>
+          </tr>
+          <tr>
+            <td style="border: 2px solid #333; padding: 12px; font-weight: bold;">FoundationOne</td>
+            <td style="border: 2px solid #333; padding: 12px;">組織NGS檢測 + IHC</td>
+            <td style="border: 2px solid #333; padding: 12px;">港幣 $52,000 - $62,000</td>
+            <td style="border: 2px solid #333; padding: 12px;">約3-4週</td>
+            <td style="border: 2px solid #333; padding: 12px;">固體腫瘤（肺癌、黑色素瘤、卵巢癌等）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="mb-8">
+      <h2 class="text-xl font-bold mb-4" style="color: #555;">檢測項目對比</h2>
+      <table style="width: 100%; border-collapse: collapse; border: 2px solid #333; table-layout: auto;" border="2" cellspacing="0" cellpadding="8">
+        <thead>
+          <tr class="bg-primary text-white" style="background-color: #ffdebf;">
+            <th style="border: 2px solid #333; padding: 12px; width: 5%;">排名</th>
+            <th style="border: 2px solid #333; padding: 12px; width: 15%;">檢測項目</th>
+            <th style="border: 2px solid #333; padding: 12px; width: 20%;">ACTOnco Pro</th>
+            <th style="border: 2px solid #333; padding: 12px; width: 20%;">FoundationOne</th>
+            <th style="border: 2px solid #333; padding: 12px; width: 20%;">適用情況建議</th>
+            <th style="border: 2px solid #333; padding: 12px; width: 20%;">備註</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="border: 2px solid #333; padding: 12px; text-align: center;">1</td>
+            <td style="border: 2px solid #333; padding: 12px; font-weight: bold;">基因檢測數量</td>
+            <td style="border: 2px solid #333; padding: 12px;">覆蓋&gt;500個癌症相關基因</td>
+            <td style="border: 2px solid #333; padding: 12px;">覆蓋&gt;324個癌症相關基因</td>
+            <td style="border: 2px solid #333; padding: 12px;">需要全面基因譜分析時選擇ACTOnco</td>
+            <td style="border: 2px solid #333; padding: 12px;">ACTOnco包含更多RNA融合檢測</td>
+          </tr>
+          <tr>
+            <td style="border: 2px solid #333; padding: 12px; text-align: center;">2</td>
+            <td style="border: 2px solid #333; padding: 12px; font-weight: bold;">RNA表達分析</td>
+            <td style="border: 2px solid #333; padding: 12px;">全面RNA表達譜和融合檢測</td>
+            <td style="border: 2px solid #333; padding: 12px;">有限的RNA分析</td>
+            <td style="border: 2px solid #333; padding: 12px;">懷疑RNA融合或表達異常時選擇ACTOnco</td>
+            <td style="border: 2px solid #333; padding: 12px;">ACTOnco提供更全面的轉錄組分析</td>
+          </tr>
+          <tr>
+            <td style="border: 2px solid #333; padding: 12px; text-align: center;">3</td>
+            <td style="border: 2px solid #333; padding: 12px; font-weight: bold;">PD-L1表達檢測</td>
+            <td style="border: 2px solid #333; padding: 12px;">包含PD-L1 IHC檢測</td>
+            <td style="border: 2px solid #333; padding: 12px;">需額外收費添加PD-L1檢測</td>
+            <td style="border: 2px solid #333; padding: 12px;">考慮免疫治療時選擇ACTOnco</td>
+            <td style="border: 2px solid #333; padding: 12px;">FoundationOne需額外支付約$5,000</td>
+          </tr>
+          <tr>
+            <td style="border: 2px solid #333; padding: 12px; text-align: center;">4</td>
+            <td style="border: 2px solid #333; padding: 12px; font-weight: bold;">同源重組修復缺陷(HRD)</td>
+            <td style="border: 2px solid #333; padding: 12px;">包含HRD分析</td>
+            <td style="border: 2px solid #333; padding: 12px;">包含BRCA1/2和HRD分析</td>
+            <td style="border: 2px solid #333; padding: 12px;">卵巢癌或乳腺癌患者可考慮FoundationOne</td>
+            <td style="border: 2px solid #333; padding: 12px;">兩者均提供HRD相關資訊</td>
+          </tr>
+          <tr>
+            <td style="border: 2px solid #333; padding: 12px; text-align: center;">5</td>
+            <td style="border: 2px solid #333; padding: 12px; font-weight: bold;">微衛星不穩定性(MSI)</td>
+            <td style="border: 2px solid #333; padding: 12px;">包含MSI檢測</td>
+            <td style="border: 2px solid #333; padding: 12px;">包含MSI檢測</td>
+            <td style="border: 2px solid #333; padding: 12px;">結直腸癌或胃癌患者可選擇任一檢測</td>
+            <td style="border: 2px solid #333; padding: 12px;">兩者方法略有不同但結果一致率高</td>
+          </tr>
+          <tr>
+            <td style="border: 2px solid #333; padding: 12px; text-align: center;">6</td>
+            <td style="border: 2px solid #333; padding: 12px; font-weight: bold;">腫瘤突變負荷(TMB)</td>
+            <td style="border: 2px solid #333; padding: 12px;">包含TMB計算</td>
+            <td style="border: 2px solid #333; padding: 12px;">包含TMB計算</td>
+            <td style="border: 2px solid #333; padding: 12px;">考慮免疫治療時選擇任一檢測</td>
+            <td style="border: 2px solid #333; padding: 12px;">計算方法略有不同</td>
+          </tr>
+          <tr>
+            <td style="border: 2px solid #333; padding: 12px; text-align: center;">7</td>
+            <td style="border: 2px solid #333; padding: 12px; font-weight: bold;">藥物匹配分析</td>
+            <td style="border: 2px solid #333; padding: 12px;">包含FDA批准及臨床試驗藥物</td>
+            <td style="border: 2px solid #333; padding: 12px;">包含FDA批准及更多臨床試驗藥物</td>
+            <td style="border: 2px solid #333; padding: 12px;">尋求參加臨床試驗時選擇FoundationOne</td>
+            <td style="border: 2px solid #333; padding: 12px;">FoundationOne的臨床試驗數據更全面</td>
+          </tr>
+          <tr>
+            <td style="border: 2px solid #333; padding: 12px; text-align: center;">8</td>
+            <td style="border: 2px solid #333; padding: 12px; font-weight: bold;">液體活檢兼容性</td>
+            <td style="border: 2px solid #333; padding: 12px;">支持血漿ctDNA檢測</td>
+            <td style="border: 2px solid #333; padding: 12px;">支持血漿ctDNA檢測</td>
+            <td style="border: 2px solid #333; padding: 12px;">無法獲得組織樣本時可選擇任一檢測</td>
+            <td style="border: 2px solid #333; padding: 12px;">液體活檢靈敏度相似</td>
+          </tr>
+          <tr>
+            <td style="border: 2px solid #333; padding: 12px; text-align: center;">9</td>
+            <td style="border: 2px solid #333; padding: 12px; font-weight: bold;">報告易用性</td>
+            <td style="border: 2px solid #333; padding: 12px;">中文報告詳細易懂</td>
+            <td style="border: 2px solid #333; padding: 12px;">英文報告專業詳盡</td>
+            <td style="border: 2px solid #333; padding: 12px;">偏好中文報告選擇ACTOnco</td>
+            <td style="border: 2px solid #333; padding: 12px;">FoundationOne報告需醫生解讀</td>
+          </tr>
+          <tr>
+            <td style="border: 2px solid #333; padding: 12px; text-align: center;">10</td>
+            <td style="border: 2px solid #333; padding: 12px; font-weight: bold;">報告時間</td>
+            <td style="border: 2px solid #333; padding: 12px;">約2-3週</td>
+            <td style="border: 2px solid #333; padding: 12px;">約3-4週</td>
+            <td style="border: 2px solid #333; padding: 12px;">需要快速結果選擇ACTOnco</td>
+            <td style="border: 2px solid #333; padding: 12px;">緊急情況可申請加速服務</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="mb-8">
+      <h2 class="text-xl font-bold mb-4" style="color: #555;">優缺點分析</h2>
+      <table style="width: 100%; border-collapse: collapse; border: 2px solid #333; table-layout: auto;" border="2" cellspacing="0" cellpadding="8">
+        <thead>
+          <tr class="bg-primary text-white" style="background-color: #ffdebf;">
+            <th style="border: 2px solid #333; padding: 12px; width: 50%;">ACTOnco Pro</th>
+            <th style="border: 2px solid #333; padding: 12px; width: 50%;">FoundationOne</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="border: 2px solid #333; padding: 12px;">
+              <div class="mb-4">
+                <h3 class="font-bold text-green-600 mb-2">優點</h3>
+                <ul class="list-disc pl-5 space-y-1">
+                  <li>全面的DNA+RNA分析，檢測融合基因</li>
+                  <li>包含PD-L1表達檢測，無需額外收費</li>
+                  <li>中文報告，臨床醫生易於理解</li>
+                  <li>報告時間較短(2-3週)</li>
+                  <li>價格相對較低</li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="font-bold text-red-600 mb-2">缺點</h3>
+                <ul class="list-disc pl-5 space-y-1">
+                  <li>臨床試驗匹配數據不如FoundationOne全面</li>
+                  <li>國際認可度略低</li>
+                </ul>
+              </div>
+            </td>
+            <td style="border: 2px solid #333; padding: 12px;">
+              <div class="mb-4">
+                <h3 class="font-bold text-green-600 mb-2">優點</h3>
+                <ul class="list-disc pl-5 space-y-1">
+                  <li>國際知名品牌，臨床數據更全面</li>
+                  <li>更多FDA批准和臨床試驗藥物匹配</li>
+                  <li>用於多項大型臨床試驗的標準檢測</li>
+                  <li>提供HRD和TMB分析</li>
+                  <li>適用於多種癌症類型</li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="font-bold text-red-600 mb-2">缺點</h3>
+                <ul class="list-disc pl-5 space-y-1">
+                  <li>價格較高</li>
+                  <li>報告時間較長(3-4週)</li>
+                  <li>PD-L1檢測需額外收費</li>
+                  <li>英文報告，可能需要專業解讀</li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="mb-8">
+      <h2 class="text-xl font-bold mb-4" style="color: #555;">適用人群建議</h2>
+      <table style="width: 100%; border-collapse: collapse; border: 2px solid #333; table-layout: auto;" border="2" cellspacing="0" cellpadding="8">
+        <thead>
+          <tr class="bg-primary text-white" style="background-color: #ffdebf;">
+            <th style="border: 2px solid #333; padding: 12px;">適用人群</th>
+            <th style="border: 2px solid #333; padding: 12px;">推薦檢測</th>
+            <th style="border: 2px solid #333; padding: 12px;">理由</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="border: 2px solid #333; padding: 12px;">晚期癌症患者尋求靶向治療</td>
+            <td style="border: 2px solid #333; padding: 12px;">ACTOnco Pro</td>
+            <td style="border: 2px solid #333; padding: 12px;">全面的DNA+RNA分析，快速報告，包含PD-L1檢測</td>
+          </tr>
+          <tr>
+            <td style="border: 2px solid #333; padding: 12px;">考慮免疫治療的患者</td>
+            <td style="border: 2px solid #333; padding: 12px;">ACTOnco Pro</td>
+            <td style="border: 2px solid #333; padding: 12px;">PD-L1檢測已包含在套餐中，提供TMB分析</td>
+          </tr>
+          <tr>
+            <td style="border: 2px solid #333; padding: 12px;">卵巢癌或乳腺癌患者</td>
+            <td style="border: 2px solid #333; padding: 12px;">FoundationOne</td>
+            <td style="border: 2px solid #333; padding: 12px;">更全面的HRD分析和BRCA1/2檢測</td>
+          </tr>
+          <tr>
+            <td style="border: 2px solid #333; padding: 12px;">尋求參加臨床試驗的患者</td>
+            <td style="border: 2px solid #333; padding: 12px;">FoundationOne</td>
+            <td style="border: 2px solid #333; padding: 12px;">更多臨床試驗匹配數據和國際認可度</td>
+          </tr>
+          <tr>
+            <td style="border: 2px solid #333; padding: 12px;">需要快速治療決策的患者</td>
+            <td style="border: 2px solid #333; padding: 12px;">ACTOnco Pro</td>
+            <td style="border: 2px solid #333; padding: 12px;">報告時間較短(2-3週)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="container" style="font-family: Arial, sans-serif; margin: 20px;">
+        <h1 style="text-align: center;">基因檢測報告結構說明</h1>
+    
+        <div class="section" style="background-color: #f4f4f4; padding: 10px;">
+            <h2>ACTOnco Pro 報告</h2>
+            <ul>
+                <li>封面頁: 包含患者基本資訊、檢測編號、檢測日期</li>
+                <li>檢測類型: DNA+RNA NGS + PD-L1 IHC</li>
+                <li>基因突變圖譜: 瀑布圖或表格展示 (EGFR、ALK、KRAS 等)</li>
+                <li>RNA 融合檢測: 顯示融合基因對 (EML4-ALK) 及表達水平</li>
+                <li>生物標誌物分析: PD-L1 表達值、TMB 數值、MSI 狀態</li>
+                <li>臨床解讀: 靶向藥物推薦、免疫治療評估、臨床試驗匹配</li>
+            </ul>
+        </div>
+    
+        <div class="section" style="background-color: #f4f4f4; padding: 10px;">
+            <h2>FoundationOne 報告</h2>
+            <ul>
+                <li>封面頁: 國際標準格式，包含患者 ID、樣本類型、檢測版本</li>
+                <li>基因分析: 覆蓋 324+ 基因，標注致癌突變</li>
+                <li>基因組特徵: HRD 評分, 腫瘤突變負荷, 染色體拷貝數變異</li>
+                <li>臨床應用: FDA 核准藥物推薦, 臨床試驗匹配, 耐藥機制分析</li>
+                <li>報告權威性: 引用 NCCN 指南、ASCO 標準、頂級期刊文獻</li>
+            </ul>
+        </div>
+    
+        <div class="section" style="background-color: #fff; padding: 10px;">
+            <h2>關鍵差異總結</h2>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <th style="border: 1px solid #ddd; padding: 8px;">維度</th>
+                    <th style="border: 1px solid #ddd; padding: 8px;">ACTOnco Pro</th>
+                    <th style="border: 1px solid #ddd; padding: 8px;">FoundationOne</th>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">語言</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">中文為主，附英文摘要</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">全英文，專業醫學術語密集</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">數據深度</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">側重東亞人群高頻突變，RNA 融合檢測更全面</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">全球多癌種數據，HRD/BRAF 等檢測更精準</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">臨床對接</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">匹配中國核准藥物及 CSCO 指南</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">優先推薦國際多中心試驗及 FDA 突破性療法</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">報告時效</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">10-14 天（加急可縮短至 7 天）</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">14-21 天，需國際物流運輸樣本</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    <!DOCTYPE html>
+    <html lang="zh-Hant">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>癌症基因检测分析平台 - 完整对比与误区解析</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: '#2b6cb0',
+                            secondary: '#c53030',
+                            tertiary: '#2f855a',
+                            warning: '#f6ad55',
+                            danger: '#e53e3e',
+                            success: '#48bb78',
+                            info: '#4299e1',
+                            light: '#f7fafc',
+                            dark: '#2d3748',
+                            custom: '#805ad5', // 新增颜色用于ACTOnco Pro
+                        },
+                        fontFamily: {
+                            sans: ['"Microsoft JhengHei"', 'Arial', 'sans-serif'],
+                        },
+                    }
+                }
+            }
+        </script>
+        <style type="text/tailwindcss">
+            @layer utilities {
+                .content-auto {
+                    content-visibility: auto;
+                }
+                .gradient-blue {
+                    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+                }
+                .gradient-header {
+                    background: linear-gradient(90deg, #4a5568, #2d3748);
+                }
+                .shadow-card {
+                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                }
+                .border-thick {
+                    border-width: 4px;
+                }
+                .text-shadow {
+                    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+                }
+            }
+        </style>
+    </head>
+    <body class="bg-gray-50 min-h-screen">
+        <div class="max-w-7xl mx-auto p-4 md:p-8">
+            <!-- 癌症基因全景数据 -->
+            <div class="cancer-genetic-analysis rounded-xl overflow-hidden shadow-lg gradient-blue border-4 border-primary">
+                <div class="border-4 border-secondary p-6 mb-8 bg-white rounded-lg">
+                    <h2 class="text-2xl font-bold text-secondary border-b-4 border-secondary pb-4 mb-6 flex items-center">
+                        <i class="fa fa-dna mr-3 text-primary"></i>
+                        癌症基因組學關鍵數據 (2023年最新)
+                        <sup class="ml-1"><a href="https://doi.org/10.1016/j.cell.2023.03.013" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300"><u>[Cell 2023]</u></a></sup>
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fa fa-database text-primary mt-1 mr-2"></i>
+                                <span>致癌基因數據庫： <a href="https://cancer.sanger.ac.uk/cosmic" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">COSMIC v96</a> (723核心基因)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-microscope text-primary mt-1 mr-2"></i>
+                                <span>臨床級別Panel： <a href="https://doi.org/10.1038/s41591-022-01747-w" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">MSK-IMPACT® 505基因</a></span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-flask text-primary mt-1 mr-2"></i>
+                                <span>液體活檢靈敏度： <a href="https://doi.org/10.1056/NEJMoa2200075" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">0.1% ctDNA (Guardant360®)</a></span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-rocket text-custom mt-1 mr-2"></i>
+                                <span>新興技術平台： <a href="https://doi.org/10.1038/s41591-023-02425-3" target="_blank" class="text-custom hover:text-custom/80 transition-colors duration-300">ACTOnco Pro™</a> (多組學整合分析)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <!-- 十大检测平台完整表格 -->
+                <div class="overflow-x-auto rounded-xl shadow-card mb-8">
+                    <table class="w-full border-collapse bg-white">
+                        <thead>
+                            <tr class="gradient-header text-white">
+                                <th class="border-2 border-gray-200 p-4 text-center font-bold" style="width: 8%;">排名</th>
+                                <th class="border-2 border-gray-200 p-4 text-center font-bold" style="width: 22%;">檢測系統 (全稱)</th>
+                                <th class="border-2 border-gray-200 p-4 text-center font-bold" style="width: 12%;">香港定價 (HKD)</th>
+                                <th class="border-2 border-gray-200 p-4 text-center font-bold" style="width: 18%;">臨床適應症</th>
+                                <th class="border-2 border-gray-200 p-4 text-center font-bold" style="width: 20%;">技術優勢</th>
+                                <th class="border-2 border-gray-200 p-4 text-center font-bold" style="width: 20%;">主要限制</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 第1名 -->
+                            <tr class="bg-blue-50 hover:bg-blue-100 transition-colors duration-300">
+                                <td class="border-2 border-gray-200 p-4 text-center font-bold text-primary">1</td>
+                                <td class="border-2 border-gray-200 p-4">
+                                    <a href="https://doi.org/10.1038/s41586-022-05068-3" target="_blank" class="text-primary font-semibold hover:text-primary/80 transition-colors duration-300">
+                                        FoundationOne®CDx<br>
+                                        <span class="text-sm text-gray-600">全外顯子組測序平台</span>
+                                    </a>
+                                </td>
+                                <td class="border-2 border-gray-200 p-4 text-center">$48,000-$65,000</td>
+                                <td class="border-2 border-gray-200 p-4">實體腫瘤全面分析</td>
+                                <td class="border-2 border-gray-200 p-4 text-green-600">324基因+MSI+TMB檢測</td>
+                                <td class="border-2 border-gray-200 p-4 text-red-600">需組織樣本(≥20%腫瘤含量)</td>
+                            </tr>
+                            
+                            <!-- 第2名 -->
+                            <tr class="bg-green-50 hover:bg-green-100 transition-colors duration-300">
+                                <td class="border-2 border-gray-200 p-4 text-center font-bold text-primary">2</td>
+                                <td class="border-2 border-gray-200 p-4">
+                                    <a href="https://doi.org/10.1056/NEJMoa2109975" target="_blank" class="text-primary font-semibold hover:text-primary/80 transition-colors duration-300">
+                                        MSK-IMPACT®<br>
+                                        <span class="text-sm text-gray-600">Memorial Sloan Kettering系統</span>
+                                    </a>
+                                </td>
+                                <td class="border-2 border-gray-200 p-4 text-center">$52,000-$68,000</td>
+                                <td class="border-2 border-gray-200 p-4">血液腫瘤與罕見突變</td>
+                                <td class="border-2 border-gray-200 p-4 text-green-600">505基因+同源重組缺陷(HRD)</td>
+                                <td class="border-2 border-gray-200 p-4 text-red-600">僅限研究用途(非FDA批准)</td>
+                            </tr>
+                            
+                            <!-- 第3名 -->
+                            <tr class="bg-purple-50 hover:bg-purple-100 transition-colors duration-300">
+                                <td class="border-2 border-gray-200 p-4 text-center font-bold text-custom">3</td>
+                                <td class="border-2 border-gray-200 p-4">
+                                    <a href="https://doi.org/10.1038/s41591-023-02425-3" target="_blank" class="text-custom font-semibold hover:text-custom/80 transition-colors duration-300">
+                                        ACTOnco Pro™<br>
+                                        <span class="text-sm text-gray-600">多組學整合分析平台</span>
+                                    </a>
+                                </td>
+                                <td class="border-2 border-gray-200 p-4 text-center">$49,000-$63,000</td>
+                                <td class="border-2 border-gray-200 p-4">複雜腫瘤綜合診斷</td>
+                                <td class="border-2 border-gray-200 p-4 text-custom">648基因+RNA+甲基化分析</td>
+                                <td class="border-2 border-gray-200 p-4 text-red-600">新技術需更多臨床驗證</td>
+                            </tr>
+                            
+                            <!-- 第4名 -->
+                            <tr class="bg-yellow-50 hover:bg-yellow-100 transition-colors duration-300">
+                                <td class="border-2 border-gray-200 p-4 text-center font-bold text-primary">4</td>
+                                <td class="border-2 border-gray-200 p-4">
+                                    <a href="https://doi.org/10.1016/j.ccell.2021.03.010" target="_blank" class="text-primary font-semibold hover:text-primary/80 transition-colors duration-300">
+                                        Guardant360®<br>
+                                        <span class="text-sm text-gray-600">液態活檢ctDNA檢測</span>
+                                    </a>
+                                </td>
+                                <td class="border-2 border-gray-200 p-4 text-center">$38,000-$45,000</td>
+                                <td class="border-2 border-gray-200 p-4">晚期癌症監測</td>
+                                <td class="border-2 border-gray-200 p-4 text-green-600">無創檢測+73基因追蹤</td>
+                                <td class="border-2 border-gray-200 p-4 text-red-600">低腫瘤負荷時假陰性率高</td>
+                            </tr>
+                            
+                            <!-- 第5名 -->
+                            <tr class="bg-gray-50 hover:bg-gray-100 transition-colors duration-300">
+                                <td class="border-2 border-gray-200 p-4 text-center font-bold text-primary">5</td>
+                                <td class="border-2 border-gray-200 p-4">
+                                    <a href="https://doi.org/10.1038/s41591-021-01652-8" target="_blank" class="text-primary font-semibold hover:text-primary/80 transition-colors duration-300">
+                                        Tempus xT®<br>
+                                        <span class="text-sm text-gray-600">AI驅動基因組分析</span>
+                                    </a>
+                                </td>
+                                <td class="border-2 border-gray-200 p-4 text-center">$55,000-$72,000</td>
+                                <td class="border-2 border-gray-200 p-4">免疫治療反應預測</td>
+                                <td class="border-2 border-gray-200 p-4 text-green-600">整合RNA測序與TMB分析</td>
+                                <td class="border-2 border-gray-200 p-4 text-red-600">數據解讀需專科醫生配合</td>
+                            </tr>
+                            
+                            <!-- 第6名 -->
+                            <tr class="bg-blue-50 hover:bg-blue-100 transition-colors duration-300">
+                                <td class="border-2 border-gray-200 p-4 text-center font-bold text-primary">6</td>
+                                <td class="border-2 border-gray-200 p-4">
+                                    <a href="https://doi.org/10.1158/2159-8290.CD-21-0123" target="_blank" class="text-primary font-semibold hover:text-primary/80 transition-colors duration-300">
+                                        Caris Molecular Intelligence®<br>
+                                        <span class="text-sm text-gray-600">蛋白質組學整合平台</span>
+                                    </a>
+                                </td>
+                                <td class="border-2 border-gray-200 p-4 text-center">$62,000-$78,000</td>
+                                <td class="border-2 border-gray-200 p-4">跨癌種治療匹配</td>
+                                <td class="border-2 border-gray-200 p-4 text-green-600">結合DNA+RNA+蛋白質分析</td>
+                                <td class="border-2 border-gray-200 p-4 text-red-600">高成本與長報告周期(4週)</td>
+                            </tr>
+                            
+                            <!-- 第7名 -->
+                            <tr class="bg-green-50 hover:bg-green-100 transition-colors duration-300">
+                                <td class="border-2 border-gray-200 p-4 text-center font-bold text-primary">7</td>
+                                <td class="border-2 border-gray-200 p-4">
+                                    <a href="https://doi.org/10.1200/JCO.2020.38.15_suppl.9501" target="_blank" class="text-primary font-semibold hover:text-primary/80 transition-colors duration-300">
+                                        Oncomine™ Dx Target Test<br>
+                                        <span class="text-sm text-gray-600">靶向治療選擇平台</span>
+                                    </a>
+                                </td>
+                                <td class="border-2 border-gray-200 p-4 text-center">$34,000-$42,000</td>
+                                <td class="border-2 border-gray-200 p-4">肺癌靶向治療</td>
+                                <td class="border-2 border-gray-200 p-4 text-green-600">快速週轉(7天)</td>
+                                <td class="border-2 border-gray-200 p-4 text-red-600">僅限特定基因變異</td>
+                            </tr>
+                            
+                            <!-- 第8名 -->
+                            <tr class="bg-yellow-50 hover:bg-yellow-100 transition-colors duration-300">
+                                <td class="border-2 border-gray-200 p-4 text-center font-bold text-primary">8</td>
+                                <td class="border-2 border-gray-200 p-4">
+                                    <a href="https://doi.org/10.1016/j.jmoldx.2021.04.008" target="_blank" class="text-primary font-semibold hover:text-primary/80 transition-colors duration-300">
+                                        PGDx elio™ Tissue Complete<br>
+                                        <span class="text-sm text-gray-600">泛癌種基因檢測</span>
+                                    </a>
+                                </td>
+                                <td class="border-2 border-gray-200 p-4 text-center">$41,000-$53,000</td>
+                                <td class="border-2 border-gray-200 p-4">泛癌種篩查</td>
+                                <td class="border-2 border-gray-200 p-4 text-green-600">高成本效益</td>
+                                <td class="border-2 border-gray-200 p-4 text-red-600">缺乏MSI檢測</td>
+                            </tr>
+                            
+                            <!-- 第9名 -->
+                            <tr class="bg-gray-50 hover:bg-gray-100 transition-colors duration-300">
+                                <td class="border-2 border-gray-200 p-4 text-center font-bold text-primary">9</td>
+                                <td class="border-2 border-gray-200 p-4">
+                                    <a href="https://doi.org/10.1016/j.jtho.2020.09.004" target="_blank" class="text-primary font-semibold hover:text-primary/80 transition-colors duration-300">
+                                        ArcherDX® FusionPlex®<br>
+                                        <span class="text-sm text-gray-600">融合基因檢測系統</span>
+                                    </a>
+                                </td>
+                                <td class="border-2 border-gray-200 p-4 text-center">$37,000-$49,000</td>
+                                <td class="border-2 border-gray-200 p-4">融合基因檢測</td>
+                                <td class="border-2 border-gray-200 p-4 text-green-600">高靈敏度NGS</td>
+                                <td class="border-2 border-gray-200 p-4 text-red-600">僅限RNA分析</td>
+                            </tr>
+                            
+                            <!-- 第10名 -->
+                            <tr class="bg-blue-50 hover:bg-blue-100 transition-colors duration-300">
+                                <td class="border-2 border-gray-200 p-4 text-center font-bold text-primary">10</td>
+                                <td class="border-2 border-gray-200 p-4">
+                                    <a href="https://doi.org/10.1016/j.clml.2021.07.002" target="_blank" class="text-primary font-semibold hover:text-primary/80 transition-colors duration-300">
+                                        NeoGenomics® NeoTYPE®<br>
+                                        <span class="text-sm text-gray-600">血液腫瘤分析平台</span>
+                                    </a>
+                                </td>
+                                <td class="border-2 border-gray-200 p-4 text-center">$28,000-$35,000</td>
+                                <td class="border-2 border-gray-200 p-4">血液腫瘤分析</td>
+                                <td class="border-2 border-gray-200 p-4 text-green-600">包含CNV檢測</td>
+                                <td class="border-2 border-gray-200 p-4 text-red-600">覆蓋基因較少</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+    
+                <!-- 十大謬誤修正樹狀圖 -->
+                <div class="border-4 border-tertiary p-6 rounded-lg mb-8 bg-green-50">
+                    <h3 class="text-xl font-bold text-tertiary mb-6 flex items-center">
+                        <i class="fa fa-exclamation-triangle mr-3 text-warning"></i>
+                        臨床基因檢測十大認知謬誤與修正
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- 謬誤1 -->
+                        <div class="border-3 border-warning p-4 rounded-lg bg-yellow-50 transform hover:scale-[1.02] transition-transform duration-300">
+                            <h4 class="text-lg font-semibold text-red-600 mb-2 flex items-center">
+                                <i class="fa fa-times-circle mr-2"></i>
+                                謬誤1: 單次檢測即可終身適用
+                            </h4>
+                            <p class="text-blue-700">
+                                <i class="fa fa-arrow-right mr-2 text-green-600"></i>
+                                修正：需動態監測腫瘤演化<br>
+                                <a href="https://doi.org/10.1038/s41586-021-03776-w" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    <i class="fa fa-external-link-square mr-1"></i>(Nature 2021)
+                                </a>
+                            </p>
+                        </div>
+                        
+                        <!-- 謬誤2 -->
+                        <div class="border-3 border-success p-4 rounded-lg bg-green-50 transform hover:scale-[1.02] transition-transform duration-300">
+                            <h4 class="text-lg font-semibold text-blue-700 mb-2 flex items-center">
+                                <i class="fa fa-times-circle mr-2"></i>
+                                謬誤2: ctDNA陰性=無腫瘤
+                            </h4>
+                            <p class="text-green-700">
+                                <i class="fa fa-arrow-right mr-2 text-green-600"></i>
+                                修正：需結合影像學與病理<br>
+                                <a href="https://doi.org/10.1056/NEJMra2030174" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    <i class="fa fa-external-link-square mr-1"></i>(NEJM 2021)
+                                </a>
+                            </p>
+                        </div>
+                        
+                        <!-- 謬誤3 -->
+                        <div class="border-3 border-info p-4 rounded-lg bg-blue-50 transform hover:scale-[1.02] transition-transform duration-300">
+                            <h4 class="text-lg font-semibold text-purple-600 mb-2 flex items-center">
+                                <i class="fa fa-times-circle mr-2"></i>
+                                謬誤3: 基因檢測報告完全一致
+                            </h4>
+                            <p class="text-blue-700">
+                                <i class="fa fa-arrow-right mr-2 text-green-600"></i>
+                                修正：不同平台基因覆蓋度差異顯著<br>
+                                <a href="https://doi.org/10.1016/j.jmoldx.2020.09.004" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    <i class="fa fa-external-link-square mr-1"></i>(J Mol Diagn 2021)
+                                </a>
+                            </p>
+                        </div>
+                        
+                        <!-- 謬誤4 -->
+                        <div class="border-3 border-warning p-4 rounded-lg bg-yellow-50 transform hover:scale-[1.02] transition-transform duration-300">
+                            <h4 class="text-lg font-semibold text-red-600 mb-2 flex items-center">
+                                <i class="fa fa-times-circle mr-2"></i>
+                                謬誤4: 陽性結果必然需要治療
+                            </h4>
+                            <p class="text-blue-700">
+                                <i class="fa fa-arrow-right mr-2 text-green-600"></i>
+                                修正：需結合臨床表現與指南<br>
+                                <a href="https://doi.org/10.1200/JCO.2020.38.15_suppl.9501" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    <i class="fa fa-external-link-square mr-1"></i>(ASCO 2020)
+                                </a>
+                            </p>
+                        </div>
+                        
+                        <!-- 謬誤5 -->
+                        <div class="border-3 border-success p-4 rounded-lg bg-green-50 transform hover:scale-[1.02] transition-transform duration-300">
+                            <h4 class="text-lg font-semibold text-blue-700 mb-2 flex items-center">
+                                <i class="fa fa-times-circle mr-2"></i>
+                                謬誤5: 組織活檢優於液體活檢
+                            </h4>
+                            <p class="text-green-700">
+                                <i class="fa fa-arrow-right mr-2 text-green-600"></i>
+                                修正：兩者互補，需根據臨床情境選擇<br>
+                                <a href="https://doi.org/10.1056/NEJMoa2109975" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    <i class="fa fa-external-link-square mr-1"></i>(NEJM 2022)
+                                </a>
+                            </p>
+                        </div>
+                        
+                        <!-- 謬誤6 -->
+                        <div class="border-3 border-info p-4 rounded-lg bg-blue-50 transform hover:scale-[1.02] transition-transform duration-300">
+                            <h4 class="text-lg font-semibold text-purple-600 mb-2 flex items-center">
+                                <i class="fa fa-times-circle mr-2"></i>
+                                謬誤6: 所有突變都有靶向藥物
+                            </h4>
+                            <p class="text-blue-700">
+                                <i class="fa fa-arrow-right mr-2 text-green-600"></i>
+                                修正：僅少部分突變有獲批藥物<br>
+                                <a href="https://doi.org/10.1158/2159-8290.CD-21-0123" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    <i class="fa fa-external-link-square mr-1"></i>(Cancer Discov 2021)
+                                </a>
+                            </p>
+                        </div>
+                        
+                        <!-- 謬誤7 -->
+                        <div class="border-3 border-warning p-4 rounded-lg bg-yellow-50 transform hover:scale-[1.02] transition-transform duration-300">
+                            <h4 class="text-lg font-semibold text-red-600 mb-2 flex items-center">
+                                <i class="fa fa-times-circle mr-2"></i>
+                                謬誤7: 基因檢測適用於所有癌症患者
+                            </h4>
+                            <p class="text-blue-700">
+                                <i class="fa fa-arrow-right mr-2 text-green-600"></i>
+                                修正：需根據指南選擇合適患者<br>
+                                <a href="https://doi.org/10.1200/EDBK_339330" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    <i class="fa fa-external-link-square mr-1"></i>(NCCN Guidelines 2023)
+                                </a>
+                            </p>
+                        </div>
+                        
+                        <!-- 謬誤8 -->
+                        <div class="border-3 border-success p-4 rounded-lg bg-green-50 transform hover:scale-[1.02] transition-transform duration-300">
+                            <h4 class="text-lg font-semibold text-blue-700 mb-2 flex items-center">
+                                <i class="fa fa-times-circle mr-2"></i>
+                                謬誤8: TMB高=免疫治療反應好
+                            </h4>
+                            <p class="text-green-700">
+                                <i class="fa fa-arrow-right mr-2 text-green-600"></i>
+                                修正：需結合PD-L1表達與MSI狀態<br>
+                                <a href="https://doi.org/10.1038/s41586-022-05068-3" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    <i class="fa fa-external-link-square mr-1"></i>(Nature 2022)
+                                </a>
+                            </p>
+                        </div>
+                        
+                        <!-- 謬誤9 -->
+                        <div class="border-3 border-info p-4 rounded-lg bg-blue-50 transform hover:scale-[1.02] transition-transform duration-300">
+                            <h4 class="text-lg font-semibold text-purple-600 mb-2 flex items-center">
+                                <i class="fa fa-times-circle mr-2"></i>
+                                謬誤9: 兒童與成人基因檢測相同
+                            </h4>
+                            <p class="text-blue-700">
+                                <i class="fa fa-arrow-right mr-2 text-green-600"></i>
+                                修正：兒童癌症基因譜與成人不同<br>
+                                <a href="https://doi.org/10.1016/j.ccell.2021.03.010" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    <i class="fa fa-external-link-square mr-1"></i>(Cancer Cell 2021)
+                                </a>
+                            </p>
+                        </div>
+                        
+                        <!-- 謬誤10 -->
+                        <div class="border-3 border-warning p-4 rounded-lg bg-yellow-50 transform hover:scale-[1.02] transition-transform duration-300">
+                            <h4 class="text-lg font-semibold text-red-600 mb-2 flex items-center">
+                                <i class="fa fa-times-circle mr-2"></i>
+                                謬誤10: 基因檢測結果絕對準確
+                            </h4>
+                            <p class="text-blue-700">
+                                <i class="fa fa-arrow-right mr-2 text-green-600"></i>
+                                修正：存在假陰性/假陽性風險，需技術驗證<br>
+                                <a href="https://doi.org/10.1056/NEJMoa2202177" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    <i class="fa fa-external-link-square mr-1"></i>(NEJM 2023)
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- 验证文献系统 -->
+                <div class="border-4 border-pink-500 p-6 rounded-lg mb-8 bg-pink-50">
+                    <h3 class="text-xl font-bold text-pink-600 mb-6 flex items-center">
+                        <i class="fa fa-book mr-3 text-primary"></i>
+                        權威驗證文獻 (2020-2023)
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fa fa-file-text-o text-primary mt-1 mr-2"></i>
+                                <a href="https://doi.org/10.1016/j.cell.2021.12.008" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    泛癌種基因組圖譜 (Cell 2022)
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-file-text-o text-primary mt-1 mr-2"></i>
+                                <a href="https://doi.org/10.1056/NEJMoa2202177" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    MSI檢測新標準 (NEJM 2023)
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-file-text-o text-primary mt-1 mr-2"></i>
+                                <a href="https://doi.org/10.1038/s41586-021-03776-w" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    腫瘤演化與治療耐藥機制 (Nature 2021)
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-file-text-o text-primary mt-1 mr-2"></i>
+                                <a href="https://doi.org/10.1056/NEJMoa2109975" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    液體活檢在癌症管理中的應用 (NEJM 2022)
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-file-text-o text-custom mt-1 mr-2"></i>
+                                <a href="https://doi.org/10.1038/s41591-023-02425-3" target="_blank" class="text-custom hover:text-custom/80 transition-colors duration-300">
+                                    ACTOnco Pro™多組學分析臨床驗證 (Nat Med 2023)
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fa fa-file-text-o text-primary mt-1 mr-2"></i>
+                                <a href="https://doi.org/10.1016/j.ccell.2021.03.010" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    多組學分析指導精準治療 (Cancer Cell 2021)
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-file-text-o text-primary mt-1 mr-2"></i>
+                                <a href="https://doi.org/10.1038/s41591-021-01652-8" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    AI在基因組數據分析中的應用 (Nat Med 2021)
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-file-text-o text-primary mt-1 mr-2"></i>
+                                <a href="https://doi.org/10.1158/2159-8290.CD-21-0123" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    蛋白質組學與基因組學整合分析 (Cancer Discov 2021)
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-file-text-o text-primary mt-1 mr-2"></i>
+                                <a href="https://doi.org/10.1038/s41586-022-05068-3" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    全外顯子組測序在臨床的應用 (Nature 2022)
+                                </a>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-file-text-o text-primary mt-1 mr-2"></i>
+                                <a href="https://doi.org/10.1016/j.jmoldx.2020.09.004" target="_blank" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                                    不同NGS平台性能比較 (J Mol Diagn 2021)
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <!-- 技术指标可视化 -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <!-- 检测周期比较 -->
+                    <div class="border-4 border-warning p-4 rounded-lg bg-yellow-50 transform hover:scale-[1.02] transition-transform duration-300">
+                        <h4 class="text-lg font-semibold text-red-600 mb-3 flex items-center">
+                            <i class="fa fa-clock-o mr-2"></i>
+                            檢測週期比較
+                        </h4>
+                        <div class="h-48 bg-gradient-to-r from-red-100 to-yellow-100 rounded-lg p-4">
+                            <canvas id="turnaroundTimeChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- 基因覆盖度 -->
+                    <div class="border-4 border-success p-4 rounded-lg bg-green-50 transform hover:scale-[1.02] transition-transform duration-300">
+                        <h4 class="text-lg font-semibold text-green-600 mb-3 flex items-center">
+                            <i class="fa fa-dna mr-2"></i>
+                            基因覆蓋度
+                        </h4>
+                        <div class="h-48 bg-gradient-to-r from-green-100 to-teal-100 rounded-lg p-4">
+                            <canvas id="geneCoverageChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- 临床验证等级 -->
+                    <div class="border-4 border-info p-4 rounded-lg bg-blue-50 transform hover:scale-[1.02] transition-transform duration-300">
+                        <h4 class="text-lg font-semibold text-blue-600 mb-3 flex items-center">
+                            <i class="fa fa-check-circle mr-2"></i>
+                            臨床驗證等級
+                        </h4>
+                        <div class="h-48 bg-gradient-to-r from-blue-100 to-indigo-100 rounded-lg p-4">
+                            <canvas id="clinicalValidationChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+        <script>
+            // 初始化图表
+            document.addEventListener('DOMContentLoaded', function() {
+                // 检测周期比较图表
+                const turnaroundCtx = document.getElementById('turnaroundTimeChart').getContext('2d');
+                new Chart(turnaroundCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['FoundationOne®CDx', 'MSK-IMPACT®', 'ACTOnco Pro™', 'Guardant360®', 'Tempus xT®'],
+                        datasets: [{
+                            label: '检测周期 (天)',
+                            data: [14, 18, 12, 7, 21],
+                            backgroundColor: [
+                                'rgba(239, 68, 68, 0.7)',
+                                'rgba(59, 130, 246, 0.7)',
+                                'rgba(128, 90, 213, 0.7)',
+                                'rgba(249, 115, 22, 0.7)',
+                                'rgba(16, 185, 129, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgb(239, 68, 68)',
+                                'rgb(59, 130, 246)',
+                                'rgb(128, 90, 213)',
+                                'rgb(249, 115, 22)',
+                                'rgb(16, 185, 129)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: '天数'
+                                }
+                            }
+                        }
+                    }
+                });
+    
+                // 基因覆盖度图表
+                const coverageCtx = document.getElementById('geneCoverageChart').getContext('2d');
+                new Chart(coverageCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['FoundationOne®CDx', 'MSK-IMPACT®', 'ACTOnco Pro™', 'Tempus xT®', 'Caris MI®'],
+                        datasets: [{
+                            label: '基因数量',
+                            data: [324, 505, 648, 648, 800],
+                            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                            borderColor: 'rgb(16, 185, 129)',
+                            pointBackgroundColor: 'rgb(16, 185, 129)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgb(16, 185, 129)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                beginAtZero: true,
+                                max: 1000,
+                                ticks: {
+                                    stepSize: 200
+                                }
+                            }
+                        }
+                    }
+                });
+    
+                // 临床验证等级图表
+                const validationCtx = document.getElementById('clinicalValidationChart').getContext('2d');
+                new Chart(validationCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['FoundationOne®CDx', 'MSK-IMPACT®', 'ACTOnco Pro™', 'Guardant360®', 'Tempus xT®'],
+                        datasets: [{
+                            label: '临床验证等级',
+                            data: [95, 90, 88, 85, 88],
+                            fill: true,
+                            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                            borderColor: 'rgb(59, 130, 246)',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                min: 70,
+                                max: 100,
+                                title: {
+                                    display: true,
+                                    text: '验证百分比 (%)'
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+    </body>
+    </html>
+    <table class="w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
+        <thead>
+            <tr class="bg-primary text-white" style="background-color: #4a5568;">
+                <th class="border border-gray-700 p-4 text-center font-bold">類別</th>
+                <th class="border border-gray-700 p-4 text-center font-bold">基因數量</th>
+                <th class="border border-gray-700 p-4 text-center font-bold">說明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="hover:bg-gray-100 transition-colors duration-200">
+                <td class="border border-gray-300 p-4 text-center font-semibold">COSMIC v96核心基因</td>
+                <td class="border border-gray-300 p-4 text-center">723</td>
+                <td class="border border-gray-300 p-4">與癌症發生發展密切相關的基因</td>
+            </tr>
+            <tr class="hover:bg-gray-100 transition-colors duration-200">
+                <td class="border border-gray-300 p-4 text-center font-semibold">人類蛋白編碼基因</td>
+                <td class="border border-gray-300 p-4 text-center">約19,000-20,000</td>
+                <td class="border border-gray-300 p-4">能夠編碼蛋白質的基因</td>
+            </tr>
+            <tr class="hover:bg-gray-100 transition-colors duration-200">
+                <td class="border border-gray-300 p-4 text-center font-semibold">人類非編碼RNA基因</td>
+                <td class="border border-gray-300 p-4 text-center">約20,000-25,000</td>
+                <td class="border border-gray-300 p-4">不編碼蛋白質但具有調控功能的基因</td>
+            </tr>
+            <tr class="hover:bg-gray-100 transition-colors duration-200">
+                <td class="border border-gray-300 p-4 text-center font-semibold">人類基因組總基因數</td>
+                <td class="border border-gray-300 p-4 text-center">約40,000-45,000</td>
+                <td class="border border-gray-300 p-4">蛋白編碼基因與非編碼RNA基因的總和</td>
+            </tr>
+            <tr class="hover:bg-gray-100 transition-colors duration-200">
+                <td class="border border-gray-300 p-4 text-center font-semibold">MSK-IMPACT®覆蓋基因</td>
+                <td class="border border-gray-300 p-4 text-center">505</td>
+                <td class="border border-gray-300 p-4">用於臨床癌症基因檢測的基因數</td>
+            </tr>
+            <tr class="hover:bg-gray-100 transition-colors duration-200">
+                <td class="border border-gray-300 p-4 text-center font-semibold">ACTOnco Pro™覆蓋基因</td>
+                <td class="border border-gray-300 p-4 text-center">648</td>
+                <td class="border border-gray-300 p-4">新一代多組學分析平台覆蓋的基因</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr class="bg-gray-200">
+                <td colspan="3" class="border border-gray-300 p-4 text-center text-sm text-gray-600">
+                    數據來源：COSMIC數據庫(2023), Ensembl基因組數據庫(2023), 人類基因組計劃
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+        
+     <hr />
+<h2>更新聲明  更新聲明 </h2> 
+<hr style="margin: 10px 0; border-color: #ff8888;" />
+<p style="margin: 0;">所有內容材料均來自網上考核合法公開搜集或由自願貢獻者提供傳達。真實案例研究中的敏感名字和私隱訊息已被刪除。資源有限，無法經常檢測全數連結，僅能展示最近或相關的參考資料。若有錯誤, 深表歉意, 但因僅用於教授及學術用途，特此聲明概不承擔任何財經賠償或法律刑責後果。<strong> 請使用關鍵字詞串語 </strong> 搜尋最新證明文獻，並請將成果<a style="color: #0066cc;" href="mailto:email@habilitation.top"> 通知我們</a> 相關報告中不包含您任何隱私信息, 希望您發送給我們以幫助改進運作質量 以完善專案。</p>
+<hr />
+<strong>註冊為 <span style="color: #008000;"> 訪客 </span> 可以瀏覽所有公開發佈的內容</strong>
+<strong>註冊為 <span style="color: #993300;"> 學員 </span> 可以瀏覽所有專用和免費資源</strong>
+<hr /> 

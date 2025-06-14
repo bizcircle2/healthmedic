@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CEA Trend Analysis CarcinoEmbryonic Antigen 趨勢分析 癌胚抗原</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+        <style>
+            :root {
+                --primary: #2c3e50;
+                --secondary: #3498db;
+                --accent: #e74c3c;
+                --light: #ecf0f1;
+                --dark: #2c3e50;
+                --success: #27ae60;
+                --warning: #f39c12;
+                --info: #2980b9;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Microsoft JhengHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            body {
+                background: linear-gradient(135deg, #1a2a3a 0%, #2c3e50 100%);
+                color: var(--light);
+                min-height: 100vh;
+                padding: 20px;
+            }
+
+            .container {
+                max-width: 1400px;
+                margin: 0 auto;
+            }
+
+            .language-section {
+                margin-bottom: 50px;
+            }
+
+            header {
+                text-align: center;
+                padding: 20px 0;
+                margin-bottom: 30px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            h1 {
+                font-size: 2.8rem;
+                margin-bottom: 10px;
+                background: linear-gradient(to right, #3498db, #2ecc71);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+                color: #bdc3c7;
+                max-width: 800px;
+                margin: 0 auto;
+                line-height: 1.6;
+            }
+
+            .dashboard {
+                display: grid;
+                grid-template-columns: 300px 1fr;
+                gap: 25px;
+            }
+
+            .controls {
+                background: rgba(255, 255, 255, 0.08);
+                border-radius: 15px;
+                padding: 25px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                height: fit-content;
+            }
+
+            .control-group {
+                margin-bottom: 25px;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+                margin-bottom: 20px;
+                color: #3498db;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            h2 i {
+                font-size: 1.2rem;
+            }
+
+            .time-filters {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 10px;
+                margin-bottom: 25px;
+            }
+
+            .time-btn {
+                background: rgba(52, 152, 219, 0.15);
+                border: none;
+                color: var(--light);
+                padding: 12px 10px;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-weight: 500;
+                text-align: center;
+            }
+
+            .time-btn:hover {
+                background: rgba(52, 152, 219, 0.3);
+                transform: translateY(-2px);
+            }
+
+            .time-btn.active {
+                background: var(--secondary);
+                box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+            }
+
+            .range-filter {
+                background: rgba(44, 62, 80, 0.7);
+                padding: 15px;
+                border-radius: 10px;
+                margin-top: 15px;
+            }
+
+            .stats-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 15px;
+                margin-bottom: 30px;
+            }
+
+            .stat-card {
+                background: rgba(255, 255, 255, 0.08);
+                border-radius: 12px;
+                padding: 20px;
+                text-align: center;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                transition: transform 0.3s ease;
+            }
+
+            .stat-card:hover {
+                transform: translateY(-5px);
+                background: rgba(255, 255, 255, 0.12);
+            }
+
+            .stat-value {
+                font-size: 2.2rem;
+                font-weight: 700;
+                margin: 10px 0;
+                color: #3498db;
+            }
+
+            .stat-label {
+                font-size: 0.95rem;
+                color: #bdc3c7;
+            }
+
+            .chart-container {
+                background: rgba(255, 255, 255, 0.08);
+                border-radius: 15px;
+                padding: 25px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                position: relative;
+                height: 600px;
+            }
+
+            .chart-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 25px;
+            }
+
+            .chart-title {
+                font-size: 1.6rem;
+                font-weight: 600;
+            }
+
+            .chart-wrapper {
+                position: relative;
+                height: 500px;
+                width: 100%;
+            }
+
+            canvas {
+                width: 100% !important;
+                height: 100% !important;
+            }
+
+            .info-section {
+                margin-top: 30px;
+                background: rgba(231, 76, 60, 0.1);
+                border-radius: 12px;
+                padding: 20px;
+                border-left: 4px solid var(--accent);
+            }
+
+            .info-title {
+                color: var(--accent);
+                margin-bottom: 15px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .info-content {
+                line-height: 1.7;
+                color: #ecf0f1;
+            }
+
+            .footer {
+                text-align: center;
+                margin-top: 40px;
+                padding: 20px;
+                color: #7f8c8d;
+                font-size: 0.9rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            @media (max-width: 1100px) {
+                .dashboard {
+                    grid-template-columns: 1fr;
+                }
+
+                .stats-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            @media (max-width: 768px) {
+                .stats-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .time-filters {
+                    grid-template-columns: 1fr;
+                }
+
+                .chart-container {
+                    height: 500px;
+                }
+
+                .chart-wrapper {
+                    height: 400px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <!-- Chinese Version -->
+            <div class="language-section" id="chinese-version">
+                <header>
+                    <h1>曾愛蓮 CEA 癌胚抗原 CarcinoEmbryonic Antigen 趨勢分析</h1>
+                    <p class="subtitle">
+                        追蹤並可視化癌胚抗原(CEA)水平隨時間變化。分析趨勢、辨別模式並監測不同時間段數據。
+                    </p>
+                </header>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">當前CEA水平</div>
+                        <div class="stat-value">75.0</div>
+                        <div class="stat-label">納克/毫升</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">基準水平</div>
+                        <div class="stat-value">129.5</div>
+                        <div class="stat-label">(2022年5月)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">峰值水平</div>
+                        <div class="stat-value">268.4</div>
+                        <div class="stat-label">(2022年10月)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">12個月變化</div>
+                        <div class="stat-value">-72%</div>
+                        <div class="stat-label">顯著下降</div>
+                    </div>
+                </div>
+
+                <div class="dashboard">
+                    <div class="controls">
+                        <div class="control-group">
+                            <h2>時間週期</h2>
+                            <div class="time-filters">
+                                <button class="time-btn active" data-period="all" data-lang="zh">
+                                    全部時間
+                                </button>
+                                <button class="time-btn" data-period="12months" data-lang="zh">
+                                    過去12個月
+                                </button>
+                                <button class="time-btn" data-period="quarter" data-lang="zh">
+                                    最近季度
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <h2>日期範圍</h2>
+                            <div class="range-filter">
+                                <label for="start-date-zh">從:</label>
+                                <input
+                                    type="date"
+                                    id="start-date-zh"
+                                    class="form-control"
+                                    value="2022-05-24"
+                                />
+
+                                <label for="end-date-zh" style="margin-top: 10px; display: block"
+                                    >至:</label
+                                >
+                                <input
+                                    type="date"
+                                    id="end-date-zh"
+                                    class="form-control"
+                                    value="2025-05-12"
+                                />
+
+                                <button
+                                    id="apply-range-zh"
+                                    class="time-btn"
+                                    style="margin-top: 15px; width: 100%"
+                                >
+                                    應用範圍
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <h2>分析選項</h2>
+                            <div style="display: flex; flex-direction: column; gap: 10px">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" checked /> 顯示趨勢線
+                                </label>
+                                <label class="checkbox-container">
+                                    <input type="checkbox" checked /> 顯示參考範圍
+                                </label>
+                                <label class="checkbox-container">
+                                    <input type="checkbox" /> 顯示註釋
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <h2 class="info-title">關於CEA水平</h2>
+                            <div class="info-content">
+                                <p>
+                                    癌胚抗原(CEA)是一種主要用於監測結直腸癌治療的腫瘤標記物。正常範圍通常為非吸煙者0-3
+                                    ng/mL，吸煙者0-5 ng/mL。
+                                </p>
+                                <p style="margin-top: 10px">
+                                    高於10
+                                    ng/mL的值可能表明癌症復發或進展。請務必諮詢您的腫瘤科醫生進行臨床解釋。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <div class="chart-title">CEA水平趨勢 (2022-2025)</div>
+                            <div class="chart-actions">
+                                <button class="time-btn export-btn" data-lang="zh">導出數據</button>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="ceaChartZh"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <p>CEA趨勢分析儀表板 | 數據時間範圍：2022年5月至2025年5月 | 僅供醫療監測使用</p>
+                </div>
+            </div>
+
+            <!-- English Version -->
+            <div class="language-section" id="english-version">
+                <header>
+                    <h1>TSANG oi-lin Amly CEA CarcinoEmbryonic Antigen Trend Analysis</h1>
+                    <p class="subtitle">
+                        Track and visualize Carcinoembryonic Antigen levels over time. Analyze
+                        trends, identify patterns, and monitor changes across different time
+                        periods.
+                    </p>
+                </header>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Current CEA Level</div>
+                        <div class="stat-value">75.0</div>
+                        <div class="stat-label">ng/mL</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Baseline Level</div>
+                        <div class="stat-value">129.5</div>
+                        <div class="stat-label">(May 2022)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Peak Level</div>
+                        <div class="stat-value">268.4</div>
+                        <div class="stat-label">(Oct 2022)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">12-Month Change</div>
+                        <div class="stat-value">-72%</div>
+                        <div class="stat-label">Significant Decrease</div>
+                    </div>
+                </div>
+
+                <div class="dashboard">
+                    <div class="controls">
+                        <div class="control-group">
+                            <h2>Time Period</h2>
+                            <div class="time-filters">
+                                <button class="time-btn active" data-period="all" data-lang="en">
+                                    All Time
+                                </button>
+                                <button class="time-btn" data-period="12months" data-lang="en">
+                                    Past 12 Months
+                                </button>
+                                <button class="time-btn" data-period="quarter" data-lang="en">
+                                    Last Quarter
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <h2>Date Range</h2>
+                            <div class="range-filter">
+                                <label for="start-date-en">From:</label>
+                                <input
+                                    type="date"
+                                    id="start-date-en"
+                                    class="form-control"
+                                    value="2022-05-24"
+                                />
+
+                                <label for="end-date-en" style="margin-top: 10px; display: block"
+                                    >To:</label
+                                >
+                                <input
+                                    type="date"
+                                    id="end-date-en"
+                                    class="form-control"
+                                    value="2025-05-12"
+                                />
+
+                                <button
+                                    id="apply-range-en"
+                                    class="time-btn"
+                                    style="margin-top: 15px; width: 100%"
+                                >
+                                    Apply Range
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <h2>Analysis Options</h2>
+                            <div style="display: flex; flex-direction: column; gap: 10px">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" checked /> Show Trend Line
+                                </label>
+                                <label class="checkbox-container">
+                                    <input type="checkbox" checked /> Show Reference Range
+                                </label>
+                                <label class="checkbox-container">
+                                    <input type="checkbox" /> Show Annotations
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <h2 class="info-title">About CEA Levels</h2>
+                            <div class="info-content">
+                                <p>
+                                    Carcinoembryonic Antigen (CEA) is a tumor marker used primarily
+                                    to monitor colorectal cancer treatment. Normal range is
+                                    typically 0-3 ng/mL for non-smokers and 0-5 ng/mL for smokers.
+                                </p>
+                                <p style="margin-top: 10px">
+                                    Values above 10 ng/mL may indicate cancer recurrence or
+                                    progression. Always consult with your oncologist for clinical
+                                    interpretation.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <div class="chart-title">CEA Level Trend (2022-2025)</div>
+                            <div class="chart-actions">
+                                <button class="time-btn export-btn" data-lang="en">
+                                    Export Data
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="ceaChartEn"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <p>
+                        CEA Trend Analysis Dashboard | Data from May 2022 to May 2025 | For medical
+                        monitoring purposes only
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Sample data - in a real application, this would come from a database or API
+            const ceaData = [
+                { date: '2022-05-24', value: 129.5 },
+                { date: '2022-06-15', value: 100 },
+                { date: '2022-06-23', value: 85 },
+                { date: '2022-06-28', value: 73.8 },
+                { date: '2022-07-07', value: 68 },
+                { date: '2022-07-12', value: 63.6 },
+                { date: '2022-07-13', value: 64 },
+                { date: '2022-07-21', value: 64 },
+                { date: '2022-07-26', value: 64 },
+                { date: '2022-07-29', value: 74 },
+                { date: '2022-08-06', value: 86.8 },
+                { date: '2022-08-12', value: 88 },
+                { date: '2022-08-19', value: 81 },
+                { date: '2022-08-26', value: 99 },
+                { date: '2022-09-03', value: 122 },
+                { date: '2022-09-09', value: 146.9 },
+                { date: '2022-09-19', value: 181.3 },
+                { date: '2022-09-21', value: 252.43 },
+                { date: '2022-09-26', value: 253 },
+                { date: '2022-09-27', value: 253 },
+                { date: '2022-09-27', value: 252.53 },
+                { date: '2022-10-05', value: 268.41 },
+                { date: '2022-10-13', value: 206.27 },
+                { date: '2022-10-17', value: 161.28 },
+                { date: '2022-10-21', value: 103.33 },
+                { date: '2022-10-25', value: 80.13 },
+                { date: '2022-11-01', value: 66.89 },
+                { date: '2022-11-07', value: 57.95 },
+                { date: '2022-11-11', value: 39.49 },
+                { date: '2022-11-17', value: 33.02 },
+                { date: '2022-11-25', value: 32 },
+                { date: '2022-11-28', value: 31.09 },
+                { date: '2022-12-02', value: 24.94 },
+                { date: '2022-12-08', value: 25.2 },
+                { date: '2022-12-16', value: 27.63 },
+                { date: '2022-12-19', value: 27.27 },
+                { date: '2022-12-23', value: 23.3 },
+                { date: '2023-01-05', value: 31.05 },
+                { date: '2023-01-12', value: 36.05 },
+                { date: '2023-01-19', value: 41.86 },
+                { date: '2023-01-26', value: 47.53 },
+                { date: '2023-02-02', value: 39.74 },
+                { date: '2023-02-13', value: 34.5 },
+                { date: '2023-02-22', value: 27.72 },
+                { date: '2023-02-28', value: 22.92 },
+                { date: '2023-03-09', value: 19.34 },
+                { date: '2023-03-16', value: 17.57 },
+                { date: '2023-03-30', value: 13.76 },
+                { date: '2023-04-06', value: 13.48 },
+                { date: '2023-04-14', value: 12.49 },
+                { date: '2023-04-26', value: 12.23 },
+                { date: '2023-05-08', value: 9.8 },
+                { date: '2023-05-16', value: 9.75 },
+                { date: '2023-05-31', value: 9.83 },
+                { date: '2023-06-23', value: 7.74 },
+                { date: '2023-07-10', value: 8.33 },
+                { date: '2023-07-14', value: 7.92 },
+                { date: '2023-07-27', value: 7.68 },
+                { date: '2023-08-07', value: 8.17 },
+                { date: '2023-08-28', value: 7.84 },
+                { date: '2023-09-18', value: 7.63 },
+                { date: '2023-10-12', value: 7.59 },
+                { date: '2023-11-02', value: 8.51 },
+                { date: '2023-11-23', value: 8.79 },
+                { date: '2023-12-14', value: 8.48 },
+                { date: '2024-01-04', value: 8.88 },
+                { date: '2024-02-07', value: 10.08 },
+                { date: '2024-02-27', value: 9.89 },
+                { date: '2024-03-20', value: 9.82 },
+                { date: '2024-04-12', value: 9.85 },
+                { date: '2024-05-06', value: 10.69 },
+                { date: '2024-05-30', value: 11.15 },
+                { date: '2024-06-20', value: 11.16 },
+                { date: '2024-07-11', value: 10.3 },
+                { date: '2024-07-31', value: 11.46 },
+                { date: '2024-09-03', value: 12.69 },
+                { date: '2024-09-24', value: 13.6 },
+                { date: '2024-10-22', value: 15.8 },
+                { date: '2024-11-15', value: 17.8 },
+                { date: '2024-12-17', value: 19.3 },
+                { date: '2024-12-20', value: 22 },
+                { date: '2025-01-14', value: 29 },
+                { date: '2025-02-11', value: 35.8 },
+                { date: '2025-03-10', value: 52 },
+                { date: '2025-04-22', value: 74.3 },
+                { date: '2025-05-12', value: 75 },
+            ]
+
+            // Initialize both charts
+            function initializeChart(canvasId, language) {
+                const ctx = document.getElementById(canvasId).getContext('2d')
+
+                const gradient = ctx.createLinearGradient(0, 0, 0, 500)
+                gradient.addColorStop(0, 'rgba(52, 152, 219, 0.8)')
+                gradient.addColorStop(1, 'rgba(46, 204, 113, 0.4)')
+
+                return new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ceaData.map((item) => item.date),
+                        datasets: [
+                            {
+                                label:
+                                    language === 'zh' ? 'CEA水平(納克/毫升)' : 'CEA Level (ng/mL)',
+                                data: ceaData.map((item) => item.value),
+                                borderColor: gradient,
+                                backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                                borderWidth: 4,
+                                pointRadius: 4,
+                                pointBackgroundColor: '#fff',
+                                pointBorderColor: '#3498db',
+                                pointBorderWidth: 2,
+                                pointHoverRadius: 6,
+                                tension: 0.2,
+                                fill: true,
+                            },
+                            {
+                                label: language === 'zh' ? '正常範圍' : 'Normal Range',
+                                data: Array(ceaData.length).fill(5),
+                                borderColor: 'rgba(46, 204, 113, 0.7)',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                pointRadius: 0,
+                                fill: false,
+                            },
+                        ],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    color: '#ecf0f1',
+                                    font: {
+                                        size: 14,
+                                    },
+                                    padding: 20,
+                                },
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(44, 62, 80, 0.9)',
+                                titleColor: '#3498db',
+                                bodyColor: '#ecf0f1',
+                                borderColor: 'rgba(255, 255, 255, 0.1)',
+                                borderWidth: 1,
+                                displayColors: false,
+                                padding: 12,
+                                bodyFont: {
+                                    size: 14,
+                                },
+                                titleFont: {
+                                    size: 16,
+                                    weight: 'bold',
+                                },
+                                callbacks: {
+                                    label: function (context) {
+                                        return language === 'zh'
+                                            ? `CEA: ${context.parsed.y.toFixed(2)} 納克/毫升`
+                                            : `CEA: ${context.parsed.y.toFixed(2)} ng/mL`
+                                    },
+                                    title: function (context) {
+                                        return language === 'zh'
+                                            ? `日期: ${context[0].label}`
+                                            : `Date: ${context[0].label}`
+                                    },
+                                },
+                            },
+                        },
+                        scales: {
+                            x: {
+                                type: 'time',
+                                time: {
+                                    unit: 'month',
+                                    tooltipFormat:
+                                        language === 'zh' ? 'yyyy年MM月dd日' : 'MMM d, yyyy',
+                                    displayFormats: {
+                                        month: language === 'zh' ? 'yyyy年MM月' : 'MMM yyyy',
+                                    },
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.05)',
+                                    drawBorder: false,
+                                },
+                                ticks: {
+                                    color: '#bdc3c7',
+                                    font: {
+                                        size: 12,
+                                    },
+                                    maxRotation: 45,
+                                    minRotation: 45,
+                                },
+                                title: {
+                                    display: true,
+                                    text: language === 'zh' ? '日期' : 'Date',
+                                    color: '#ecf0f1',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold',
+                                    },
+                                    padding: { top: 20, bottom: 10 },
+                                },
+                            },
+                            y: {
+                                min: 0,
+                                max: 300,
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.05)',
+                                    drawBorder: false,
+                                },
+                                ticks: {
+                                    color: '#bdc3c7',
+                                    font: {
+                                        size: 12,
+                                    },
+                                    callback: function (value) {
+                                        return language === 'zh'
+                                            ? value + ' 納克/毫升'
+                                            : value + ' ng/mL'
+                                    },
+                                    padding: 10,
+                                },
+                                title: {
+                                    display: true,
+                                    text:
+                                        language === 'zh'
+                                            ? 'CEA水平(納克/毫升)'
+                                            : 'CEA Level (ng/mL)',
+                                    color: '#ecf0f1',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold',
+                                    },
+                                    padding: { top: 10, bottom: 20 },
+                                },
+                            },
+                        },
+                        layout: {
+                            padding: {
+                                left: 20,
+                                right: 20,
+                                top: 20,
+                                bottom: 20,
+                            },
+                        },
+                        elements: {
+                            point: {
+                                hoverRadius: 8,
+                                hoverBorderWidth: 3,
+                            },
+                        },
+                    },
+                })
+            }
+
+            // Initialize both charts
+            const ceaChartZh = initializeChart('ceaChartZh', 'zh')
+            const ceaChartEn = initializeChart('ceaChartEn', 'en')
+
+            // Time period filtering
+            document.querySelectorAll('.time-btn[data-period]').forEach((button) => {
+                button.addEventListener('click', function () {
+                    const lang = this.dataset.lang
+                    const period = this.dataset.period
+
+                    // Remove active class from all buttons of this language
+                    document.querySelectorAll(`.time-btn[data-lang="${lang}"]`).forEach((btn) => {
+                        btn.classList.remove('active')
+                    })
+
+                    // Add active class to clicked button
+                    this.classList.add('active')
+
+                    // Update the chart based on period
+                    updateChartPeriod(lang, period)
+                })
+            })
+
+            // Function to update chart based on selected period
+            function updateChartPeriod(lang, period) {
+                let startDate, endDate
+                const allDates = ceaData.map((item) => new Date(item.date))
+                const minDate = new Date(Math.min(...allDates))
+                const maxDate = new Date(Math.max(...allDates))
+
+                switch (period) {
+                    case 'all':
+                        startDate = minDate
+                        endDate = maxDate
+                        break
+                    case '12months':
+                        endDate = maxDate
+                        startDate = new Date(endDate)
+                        startDate.setFullYear(startDate.getFullYear() - 1)
+                        break
+                    case 'quarter':
+                        endDate = maxDate
+                        startDate = new Date(endDate)
+                        startDate.setMonth(startDate.getMonth() - 3)
+                        break
+                }
+
+                // Filter data
+                const filteredData = ceaData.filter((item) => {
+                    const itemDate = new Date(item.date)
+                    return itemDate >= startDate && itemDate <= endDate
+                })
+
+                // Update the correct chart
+                const chart = lang === 'zh' ? ceaChartZh : ceaChartEn
+                chart.data.labels = filteredData.map((item) => item.date)
+                chart.data.datasets[0].data = filteredData.map((item) => item.value)
+                chart.update()
+
+                // Update UI
+                const titleElement =
+                    lang === 'zh'
+                        ? document.querySelector('#chinese-version .chart-title')
+                        : document.querySelector('#english-version .chart-title')
+
+                if (lang === 'zh') {
+                    titleElement.textContent = `CEA水平趨勢 (${startDate.getFullYear()}年${
+                        startDate.getMonth() + 1
+                    }月${startDate.getDate()}日至${endDate.getFullYear()}年${
+                        endDate.getMonth() + 1
+                    }月${endDate.getDate()}日)`
+                } else {
+                    titleElement.textContent = `CEA Level Trend (${startDate.toLocaleDateString(
+                        'en-US',
+                    )} to ${endDate.toLocaleDateString('en-US')})`
+                }
+            }
+
+            // Apply custom date range
+            document.getElementById('apply-range-zh').addEventListener('click', function () {
+                const startDate = new Date(document.getElementById('start-date-zh').value)
+                const endDate = new Date(document.getElementById('end-date-zh').value)
+                applyDateRange('zh', startDate, endDate)
+            })
+
+            document.getElementById('apply-range-en').addEventListener('click', function () {
+                const startDate = new Date(document.getElementById('start-date-en').value)
+                const endDate = new Date(document.getElementById('end-date-en').value)
+                applyDateRange('en', startDate, endDate)
+            })
+
+            function applyDateRange(lang, startDate, endDate) {
+                // Filter data
+                const filteredData = ceaData.filter((item) => {
+                    const itemDate = new Date(item.date)
+                    return itemDate >= startDate && itemDate <= endDate
+                })
+
+                // Update the correct chart
+                const chart = lang === 'zh' ? ceaChartZh : ceaChartEn
+                chart.data.labels = filteredData.map((item) => item.date)
+                chart.data.datasets[0].data = filteredData.map((item) => item.value)
+                chart.update()
+
+                // Update UI
+                const titleElement =
+                    lang === 'zh'
+                        ? document.querySelector('#chinese-version .chart-title')
+                        : document.querySelector('#english-version .chart-title')
+
+                if (lang === 'zh') {
+                    titleElement.textContent = `CEA水平趨勢 (${startDate.getFullYear()}年${
+                        startDate.getMonth() + 1
+                    }月${startDate.getDate()}日至${endDate.getFullYear()}年${
+                        endDate.getMonth() + 1
+                    }月${endDate.getDate()}日)`
+                } else {
+                    titleElement.textContent = `CEA Level Trend (${startDate.toLocaleDateString(
+                        'en-US',
+                    )} to ${endDate.toLocaleDateString('en-US')})`
+                }
+
+                // Update active button
+                document.querySelectorAll(`.time-btn[data-lang="${lang}"]`).forEach((btn) => {
+                    btn.classList.remove('active')
+                })
+            }
+
+            // Export data functionality
+            document.querySelectorAll('.export-btn').forEach((button) => {
+                button.addEventListener('click', function () {
+                    const lang = this.dataset.lang
+                    const chart = lang === 'zh' ? ceaChartZh : ceaChartEn
+
+                    // Create CSV content
+                    let csvContent =
+                        lang === 'zh' ? '日期,CEA水平(納克/毫升)\n' : 'Date,CEA Level (ng/mL)\n'
+
+                    chart.data.labels.forEach((date, index) => {
+                        csvContent += `${date},${chart.data.datasets[0].data[index]}\n`
+                    })
+
+                    // Create download link
+                    const encodedUri = encodeURI('data:text/csv;charset=utf-8,' + csvContent)
+                    const link = document.createElement('a')
+                    link.setAttribute('href', encodedUri)
+                    link.setAttribute(
+                        'download',
+                        lang === 'zh' ? 'cea_data_zh.csv' : 'cea_data_en.csv',
+                    )
+                    document.body.appendChild(link)
+                    link.click()
+                    document.body.removeChild(link)
+                })
+            })
+
+            // Initialize with all data
+            updateChartPeriod('zh', 'all')
+            updateChartPeriod('en', 'all')
+
+            // Handle window resize
+            window.addEventListener('resize', function () {
+                ceaChartZh.resize()
+                ceaChartEn.resize()
+            })
+        </script>
+    </body>
+</html>

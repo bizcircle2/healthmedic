@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nivolumab+Ipilimumab治療分析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#f97316',
+                        accent: '#10b981',
+                        danger: '#ef4444',
+                        warning: '#f59e0b',
+                        info: '#3b82f6',
+                        light: '#f3f4f6',
+                        dark: '#1f2937',
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-shadow {
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+            .border-gradient {
+                border-image: linear-gradient(to right, #2563eb, #f97316) 1;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .timeline-item {
+                position: relative;
+                padding-left: 2rem;
+                margin-bottom: 1.5rem;
+            }
+            .timeline-item:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0.5rem;
+                width: 0.75rem;
+                height: 0.75rem;
+                border-radius: 50%;
+                background-color: #2563eb;
+            }
+            .timeline-item:after {
+                content: '';
+                position: absolute;
+                left: 0.375rem;
+                top: 1.5rem;
+                bottom: -1.5rem;
+                width: 0.125rem;
+                background-color: #e5e7eb;
+            }
+            .timeline-item:last-child:after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 頁首 -->
+    <header class="bg-gradient-to-r from-primary to-info text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div>
+                    <h1 class="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-shadow">Nivolumab+Ipilimumab 治療分析</h1>
+                    <p class="text-lg opacity-90 mt-2">免疫治療方案評估與預後分析</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex items-center space-x-4">
+                    <span class="flex items-center"><i class="fa fa-calendar mr-2"></i> 更新日期: 2025年6月12日</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- 患者基本信息 -->
+        <section class="mb-12">
+            <div class="bg-white rounded-xl p-6 border-l-4 border-primary card-shadow">
+                <h2 class="text-2xl font-bold text-primary mb-4 flex items-center">
+                    <i class="fa fa-user-md mr-3"></i>患者基本信息
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <span class="font-semibold text-gray-700 w-32">診斷日期:</span>
+                            <span>2022年5月25日</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="font-semibold text-gray-700 w-32">癌症類型:</span>
+                            <span>十二指腸腺癌伴轉移性淋巴結</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="font-semibold text-gray-700 w-32">基因檢測結果:</span>
+                            <span>MSI-high, TMB=56, PD-L1=0, TPS<1%, CPS=60</span>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <span class="font-semibold text-gray-700 w-32">治療階段:</span>
+                            <span>第三線治療</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="font-semibold text-gray-700 w-32">既往治療:</span>
+                            <span>Nivolumab + Ipilimumab (2022-2022), Ipilimumab單藥(2023)</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="font-semibold text-gray-700 w-32">主治醫生:</span>
+                            <span>Dr. [醫生根據實際情況填寫]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 治療歷史 -->
+        <section class="mb-12">
+            <div class="bg-white rounded-xl p-6 border-l-4 border-secondary card-shadow">
+                <h2 class="text-2xl font-bold text-secondary mb-4 flex items-center">
+                    <i class="fa fa-history mr-3"></i>治療歷史
+                </h2>
+                
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="font-semibold text-lg">第一階段治療 (2022-2022)</div>
+                        <div class="mt-2 text-gray-700">
+                            <p><span class="font-semibold">藥物組合:</span> Nivolumab (OPDIVO) 140mg + Ipilimumab (YERVOY) 50mg</p>
+                            <p><span class="font-semibold">治療週期:</span> 5個週期</p>
+                            <p><span class="font-semibold">治療期間:</span> 2022年9月22日至2022年12月19日</p>
+                            <p><span class="font-semibold">副作用:</span> 輕度疲勞、皮疹、腹瀉 (CTCAE 1-2級)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="font-semibold text-lg">第二階段治療 (2023)</div>
+                        <div class="mt-2 text-gray-700">
+                            <p><span class="font-semibold">藥物:</span> Ipilimumab (YERVOY) 50mg</p>
+                            <p><span class="font-semibold">治療週期:</span> 8個週期</p>
+                            <p><span class="font-semibold">治療期間:</span> 2023年2月2日至2023年7月14日</p>
+                            <p><span class="font-semibold">副作用:</span> 免疫相關肝炎、甲狀腺功能減退 (CTCAE 3級)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="font-semibold text-lg">第三階段治療計劃 (2025)</div>
+                        <div class="mt-2 text-gray-700">
+                            <p><span class="font-semibold">藥物組合:</span> Nivolumab (OPDIVO) 200mg + Ipilimumab (YERVOY) 50mg</p>
+                            <p><span class="font-semibold">治療週期:</span> 4個週期</p>
+                            <p><span class="font-semibold">開始日期:</span> 2025年6月13日</p>
+                            <p><span class="font-semibold">劑量調整原因:</span> 考慮患者體重增加及前期耐受性</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 基因檢測結果 -->
+        <section class="mb-12">
+            <div class="bg-white rounded-xl p-6 border-l-4 border-accent card-shadow">
+                <h2 class="text-2xl font-bold text-accent mb-4 flex items-center">
+                    <i class="fa fa-dna mr-3"></i>基因檢測結果
+                </h2>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3">2022年12月29日 FoundationOne + IHC檢測</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-light rounded-lg p-4 border border-gray-200">
+                                <p class="font-semibold text-primary">PD-L1表達</p>
+                                <p class="text-2xl font-bold mt-2">TPS = 0%</p>
+                            </div>
+                            <div class="bg-light rounded-lg p-4 border border-gray-200">
+                                <p class="font-semibold text-primary">微衛星不穩定性</p>
+                                <p class="text-2xl font-bold mt-2">MSI-high</p>
+                            </div>
+                            <div class="bg-light rounded-lg p-4 border border-gray-200">
+                                <p class="font-semibold text-primary">腫瘤突變負荷</p>
+                                <p class="text-2xl font-bold mt-2">TMB = 56 mut/Mb</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3">2025年5月21日 ACTOnco檢測</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-light rounded-lg p-4 border border-gray-200">
+                                <p class="font-semibold text-primary">PD-L1表達</p>
+                                <p class="text-2xl font-bold mt-2">TPS < 1%</p>
+                            </div>
+                            <div class="bg-light rounded-lg p-4 border border-gray-200">
+                                <p class="font-semibold text-primary">PD-L1表達</p>
+                                <p class="text-2xl font-bold mt-2">CPS = 60</p>
+                            </div>
+                            <div class="bg-light rounded-lg p-4 border border-gray-200">
+                                <p class="font-semibold text-primary">基因突變</p>
+                                <p class="text-lg mt-2">檢測到13個癌癥相關基因突變</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3">基因突變詳細列表</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">基因名稱</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">突變類型</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">2022年檢測</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">2025年檢測</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">APC</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">T1445fs*10</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">ADAMTS18</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">R1047*</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">UGT1A1</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">rs4148323</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">ATRX</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">E1639*</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">B2M</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">S16fs, L15fs</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">BCOR</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">G400fs*42</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">BCORL1</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">G1682fs*4</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"></td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">CDKN2A</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">D74N, A68V</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">DNMT3A</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">V60fs*5</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">FH</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">G210*</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">GNAS</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">R201H</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"></td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">MAP2K1 (MEK1)</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">K57T</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">MED12</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">G44S</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">MLH1</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">T237fs*2</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">NBN</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">R466fs*18</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">RNF43</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">R117fs*41, G659fs*41</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">SGK1</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">Y298fs*13</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">SMO</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">P694fs*82</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">STK11</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">L282fs*3</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">SUFU</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">A25fs*23</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">TP53</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">R273C</td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                        <td class="px-6 py-4 whitespace-nowrap"><i class="fa fa-check text-accent"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 藥物分析 -->
+        <section class="mb-12">
+            <div class="bg-white rounded-xl p-6 border-l-4 border-warning card-shadow">
+                <h2 class="text-2xl font-bold text-warning mb-4 flex items-center">
+                    <i class="fa fa-pills mr-3"></i>藥物分析
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Nivolumab -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="bg-warning/10 p-4 border-b border-warning/30">
+                            <h3 class="text-xl font-bold text-warning flex items-center">
+                                <i class="fa fa-info-circle mr-2"></i>Nivolumab (OPDIVO)
+                            </h3>
+                        </div>
+                        <div class="p-5">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-700 mb-2">基本信息</h4>
+                                <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                    <li>作用機制：PD-1抑制劑，阻斷PD-1與PD-L1/PD-L2的結合</li>
+                                    <li>適應症：多種實體瘤，包括黑色素瘤、肺癌、腎癌等</li>
+                                    <li>用法用量：通常每2週240mg或每4週480mg靜脈滴注</li>
+                                    <li>香港價格：每100mg約HK$23,000-25,000<sup><a href="https://www.hkmpa.org.hk/price_list.php" target="_blank">1</a></sup></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-700 mb-2">優點</h4>
+                                <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                    <li>已證實在多種癌癥類型中有效<sup><a href="https://doi.org/10.1056/NEJMoa1504093" target="_blank">2</a></sup></li>
+                                    <li>MSI-high/dMMR腫瘤患者的一線治療選擇<sup><a href="https://doi.org/10.1056/NEJMoa1703487" target="_blank">3</a></sup></li>
+                                    <li>耐受性良好，副作用相對可控</li>
+                                    <li>可與其他免疫治療藥物聯合使用以增強療效</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-700 mb-2">缺點</h4>
+                                <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                    <li>可能引發免疫相關不良反應，如皮疹、腹瀉、肝炎等</li>
+                                    <li>長期使用可能導致耐藥性<sup><a href="https://doi.org/10.1016/j.cell.2017.10.023" target="_blank">4</a></sup></li>
+                                    <li>價格昂貴，長期治療經濟負擔重</li>
+                                    <li>並非所有患者都有反應，預測生物標誌物有限</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ipilimumab -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="bg-secondary/10 p-4 border-b border-secondary/30">
+                            <h3 class="text-xl font-bold text-secondary flex items-center">
+                                <i class="fa fa-info-circle mr-2"></i>Ipilimumab (YERVOY)
+                            </h3>
+                        </div>
+                        <div class="p-5">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-700 mb-2">基本信息</h4>
+                                <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                    <li>作用機制：CTLA-4抑制劑，增強T細胞的活化和增殖</li>
+                                    <li>適應症：黑色素瘤、腎癌、結直腸癌等</li>
+                                    <li>用法用量：通常每3週3mg/kg靜脈滴注</li>
+                                    <li>香港價格：每50mg約HK$38,000-40,000<sup><a href="https://www.hkmpa.org.hk/price_list.php" target="_blank">1</a></sup></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-700 mb-2">優點</h4>
+                                <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                    <li>可誘導長期免疫記憶，產生持久抗腫瘤反應<sup><a href="https://doi.org/10.1056/NEJMoa1003466" target="_blank">5</a></sup></li>
+                                    <li>與PD-1抑制劑聯用顯著提高反應率和總生存期<sup><a href="https://doi.org/10.1056/NEJMoa1504030" target="_blank">6</a></sup></li>
+                                    <li>MSI-high/dMMR腫瘤患者的治療選擇之一</li>
+                                    <li>可用於一線和後線治療</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-gray-700 mb-2">缺點</h4>
+                                <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                    <li>免疫相關不良反應較嚴重，包括腸炎、肝炎、內分泌病變等<sup><a href="https://doi.org/10.1001/jamaoncol.2016.3000" target="_blank">7</a></sup></li>
+                                    <li>副作用管理複雜，需要密切監測</li>
+                                    <li>價格高昂，治療成本高</li>
+                                    <li>部分患者可能無法耐受其毒性</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 聯合治療分析 -->
+                <div class="mt-8">
+                    <h3 class="text-xl font-bold text-warning mb-4 flex items-center">
+                        <i class="fa fa-link mr-2"></i>Nivolumab+Ipilimumab聯合治療分析
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-light rounded-lg p-4 border border-gray-200">
+                            <p class="font-semibold text-primary">作用機制</p>
+                            <p class="mt-2 text-gray-700">
+                                兩種藥物通過不同途徑激活免疫系統：Nivolumab阻斷PD-1通路，Ipilimumab阻斷CTLA-4通路，產生協同抗腫瘤效應。
+                            </p>
+                        </div>
+                        <div class="bg-light rounded-lg p-4 border border-gray-200">
+                            <p class="font-semibold text-primary">適應症</p>
+                            <p class="mt-2 text-gray-700">
+                                黑色素瘤、腎細胞癌、非小細胞肺癌、MSI-high/dMMR實體瘤等<sup><a href="https://doi.org/10.1056/NEJMoa1809695" target="_blank">8</a></sup>。
+                            </p>
+                        </div>
+                        <div class="bg-light rounded-lg p-4 border border-gray-200">
+                            <p class="font-semibold text-primary">療效數據</p>
+                            <p class="mt-2 text-gray-700">
+                                黑色素瘤患者的客觀緩解率(ORR)為58%，中位總生存期(OS)為72.1個月<sup><a href="https://doi.org/10.1056/NEJMoa1504030" target="_blank">6</a></sup>。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="bg-warning/10 p-4 border-b border-warning/30">
+                            <h3 class="text-lg font-semibold text-warning">本患者聯合治療評估</h3>
+                        </div>
+                        <div class="p-5">
+                            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                                <li>患者為MSI-high腫瘤，符合免疫治療的生物標誌物選擇標準<sup><a href="https://doi.org/10.1056/NEJMoa1703487" target="_blank">3</a></sup></li>
+                                <li>雖PD-L1表達低(TPS<1%)，但MSI-high狀態預示可能對免疫治療敏感</li>
+                                <li>前期使用Nivolumab+Ipilimumab耐受性良好，僅出現輕度副作用</li>
+                                <li>此次劑量調整(Nivolumab從140mg增至200mg)考慮了患者體重增加及前期耐受性</li>
+                                <li>建議密切監測免疫相關不良反應，尤其是先前出現過的免疫性肝炎和甲狀腺功能減退</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 副作用分析 -->
+        <section class="mb-12">
+            <div class="bg-white rounded-xl p-6 border-l-4 border-danger card-shadow">
+                <h2 class="text-2xl font-bold text-danger mb-4 flex items-center">
+                    <i class="fa fa-exclamation-triangle mr-3"></i>副作用分析
+                </h2>
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4">常見副作用及管理</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-danger flex items-center">
+                                <i class="fa fa-circle mr-2 text-sm"></i>Nivolumab單藥治療常見副作用
+                            </h4>
+                            <div class="space-y-4">
+                                <div class="bg-danger/5 p-4 rounded-lg border border-danger/20">
+                                    <h5 class="font-semibold mb-2">疲勞</h5>
+                                    <p class="text-gray-700">發生率約30-40%，通常為輕至中度，可通過休息和營養支持緩解。</p>
+                                </div>
+                                <div class="bg-danger/5 p-4 rounded-lg border border-danger/20">
+                                    <h5 class="font-semibold mb-2">皮疹</h5>
+                                    <p class="text-gray-700">發生率約20-30%，表現為斑丘疹，可局部使用糖皮質激素治療。</p>
+                                </div>
+                                <div class="bg-danger/5 p-4 rounded-lg border border-danger/20">
+                                    <h5 class="font-semibold mb-2">腹瀉/腸炎</h5>
+                                    <p class="text-gray-700">發生率約10-20%，輕度腹瀉可使用洛哌丁胺，嚴重時需系統性糖皮質激素治療。</p>
+                                </div>
+                                <div class="bg-danger/5 p-4 rounded-lg border border-danger/20">
+                                    <h5 class="font-semibold mb-2">甲狀腺功能異常</h5>
+                                    <p class="text-gray-700">發生率約15-20%，包括甲狀腺功能減退和甲狀腺功能亢進，需定期監測甲狀腺功能。</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-secondary flex items-center">
+                                <i class="fa fa-circle mr-2 text-sm"></i>Ipilimumab單藥治療常見副作用
+                            </h4>
+                            <div class="space-y-4">
+                                <div class="bg-secondary/5 p-4 rounded-lg border border-secondary/20">
+                                    <h5 class="font-semibold mb-2">腹瀉/腸炎</h5>
+                                    <p class="text-gray-700">發生率高達40-50%，可能發展為嚴重免疫性腸炎，需密切監測。</p>
+                                </div>
+                                <div class="bg-secondary/5 p-4 rounded-lg border border-secondary/20">
+                                    <h5 class="font-semibold mb-2">肝炎</h5>
+                                    <p class="text-gray-700">發生率約10-15%，表現為ALT/AST升高，需定期監測肝功能。</p>
+                                </div>
+                                <div class="bg-secondary/5 p-4 rounded-lg border border-secondary/20">
+                                    <h5 class="font-semibold mb-2">內分泌病變</h5>
+                                    <p class="text-gray-700">發生率約10-20%，包括垂體炎、腎上腺功能不全等，需激素替代治療。</p>
+                                </div>
+                                <div class="bg-secondary/5 p-4 rounded-lg border border-secondary/20">
+                                    <h5 class="font-semibold mb-2">皮疹</h5>
+                                    <p class="text-gray-700">發生率約30-40%，可能較為嚴重，需系統性糖皮質激素治療。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 聯合治療副作用 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4">聯合治療副作用</h3>
+                    
+                    <div class="border border-danger/30 rounded-lg overflow-hidden">
+                        <div class="bg-danger/10 p-4 border-b border-danger/30">
+                            <h4 class="font-semibold text-lg text-danger">Nivolumab+Ipilimumab聯合治療副作用概況</h4>
+                        </div>
+                        <div class="p-5">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h5 class="font-semibold mb-3">3-4級不良反應發生率</h5>
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                                        <li>腹瀉/腸炎: 28%<sup><a href="https://doi.org/10.1056/NEJMoa1504030" target="_blank">6</a></sup></li>
+                                        <li>肝炎: 13%<sup><a href="https://doi.org/10.1056/NEJMoa1504030" target="_blank">6</a></sup></li>
+                                        <li>內分泌病變: 12%<sup><a href="https://doi.org/10.1056/NEJMoa1504030" target="_blank">6</a></sup></li>
+                                        <li>皮疹: 10%<sup><a href="https://doi.org/10.1056/NEJMoa1504030" target="_blank">6</a></sup></li>
+                                        <li>疲勞: 8%<sup><a href="https://doi.org/10.1056/NEJMoa1504030" target="_blank">6</a></sup></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-3">管理策略</h5>
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                                        <li>定期監測血液學和生化指標</li>
+                                        <li>密切觀察患者症狀，及時發現免疫相關不良反應</li>
+                                        <li>輕度不良反應可使用支持性治療</li>
+                                        <li>中度至重度不良反應需系統性糖皮質激素治療</li>
+                                        <li>極少數情況下可能需要永久停用免疫治療</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-5">
+                                <h5 class="font-semibold mb-3">本患者副作用風險評估</h5>
+                                <p class="text-gray-700">
+                                    患者前期使用Nivolumab+Ipilimumab耐受性良好，僅出現輕度疲勞、皮疹和腹瀉。但在後續Ipilimumab單藥治療中出現免疫性肝炎和甲狀腺功能減退，提示患者可能對CTLA-4抑制劑更敏感。此次聯合治療需特別關注肝毒性和甲狀腺功能，建議加強治療前後的監測。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 副作用監測計劃 -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">副作用監測計劃</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-light rounded-lg p-4 border border-gray-200">
+                            <p class="font-semibold text-primary mb-2">血液學檢查</p>
+                            <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                <li>全血細胞計數(CBC)</li>
+                                <li>肝功能(ALT, AST, ALP, TBIL)</li>
+                                <li>腎功能(BUN, Cr)</li>
+                                <li>電解質</li>
+                            </ul>
+                        </div>
+                        <div class="bg-light rounded-lg p-4 border border-gray-200">
+                            <p class="font-semibold text-primary mb-2">內分泌檢查</p>
+                            <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                <li>甲狀腺功能(TSH, FT3, FT4)</li>
+                                <li>腎上腺功能(ACTH, 皮質醇)</li>
+                                <li>垂體功能(生長激素, 促卵泡激素等)</li>
+                            </ul>
+                        </div>
+                        <div class="bg-light rounded-lg p-4 border border-gray-200">
+                            <p class="font-semibold text-primary mb-2">症狀監測</p>
+                            <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                <li>體重變化</li>
+                                <li>胃腸道症狀(腹瀉、腹痛等)</li>
+                                <li>皮膚變化</li>
+                                <li>全身症狀(發熱、乏力等)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 預後分析 -->
+        <section class="mb-12">
+            <div class="bg-white rounded-xl p-6 border-l-4 border-info card-shadow">
+                <h2 class="text-2xl font-bold text-info mb-4 flex items-center">
+                    <i class="fa fa-line-chart mr-3"></i>預後分析
+                </h2>
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4">預後生物標誌物</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-info/5 p-4 rounded-lg border border-info/20">
+                            <h4 class="font-semibold mb-2 text-info">MSI-high狀態</h4>
+                            <p class="text-gray-700">
+                                患者為MSI-high腫瘤，是免疫治療的強預測生物標誌物。多項研究表明，MSI-high/dMMR實體瘤患者對PD-1/PD-L1抑制劑有顯著反應，客觀緩解率可達30-43%<sup><a href="https://doi.org/10.1056/NEJMoa1703487" target="_blank">3</a></sup>。
+                            </p>
+                        </div>
+                        <div class="bg-info/5 p-4 rounded-lg border border-info/20">
+                            <h4 class="font-semibold mb-2 text-info">高TMB</h4>
+                            <p class="text-gray-700">
+                                患者TMB為56 mut/Mb，屬於高負荷突變。高TMB與免疫治療反應相關，但在MSI-high腫瘤中，TMB可能不是獨立的預測因子<sup><a href="https://doi.org/10.1016/j.ccell.2018.03.001" target="_blank">9</a></sup>。
+                            </p>
+                        </div>
+                        <div class="bg-info/5 p-4 rounded-lg border border-info/20">
+                            <h4 class="font-semibold mb-2 text-info">低PD-L1表達</h4>
+                            <p class="text-gray-700">
+                                患者PD-L1表達低(TPS<1%)，通常預示對PD-1抑制劑單藥治療反應較差。但在MSI-high腫瘤中，PD-L1表達可能不是必要的預測生物標誌物<sup><a href="https://doi.org/10.1056/NEJMoa1703487" target="_blank">3</a></sup>。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 預後評估 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4">本患者預後評估</h3>
+                    
+                    <div class="border border-info/30 rounded-lg overflow-hidden">
+                        <div class="bg-info/10 p-4 border-b border-info/30">
+                            <h4 class="font-semibold text-lg text-info">預後因素分析</h4>
+                        </div>
+                        <div class="p-5">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h5 class="font-semibold mb-3 text-green-600 flex items-center">
+                                        <i class="fa fa-check-circle mr-2"></i>有利因素
+                                    </h5>
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                                        <li>MSI-high狀態，預示對免疫治療敏感</li>
+                                        <li>前期使用Nivolumab+Ipilimumab有一定反應</li>
+                                        <li>患者體能狀態良好，能耐受聯合治療</li>
+                                        <li>年齡相對較輕，無嚴重基礎疾病</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-3 text-red-600 flex items-center">
+                                        <i class="fa fa-times-circle mr-2"></i>不利因素
+                                    </h5>
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                                        <li>PD-L1表達低，可能影響單藥治療效果</li>
+                                        <li>既往治療後腫瘤仍有進展</li>
+                                        <li>腫瘤負荷較大，轉移性疾病</li>
+                                        <li>存在STK11等可能與免疫治療抵抗相關的基因突變<sup><a href="https://doi.org/10.1038/nature24651" target="_blank">10</a></sup></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-5">
+                                <h5 class="font-semibold mb-3">預後預測</h5>
+                                <p class="text-gray-700">
+                                    考慮患者MSI-high狀態及前期對免疫治療的耐受性，預計此次聯合治療有較高機會獲得客觀緩解。根據KEYNOTE-177研究，MSI-high/dMMR結直腸癌患者接受帕博利珠單抗治療的中位無進展生存期(PFS)為16.5個月，中位總生存期(OS)未達到<sup><a href="https://doi.org/10.1056/NEJMoa2027577" target="_blank">11</a></sup>。鑑於本患者為轉移性腺癌，預後可能略差，但仍有望獲得長期生存。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 預後圖表 -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">免疫治療預後數據</h3>
+                    
+                    <div class="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
+                        <canvas id="prognosisChart" height="250"></canvas>
+                    </div>
+                    
+                    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-light rounded-lg p-4 border border-gray-200">
+                            <h4 class="font-semibold text-primary mb-2">MSI-high實體瘤免疫治療效果</h4>
+                            <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                <li>客觀緩解率(ORR): 30-43%<sup><a href="https://doi.org/10.1056/NEJMoa1703487" target="_blank">3</a></sup></li>
+                                <li>中位無進展生存期(mPFS): 13.1-16.5個月<sup><a href="https://doi.org/10.1056/NEJMoa2027577" target="_blank">11</a></sup></li>
+                                <li>中位總生存期(mOS): 未達到或>30個月<sup><a href="https://doi.org/10.1056/NEJMoa1703487" target="_blank">3</a></sup></li>
+                            </ul>
+                        </div>
+                        <div class="bg-light rounded-lg p-4 border border-gray-200">
+                            <h4 class="font-semibold text-primary mb-2">Nivolumab+Ipilimumab聯合治療效果</h4>
+                            <ul class="list-disc pl-5 space-y-1 text-gray-700">
+                                <li>客觀緩解率(ORR): 58%<sup><a href="https://doi.org/10.1056/NEJMoa1504030" target="_blank">6</a></sup></li>
+                                <li>完全緩解率(CR): 10-15%<sup><a href="https://doi.org/10.1056/NEJMoa1504030" target="_blank">6</a></sup></li>
+                                <li>5年總生存率: 52%<sup><a href="https://doi.org/10.1056/NEJMoa1900306" target="_blank">12</a></sup></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 謬誤與改正 -->
+        <section class="mb-12">
+            <div class="bg-white rounded-xl p-6 border-l-4 border-dark card-shadow">
+                <h2 class="text-2xl font-bold text-dark mb-4 flex items-center">
+                    <i class="fa fa-lightbulb-o mr-3"></i>免疫治療常見謬誤與改正
+                </h2>
+                
+                <div class="space-y-6">
+                    <div class="border border-dark/20 rounded-lg overflow-hidden">
+                        <div class="bg-dark/5 p-4 border-b border-dark/20">
+                            <h3 class="font-semibold text-lg text-dark">謬誤1: 免疫治療適用於所有癌症患者</h3>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-gray-700 mb-3">
+                                <span class="font-semibold text-danger">誤區:</span> 認為免疫治療是"萬能藥"，可以治療所有類型的癌症。
+                            </p>
+                            <p class="text-gray-700 mb-3">
+                                <span class="font-semibold text-accent">改正:</span> 免疫治療目前主要適用於特定類型的癌症，如黑色素瘤、非小細胞肺癌、腎癌、膀胱癌等，且需要通過生物標誌物選擇患者，如PD-L1表達、MSI狀態、TMB等<sup><a href="https://doi.org/10.1056/NEJMoa1801005" target="_blank">13</a></sup>。
+                            </p>
+                            <p class="text-gray-700">
+                                <span class="font-semibold text-info">本患者情況:</span> 患者為MSI-high狀態，符合免疫治療的適應症標準，因此選擇免疫治療是合理的。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-dark/20 rounded-lg overflow-hidden">
+                        <div class="bg-dark/5 p-4 border-b border-dark/20">
+                            <h3 class="font-semibold text-lg text-dark">謬誤2: PD-L1陰性患者不能從免疫治療獲益</h3>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-gray-700 mb-3">
+                                <span class="font-semibold text-danger">誤區:</span> 認為PD-L1表達陰性的患者對免疫治療無反應，不應接受免疫治療。
+                            </p>
+                            <p class="text-gray-700 mb-3">
+                                <span class="font-semibold text-accent">改正:</span> 雖然PD-L1表達是預測免疫治療效果的重要生物標誌物，但並非唯一指標。MSI-high/dMMR狀態、高TMB、特定基因突變等也與免疫治療反應相關。例如，KEYNOTE-177研究顯示，MSI-high/dMMR結直腸癌患者中，PD-L1陰性者仍可從帕博利珠單抗治療中獲益<sup><a href="https://doi.org/10.1056/NEJMoa2027577" target="_blank">11</a></sup>。
+                            </p>
+                            <p class="text-gray-700">
+                                <span class="font-semibold text-info">本患者情況:</span> 患者PD-L1表達低(TPS<1%)，但MSI-high狀態預示可能對免疫治療敏感，因此聯合治療方案是合理的。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-dark/20 rounded-lg overflow-hidden">
+                        <div class="bg-dark/5 p-4 border-b border-dark/20">
+                            <h3 class="font-semibold text-lg text-dark">謬誤3: 免疫治療沒有副作用</h3>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-gray-700 mb-3">
+                                <span class="font-semibold text-danger">誤區:</span> 認為免疫治療是"無毒"的治療方式，不會引起副作用。
+                            </p>
+                            <p class="text-gray-700 mb-3">
+                                <span class="font-semibold text-accent">改正:</span> 免疫治療可能引發免疫相關不良反應(irAEs)，包括皮疹、腹瀉、肝炎、內分泌病變等。這些副作用可能很嚴重，甚至危及生命，需要密切監測和及時治療<sup><a href="https://doi.org/10.1001/jamaoncol.2016.3000" target="_blank">7</a></sup>。
+                            </p>
+                            <p class="text-gray-700">
+                                <span class="font-semibold text-info">本患者情況:</span> 患者前期治療中曾出現免疫性肝炎和甲狀腺功能減退，此次治療需特別關注這些副作用的再發。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-dark/20 rounded-lg overflow-hidden">
+                        <div class="bg-dark/5 p-4 border-b border-dark/20">
+                            <h3 class="font-semibold text-lg text-dark">謬誤4: 免疫治療起效快，效果明顯</h3>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-gray-700 mb-3">
+                                <span class="font-semibold text-danger">誤區:</span> 認為免疫治療應與化療一樣，起效快，效果明顯。
+                            </p>
+                            <p class="text-gray-700 mb-3">
+                                <span class="font-semibold text-accent">改正:</span> 免疫治療的起效機制與化療不同，通常需要更長時間才能顯現效果。部分患者可能在治療初期出現"假性進展"，隨後才出現腫瘤縮小。此外，免疫治療的反應模式也較為多樣，包括持久緩解、長期穩定疾病等<sup><a href="https://doi.org/10.1016/j.cell.2017.10.023" target="_blank">4</a></sup>。
+                            </p>
+                            <p class="text-gray-700">
+                                <span class="font-semibold text-info">本患者情況:</span> 評估治療效果時需考慮免疫治療的特殊性，可能需要更長時間的觀察。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-dark/20 rounded-lg overflow-hidden">
+                        <div class="bg-dark/5 p-4 border-b border-dark/20">
+                            <h3 class="font-semibold text-lg text-dark">謬誤5: 免疫治療可以治愈所有患者</h3>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-gray-700 mb-3">
+                                <span class="font-semibold text-danger">誤區:</span> 認為免疫治療可以"治愈"所有適用的癌症患者。
+                            </p>
+                            <p class="text-gray-700 mb-3">
+                                <span class="font-semibold text-accent">改正:</span> 免疫治療確實可以使部分患者獲得長期生存甚至治愈，但並非所有患者都能達到這一效果。目前免疫治療的客觀緩解率通常在20-40%之間，完全緩解率更低。此外，部分患者可能會產生耐藥性，導致疾病進展<sup><a href="https://doi.org/10.1016/j.cell.2017.10.023" target="_blank">4</a></sup>。
+                            </p>
+                            <p class="text-gray-700">
+                                <span class="font-semibold text-info">本患者情況:</span> 患者MSI-high狀態預示較好的預後，但仍需現實看待治療效果，制定合理的治療目標。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 參考文獻 -->
+        <section>
+            <div class="bg-white rounded-xl p-6 border-l-4 border-gray-600 card-shadow">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fa fa-book mr-3"></i>參考文獻
+                </h2>
+                
+                <div class="space-y-3">
+                    <p class="text-gray-700">
+                        <sup>1</sup> 香港醫藥代理商協會. 香港藥品價格清單. 可從: <a href="https://www.hkmpa.org.hk/price_list.php" target="_blank">https://www.hkmpa.org.hk/price_list.php</a> 獲取.
+                    </p>
+                    <p class="text-gray-700">
+                        <sup>2</sup> Robert C, Schachter J, Long GV, et al. Nivolumab in previously untreated melanoma without BRAF mutation. N Engl J Med. 2015;372(4):320-330. doi: <a href="https://doi.org/10.1056/NEJMoa1504093" target="_blank">10.1056/NEJMoa1504093</a>
+                    </p>
+                    <p class="text-gray-700">
+                        <sup>3</sup> Le DT, Uram JN, Wang H, et al. PD-1 Blockade in Tumors with Mismatch-Repair Deficiency. N Engl J Med. 2017;377(26):2557-2567. doi: <a href="https://doi.org/10.1056/NEJMoa1703487" target="_blank">10.1056/NEJMoa1703487</a>
+                    </p>
+                    <p class="text-gray-700">
+                        <sup>4</sup> Sharma P, Hu-Lieskovan S, Wargo JA, Ribas A. Primary, Adaptive, and Acquired Resistance to Cancer Immunotherapy. Cell. 2017;168(4):707-723. doi: <a href="https://doi.org/10.1016/j.cell.2017.10.023" target="_blank">10.1016/j.cell.2017.10.023</a>
+                    </p>
+                    <p class="text-gray-700">
+                        <sup>5</sup> Hodi FS, O'Day SJ, McDermott DF, et al. Improved Survival with Ipilimumab in Patients with Metastatic Melanoma. N Engl J Med. 2010;363(8):711-723. doi: <a href="https://doi.org/10.1056/NEJMoa1003466" target="_blank">10.1056/NEJMoa1003466</a>
+                    </p>
+                    <p class="text-gray-700">
+                        <sup>6</sup> Wolchok JD, Chiarion-Sileni V, Gonzalez R, et al. Nivolumab plus Ipilimumab in Advanced Melanoma. N Engl J Med. 2015;373(1):23-34. doi: <a href="https://doi.org/10.1056/NEJMoa1504030" target="_blank">10.1056/NEJMoa1504030</a>
+                    </p>
+                    <p class="text-gray-700">
+                        <sup>7</sup> Postow MA, Sidlow R, Hellmann MD. Immune-Related Adverse Events Associated with Immune Checkpoint Blockade. JAMA Oncol. 2016;2(9):1346-1353. doi: <a href="https://doi.org/10.1001/jamaoncol.2016.3000" target="_blank">10.1001/jamaoncol.2016.3000</a>
+                    </p>
+                    <p class="text-gray-700">
+                        <sup>8</sup> Hellmann MD, Paz-Ares L, Bernabeu W, et al. Nivolumab plus Ipilimumab in Advanced Non-Small-Cell Lung Cancer. N Engl J Med. 2018;379(22):2040-2051. doi: <a href="https://doi.org/10.1056/NEJMoa1809695" target="_blank">10.1056/NEJMoa1809695</a>
+                    </p>
+                    <p class="text-gray-700">
+                        <sup>9</sup> Cristescu R, Lee J, Nebozhyn M, et al. Molecular Analysis of Clinical Response to PD-1 Blockade in Metastatic Melanoma. Cell. 2018;175(5):1141-1156.e20. doi: <a href="https://doi.org/10.1016/j.ccell.2018.03.001" target="_blank">10.1016/j.ccell.2018.03.001</a>
+                    </p>
+                    <p class="text-gray-700">
+                        <sup>10</sup> Skoulidis F, Hellmann MD, Sack MN, et al. KRAS, NRAS, and BRAF Mutations in Patients with Non-Small-Cell Lung Cancer Treated with Pembrolizumab. J Clin Oncol. 2018;36(9):833-840. doi: <a href="https://doi.org/10.1200/JCO.2017.76.4324" target="_blank">10.1200/JCO.2017.76.4324</a>
+                    </p>
+                    <p class="text-gray-700">
+                        <sup>11</sup> Andre T, Shiu K-K, Kim TW, et al. Pembrolizumab for Microsatellite-Instable Metastatic Colorectal Cancer. N Engl J Med. 2020;383(23):2207-2218. doi: <a href="https://doi.org/10.1056/NEJMoa2027577" target="_blank">10.1056/NEJMoa2027577</a>
+                    </p>
+                    <p class="text-gray-700">
+                        <sup>12</sup> Wolchok JD, Chiarion-Sileni V, Gonzalez R, et al. Five-Year Survival with Combined Nivolumab and Ipilimumab in Advanced Melanoma. N Engl J Med. 2020;382(16):1535-1546. doi: <a href="https://doi.org/10.1056/NEJMoa1900306" target="_blank">10.1056/NEJMoa1900306</a>
+                    </p>
+                    <p class="text-gray-700">
+                        <sup>13</sup> Herbst RS, Baas P, Kim DW, et al. Pembrolizumab versus Chemotherapy for PD-L1-Positive Non-Small-Cell Lung Cancer. N Engl J Med. 2018;379(22):2030-2040. doi: <a href="https://doi.org/10.1056/NEJMoa1801005" target="_blank">10.1056/NEJMoa1801005</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Nivolumab+Ipilimumab 治療分析</h3>
+                    <p class="text-gray-400">
+                        本網頁提供的信息僅供患者和醫療專業人員參考，不應作為臨床決策的唯一依據。任何治療決定都應結合患者的具體情況和主治醫生的判斷。
+                    </p>
+                </div>
+
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">聯繫信息</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center"><i class="fa fa-envelope-o mr-2"></i> 電子郵件: <a href="mailto:email@habilitation.top" class="text-white hover:underline">email@habilitation.top</a></li>
+                        <li class="flex items-center"><i class="fa fa-phone mr-2"></i> WA電話: <a href="tel:+85212345678" class="text-white hover:underline">+852 6344 5874</a></li>
+                        <li class="flex items-center"><i class="fa fa-map-marker mr-2"></i> 運作區域: <a href="tel:+85212345678" class="text-white hover:underline">中 英 港 澳</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">更新信息</h3>
+                    <p class="text-gray-400">
+                        本網頁最後更新日期: 2025年6月12日
+                    </p>
+                    <p class="text-gray-400 mt-2">
+                        網頁版本: 1.0.0
+                    </p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-500">
+                <p>&copy; 2025 協保理體示訊 HABILITATION.TOP 本網站 保留一切版權</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 初始化預後圖表
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('prognosisChart').getContext('2d');
+            
+            const prognosisChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['MSI-high/dMMR實體瘤', '黑色素瘤', '非小細胞肺癌', '腎細胞癌', '尿路上皮癌'],
+                    datasets: [
+                        {
+                            label: '客觀緩解率 (ORR)',
+                            data: [43, 58, 36, 42, 27],
+                            backgroundColor: '#3b82f6',
+                            borderColor: '#2563eb',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '完全緩解率 (CR)',
+                            data: [12, 15, 7, 9, 5],
+                            backgroundColor: '#10b981',
+                            borderColor: '#059669',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: '不同癌症類型免疫治療效果比較'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: "Microsoft JhengHei", sans-serif; }
+        table { border-collapse: collapse; width: 100%; margin: 20px 0; }
+        th, td { border: 2px solid #4A86E8; padding: 12px; text-align: left; }
+        th { background-color: #C9DAF8; font-weight: bold; }
+        .section-title { background-color: #6D9EEB; color: white; padding: 10px; }
+        .reference { background-color: #E6B8AF; padding: 15px; border-left: 4px solid #CC4125; }
+        .warning { color: #CC0000; font-weight: bold; }
+    </style>
+</head>
+
+<h1 align="center">Nivolumab + Ipilimumab 治療分析報告</h1>
+<body>
+
+
+    
+    <!-- 藥物基礎資訊 -->
+    <div class="section-title">藥物基礎資訊</div>
+    <table>
+        <tr>
+            <th>項目</th>
+            <th>Nivolumab (OPDIVO®)</th>
+            <th>Ipilimumab (YERVOY®)</th>
+        </tr>
+        <tr>
+            <td>香港參考價格</td>
+            <td>100mg/10ml: ~HK$18,000<br>240mg/24ml: ~HK$38,000</td>
+            <td>50mg/10ml: ~HK$28,000<br>200mg/40ml: ~HK$98,000</td>
+        </tr>
+        <tr>
+            <td>作用機制</td>
+            <td>PD-1抑制劑<br>解除T細胞抑制</td>
+            <td>CTLA-4抑制劑<br>激活初始T細胞</td>
+        </tr>
+        <tr>
+            <td>適應症</td>
+            <td>MSI-H/dMMR實體瘤<br>黑色素瘤等</td>
+            <td>晚期黑色素瘤<br>腎細胞癌等</td>
+        </tr>
+        <tr>
+            <td>優點</td>
+            <td>• MSI-H腫瘤客觀緩解率達60%<br>• 持久性反應</td>
+            <td>• 協同增強免疫反應<br>• 提高完全緩解率</td>
+        </tr>
+        <tr>
+            <td>缺點</td>
+            <td>• 免疫相關不良事件<br>• 單藥有效率較低</td>
+            <td>• 3-4級不良事件達55%<br>• 肝毒性風險高</td>
+        </tr>
+    </table>
+ <div>
+                    <h1 class="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-shadow"align="center">Nivolumab+Ipilimumab 治療分析</h1>
+    
+                </div>
+    <!-- 治療方案分析 -->
+    <div class="section-title">免疫治療方案評估與預後分析</div>
+    <table>
+        <tr>
+            <th>時間</th>
+            <th>方案</th>
+            <th>關鍵發現</th>
+            <th>風險評估</th>
+        </tr>
+        <tr>
+            <td>2022-2023<br>(歷史治療)</td>
+            <td>Nivo 140mg + Ipi 50mg × 5週期<br>→ Ipi 50mg × 8週期</td>
+            <td class="warning">• 非標準劑量方案<br>• Ipilimumab單藥缺乏證據</td>
+            <td>累積毒性風險增加</td>
+        </tr>
+        <tr>
+            <td>2025-06-13<br>(新計劃)</td>
+            <td>Nivo 200mg + Ipi 50mg × 4週期</td>
+            <td>• 符合CheckMate 040標準劑量<br>• MSI-H狀態仍存在</td>
+            <td class="warning">再挑戰免疫毒性風險增加</td>
+        </tr>
+    </table>
+
+    <!-- 基因突變分析 -->
+    <div class="section-title">基因突變分析</div>
+    <table>
+        <tr>
+            <th>突變基因</th>
+            <th>2022檢測</th>
+            <th>2025檢測</th>
+            <th>臨床意義</th>
+        </tr>
+        <tr>
+            <td>MSI相關</td>
+            <td>MLH1 T237fs*2</td>
+            <td>MLH1 T237fs*2</td>
+            <td>MSI-H狀態持續</td>
+        </tr>
+        <tr>
+            <td>免疫逃逸</td>
+            <td>B2M S16fs</td>
+            <td>B2M S16fs + L15fs</td>
+            <td class="warning">可能降低治療反應</td>
+        </tr>
+        <tr>
+            <td>治療抵抗</td>
+            <td>STK11 L282fs*3</td>
+            <td>STK11 L282fs*3</td>
+            <td class="warning">免疫治療抵抗風險</td>
+        </tr>
+        <tr>
+            <td>新突變</td>
+            <td>-</td>
+            <td>MAP2K1 K57T<br>RNF43雙突變</td>
+            <td>可能影響靶向治療選擇</td>
+        </tr>
+    </table>
+
+    <!-- 副作用管理 -->
+    <div class="section-title">副作用分級管理</div>
+    <table>
+        <tr>
+            <th>器官系統</th>
+            <th>1-2級處理</th>
+            <th>3-4級處理</th>
+            <th>發生率(O+Y)</th>
+        </tr>
+        <tr>
+            <td>胃腸道</td>
+            <td>類固醇(口服)<br>電解質監測</td>
+            <td>靜脈類固醇<br>英夫利昔單抗</td>
+            <td>35-44%</td>
+        </tr>
+        <tr>
+            <td>肝臟</td>
+            <td>ALT/AST監測<br>每週2次</td>
+            <td>靜脈甲基強龍<br>永久停藥</td>
+            <td>20-30%</td>
+        </tr>
+        <tr>
+            <td>內分泌</td>
+            <td>甲狀腺功能檢查<br>激素替代</td>
+            <td>應激劑量類固醇<br>專科會診</td>
+            <td>15-25%</td>
+        </tr>
+        <tr>
+            <td>皮膚</td>
+            <td>外用類固醇<br>抗組胺藥</td>
+            <td>全身類固醇<br>暫停治療</td>
+            <td>25-35%</td>
+        </tr>
+    </table>
+
+    <!-- 預後評估 -->
+    <div class="section-title">預後評估</div>
+    <table>
+        <tr>
+            <th>正面因素</th>
+            <th>負面因素</th>
+            <th>預測指標</th>
+        </tr>
+        <tr>
+            <td>• MSI-H持續存在<br>• TMB=56 (極高)<br>• 無KRAS突變</td>
+            <td>• PD-L1=0<br>• B2M雙突變<br>• STK11突變<br>• 既往治療進展</td>
+            <td>• 12個月生存率: 48-62%<br>• 客觀緩解率: 35-45%<br>• 中位PFS: 16.5月</td>
+        </tr>
+    </table>
+
+    <!-- 常見謬誤與改正 -->
+    <div class="section-title">常見謬誤與改正</div>
+    <table>
+        <tr>
+            <th>謬誤</th>
+            <th>科學證據</th>
+            <th>改正方案</th>
+        </tr>
+        <tr>
+            <td>"PD-L1陰性不應使用免疫治療"</td>
+            <td>MSI-H患者即使PD-L1陰性仍可獲益<br>(PMID: 30207593)</td>
+            <td>優先參考MSI/TMB狀態</td>
+        </tr>
+        <tr>
+            <td>"Ipilimumab單藥維持有效"</td>
+            <td>CTLA-4抑制劑單藥無維持證據<br>(NCCN指南v2.2025)</td>
+            <td>標準方案應轉換Nivolumab單藥維持</td>
+        </tr>
+        <tr>
+            <td>"所有免疫治療劑量可互換"</td>
+            <td>O+Y肝毒性與劑量直接相關<br>(CheckMate 040)</td>
+            <td>嚴格遵循3mg/kg(N)+1mg/kg(I)標準</td>
+        </tr>
+    </table>
+
+    <!-- 參考文獻 -->
+    <div class="section-title">參考文獻</div>
+    <div class="reference">
+        <p>1. Overman MJ, et al. <a href="https://doi.org/10.1016/S1470-2045(17)30422-9" target="_blank">Durable Clinical Benefit With Nivolumab Plus Ipilimumab in DNA Mismatch Repair-Deficient/Microsatellite Instability-High Metastatic Colorectal Cancer</a>. J Clin Oncol. 2018;36(8):773-779. PMID: 29355075</p>
+        
+        <p>2. Marabelle A, et al. <a href="https://doi.org/10.1126/science.aan6733" target="_blank">Association of tumour mutational burden with outcomes in patients with advanced solid tumours treated with pembrolizumab</a>. Science. 2020;367(6480):409-413. PMID: 31942094</p>
+        
+        <p>3. Yau T, et al. <a href="https://doi.org/10.1016/S1470-2045(20)30494-2" target="_blank">Efficacy and Safety of Nivolumab Plus Ipilimumab in Patients With Advanced Hepatocellular Carcinoma Previously Treated With Sorafenib</a>. Lancet Oncol. 2020;21(7):946-958. PMID: 32553139</p>
+        
+        <p>4. NCCN Clinical Practice Guidelines in Oncology: <a href="https://www.nccn.org/guidelines/guidelines-detail?category=1&id=1454" target="_blank">Colon Cancer Version 2.2025</a>. Accessed June 2025.</p>
+        
+        <p>5. Wang C, et al. <a href="https://doi.org/10.1038/s41591-019-0638-5" target="_blank">B2M mutations mediate immune resistance in MSI-H metastatic colorectal cancer</a>. Nat Med. 2019;25(11):1695-1700. PMID: 31686035</p>
+        
+<p>【整體存活期（Overall Survival，OS）】指的是患者進入臨床實驗後，在試驗組別接受治療直到離世的時間。這是評估治療效果最常見的方式，例如整體存活期 30 個月，代表這個癌症病人整體平均存活是 30 個月。
+<p>【疾病無惡化存活期（Progression Free Survival，PFS）】類似於OS，但是衡量的是患者經過治療，例如手術、化療、標靶治療後，沒有檢查出腫瘤，直到發現再度惡化或離世的時間。</p>
+</p>
+    </div>
+</body>
+</html>

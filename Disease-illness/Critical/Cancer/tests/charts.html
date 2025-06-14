@@ -1,0 +1,150 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+<script>
+  // 初始化图表
+  document.addEventListener("DOMContentLoaded", function () {
+    // 检测周期比较图表
+    const turnaroundCtx = document
+      .getElementById("turnaroundTimeChart")
+      .getContext("2d");
+    new Chart(turnaroundCtx, {
+      type: "bar",
+      data: {
+        labels: [
+          "FoundationOne®CDx",
+          "MSK-IMPACT®",
+          "ACTOnco Pro™",
+          "Guardant360®",
+          "Tempus xT®",
+        ],
+        datasets: [
+          {
+            label: "检测周期 (天)",
+            data: [14, 18, 12, 7, 21],
+            backgroundColor: [
+              "rgba(239, 68, 68, 0.7)",
+              "rgba(59, 130, 246, 0.7)",
+              "rgba(128, 90, 213, 0.7)",
+              "rgba(249, 115, 22, 0.7)",
+              "rgba(16, 185, 129, 0.7)",
+            ],
+            borderColor: [
+              "rgb(239, 68, 68)",
+              "rgb(59, 130, 246)",
+              "rgb(128, 90, 213)",
+              "rgb(249, 115, 22)",
+              "rgb(16, 185, 129)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: "天数",
+            },
+          },
+        },
+      },
+    });
+
+    // 基因覆盖度图表
+    const coverageCtx = document
+      .getElementById("geneCoverageChart")
+      .getContext("2d");
+    new Chart(coverageCtx, {
+      type: "radar",
+      data: {
+        labels: [
+          "FoundationOne®CDx",
+          "MSK-IMPACT®",
+          "ACTOnco Pro™",
+          "Tempus xT®",
+          "Caris MI®",
+        ],
+        datasets: [
+          {
+            label: "基因数量",
+            data: [324, 505, 648, 648, 800],
+            backgroundColor: "rgba(16, 185, 129, 0.2)",
+            borderColor: "rgb(16, 185, 129)",
+            pointBackgroundColor: "rgb(16, 185, 129)",
+            pointBorderColor: "#fff",
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderColor: "rgb(16, 185, 129)",
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          r: {
+            beginAtZero: true,
+            max: 1000,
+            ticks: {
+              stepSize: 200,
+            },
+          },
+        },
+      },
+    });
+
+    // 临床验证等级图表
+    const validationCtx = document
+      .getElementById("clinicalValidationChart")
+      .getContext("2d");
+    new Chart(validationCtx, {
+      type: "line",
+      data: {
+        labels: [
+          "FoundationOne®CDx",
+          "MSK-IMPACT®",
+          "ACTOnco Pro™",
+          "Guardant360®",
+          "Tempus xT®",
+        ],
+        datasets: [
+          {
+            label: "临床验证等级",
+            data: [95, 90, 88, 85, 88],
+            fill: true,
+            backgroundColor: "rgba(59, 130, 246, 0.2)",
+            borderColor: "rgb(59, 130, 246)",
+            tension: 0.4,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            min: 70,
+            max: 100,
+            title: {
+              display: true,
+              text: "验证百分比 (%)",
+            },
+          },
+        },
+      },
+    });
+  });
+</script>

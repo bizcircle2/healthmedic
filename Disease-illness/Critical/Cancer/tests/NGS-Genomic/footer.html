@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+    <style>
+        :root {
+            --dark: #1E293B;
+            --light: #F8FAFC;
+            --primary: #165DFF;
+            --secondary: #00B42A;
+            --accent: #FF7D00;
+            --purple: #722ED1;
+            --pink: #F5319D;
+            --teal: #0FC6C2;
+            --primary-bg: #E6F0FF;
+            --secondary-bg: #E6FFF2;
+            --accent-bg: #FFF2E6;
+            --purple-bg: #F2E6FF;
+            --pink-bg: #FFE6F5;
+            --teal-bg: #E6FCFB;
+            --card-bg: #FFFFFF;
+            --border-color: #E2E8F0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation styles */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(30, 41, 59, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            background-color: var(--primary-bg);
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-icon i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .nav-link {
+            color: var(--dark);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background-color: var(--primary-bg);
+            color: var(--primary);
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        /* Hero section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+            position: relative;
+            overflow: hidden;
+            padding-top: 70px;
+        }
+        
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--dark);
+        }
+        
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(30, 41, 59, 0.8);
+            margin-bottom: 30px;
+        }
+        
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--primary);
+            color: white;
+            font-weight: 500;
+            padding: 12px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(22, 93, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0f4fd9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(22, 93, 255, 0.4);
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(30, 41, 59, 0.6);
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+        
+        /* Section styles */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .section-title h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: rgba(30, 41, 59, 0.8);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Card styles */
+        .card {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(30, 41, 59, 0.08);
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(30, 41, 59, 0.12);
+        }
+        
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--dark);
+        }
+        
+        .card p {
+            color: rgba(30, 41, 59, 0.7);
+            margin-bottom: 16px;
+        }
+        
+        /* Table styles - optimized */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(30, 41, 59, 0.08);
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+            background-color: white;
+        }
+        
+        .table th, .table td {
+            padding: 12px 16px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+        
+        .table thead th {
+            font-weight: 700;
+            background-color: #F1F5F9;
+            color: var(--dark);
+        }
+        
+        .table tbody tr:nth-child(even) {
+            background-color: #F8FAFC;
+        }
+        
+        .table tbody tr:hover {
+            background-color: #F1F5F9;
+        }
+        
+        /* Responsive layout */
+        .grid {
+            display: grid;
+            gap: 24px;
+        }
+        
+        .grid-cols-1 {
+            grid-template-columns: 1fr;
+        }
+        
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .grid-cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .grid-cols-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .grid-cols-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .grid-cols-2, .grid-cols-3, .grid-cols-4 {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .hero {
+                padding-top: 60px;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+        }
+        
+        /* Footer styles */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col ul li a {
+            color: #CBD5E1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-col ul li i {
+            color: var(--primary);
+            width: 20px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #334155;
+            color: #94A3B8;
+            font-size: 0.9rem;
+        }
+        
+        /* Special elements */
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .bg-green {
+            background-color: #DCFCE7;
+            color: #166534;
+        }
+        
+        .bg-yellow {
+            background-color: #FEF9C3;
+            color: #854D0E;
+        }
+        
+        .bg-red {
+            background-color: #FEE2E2;
+            color: #B91C1C;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background-color: #E2E8F0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            border-radius: 3px;
+        }
+    </style>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>關於我們</h4>
+                    <p class="text-gray-400 mb-4">致力於提供最新癌症治療資訊，幫助患者和醫療專業人員應對癌症藥物耐藥性挑戰。</p>
+                    <div class="flex items-center mt-6">
+                        <div class="bg-primary/10 p-2 rounded-lg mr-3">
+                            <i class="fab fa-facebook-f text-primary"></i>
+                        </div>
+                        <div class="bg-primary/10 p-2 rounded-lg mr-3">
+                            <i class="fab fa-twitter text-primary"></i>
+                        </div>
+                        <div class="bg-primary/10 p-2 rounded-lg">
+                            <i class="fab fa-linkedin-in text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>快速鏈接</h4>
+                    <ul>
+                        <li><a href="#definition"><i class="fas fa-chevron-right"></i> 藥物耐藥性定義</a></li>
+                        <li><a href="#mechanisms"><i class="fas fa-chevron-right"></i> 耐藥機制</a></li>
+                        <li><a href="#prevention"><i class="fas fa-chevron-right"></i> 預防策略</a></li>
+                        <li><a href="#resources"><i class="fas fa-chevron-right"></i> 支持資源</a></li>
+                        <li><a href="https://habilitation.top/"><i class="fas fa-chevron-right"></i> 最新研究</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>資源中心</h4>
+                    <ul>
+                        <li><a href="https://habilitation.top/"><i class="fas fa-chevron-right"></i> 患者指南</a></li>
+                        <li><a href="https://habilitation.top/"><i class="fas fa-chevron-right"></i> 醫學文獻</a></li>
+                        <li><a href="https://habilitation.top/"><i class="fas fa-chevron-right"></i> 臨床試驗</a></li>
+                        <li><a href="https://habilitation.top/"><i class="fas fa-chevron-right"></i> 專家講座</a></li>
+                        <li><a href="https://habilitation.top/"><i class="fas fa-chevron-right"></i> 常見問題</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>聯繫我們</h4>
+                    <ul>
+                        <li>
+                            <a href="mailto:email@habilitation.top">
+                                <i class="fas fa-envelope"></i>
+                                <span>email@habilitation.top</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:+85263445874">
+                                <i class="fas fa-phone"></i>
+                                <span>+852 63445874</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>中英港澳大灣區</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 協保理體示訊 | 癌症藥物耐藥性研究 | 保留所有權利
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 12px rgba(30, 41, 59, 0.12)';
+                header.style.padding = '5px 0';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(30, 41, 59, 0.08)';
+                header.style.padding = '0';
+            }
+        });
+        
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', function() {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Responsive adjustment
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                navLinks.style.display = 'flex';
+            } else {
+                navLinks.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'">
