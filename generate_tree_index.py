@@ -1,10 +1,43 @@
 import os
 
+# List of exact names to exclude (case-sensitive)
+EXCLUDE_NAMES = {
+    'env', 'Include', 'Lib', 'site-packages', 'Scripts',
+    '__pycache__', 'licenses', 'cli', 'idna', 'pip', '_internal',
+    'commands', 'distributions', 'index', 'locations', 'metadata', 'importlib',
+    'models', 'network', 'operations', 'build', 'install', 'req', 'resolution',
+    'legacy', 'resolvelib', 'utils', 'vcs', '_vendor', 'cachecontrol', 'caches',
+    'chardet', 'colorama', 'distlib', 'distro', 'msgpack', 'packaging',
+    'pep517', 'in_process', 'pkg_resources', 'platformdirs', 'pygments',
+    'filters', 'formatters', 'lexers', 'styles', 'pyparsing', 'diagram',
+    'extern', 'rich', 'tenacity', 'tomli', 'contrib', '_securetransport',
+    'packages', 'backports', 'util', 'webencodings', 'importlib_resources',
+    'jaraco', 'text', 'more_itertools', 'setuptools', '_distutils', 'command',
+    'importlib_metadata', '_validate_pyproject', 'emscripten', 'http2'
+}
+
+# Exclude if the name matches any of these patterns
+EXCLUDE_PATTERNS = (
+    '__pycache__',
+    '.dist-info',
+    '.egg-info'
+)
+
+def should_exclude(name):
+    if name in EXCLUDE_NAMES:
+        return True
+    for pat in EXCLUDE_PATTERNS:
+        if pat in name:
+            return True
+    if name.startswith('_'):
+        return True
+    return False
+
 def scan_dir(path, rel_path=""):
     items = []
     for name in sorted(os.listdir(path)):
-        if name.startswith('.'):
-            continue  # skip hidden files/folders
+        if should_exclude(name):
+            continue
         full_path = os.path.join(path, name)
         rel_item_path = os.path.join(rel_path, name) if rel_path else name
         if os.path.isdir(full_path):
